@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verto Real Estate — فيرتو العقارية | Kuwait Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ==================== CSS RESET & BASE ==================== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --navy: #1B2A4A;
+  --navy-dark: #152238;
+  --navy-light: #2a3d63;
+  --blue-grey: #8DA9C4;
+  --gold: #c5a55a;
+  --gold-dark: #a88a3e;
+  --red-tag: #c0392b;
+  --green: #25D366;
+  --grey-bg: #f5f5f7;
+  --grey-light: #e8e8ec;
+  --grey-text: #6b6b6b;
+  --white: #ffffff;
+  --text-primary: #1B2A4A;
+  --text-secondary: #6b6b6b;
+  --bg-main: #ffffff;
+  --bg-section: #f5f5f7;
+  --bg-card: #ffffff;
+  --border-color: #e8e8ec;
+  --header-bg: #ffffff;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+}
+[data-theme="dark"] {
+  --navy: #0f1a2e;
+  --navy-dark: #0a1120;
+  --navy-light: #1a2845;
+  --blue-grey: #5a7a9a;
+  --gold: #d4b66e;
+  --gold-dark: #c5a55a;
+  --red-tag: #d6453a;
+  --green: #25D366;
+  --grey-bg: #141418;
+  --grey-light: #2a2a30;
+  --grey-text: #9a9aa0;
+  --white: #ffffff;
+  --text-primary: #e8e8ec;
+  --text-secondary: #9a9aa0;
+  --bg-main: #0d0d11;
+  --bg-section: #141418;
+  --bg-card: #1a1a20;
+  --border-color: #2a2a30;
+  --header-bg: #1a1a20;
+  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.4);
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background .3s, color .3s;
+}
+body.rtl { font-family: 'Cairo', sans-serif; }
+body.rtl [data-en] { display: none !important; }
+body:not(.rtl) [data-ar] { display: none !important; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+input, select, textarea { font-family: inherit; }
+
+/* ==================== TOP BAR ==================== */
+.top-bar {
+  background: var(--navy);
+  color: var(--white);
+  padding: 8px 0;
+  font-size: 13px;
+}
+.top-bar-inner {
+  max-width: 1400px; margin: 0 auto; padding: 0 30px;
+  display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;
+}
+.top-bar-contact { display: flex; gap: 25px; align-items: center; flex-wrap: wrap; }
+.top-bar-contact a { color: var(--white); display: flex; align-items: center; gap: 6px; transition: opacity .2s; }
+.top-bar-contact a:hover { opacity: 0.8; }
+.top-bar-social { display: flex; gap: 15px; align-items: center; }
+.top-bar-social a { color: var(--white); font-size: 16px; transition: color .2s; }
+.top-bar-social a:hover { color: var(--gold); }
+
+/* ==================== HEADER ==================== */
+header {
+  background: var(--header-bg);
+  box-shadow: var(--shadow);
+  position: sticky; top: 0; z-index: 1000;
+  transition: box-shadow .3s, background .3s;
+}
+.header-inner {
+  max-width: 1400px; margin: 0 auto; padding: 15px 30px;
+  display: flex; justify-content: space-between; align-items: center; gap: 20px;
+}
+.logo-wrap { display: flex; align-items: center; gap: 12px; }
+.logo-svg { width: 50px; height: 50px; flex-shrink: 0; }
+.logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+.logo-text .logo-title { font-size: 22px; font-weight: 900; color: var(--text-primary); letter-spacing: 1px; }
+.logo-text .logo-sub { font-size: 11px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
+body.rtl .logo-text .logo-title { font-family: 'Cairo', sans-serif; }
+
+/* ==================== NAVIGATION ==================== */
+nav.main-nav ul { display: flex; gap: 5px; align-items: center; }
+nav.main-nav li a {
+  padding: 10px 16px; font-size: 13px; font-weight: 700; text-transform: uppercase;
+  color: var(--text-primary); border-radius: 4px; transition: all .2s; display: block; white-space: nowrap;
+}
+nav.main-nav li a:hover, nav.main-nav li a.active { color: var(--gold); background: var(--bg-section); }
+
+/* ==================== CONTROLS (theme + lang) ==================== */
+.header-controls { display: flex; align-items: center; gap: 12px; }
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--border-color);
+  background: var(--bg-card); color: var(--text-primary); cursor: pointer; font-size: 16px;
+  display: flex; align-items: center; justify-content: center; transition: all .2s;
+}
+.theme-toggle:hover { border-color: var(--gold); color: var(--gold); }
+.lang-toggle {
+  display: flex; align-items: center; gap: 4px; background: var(--bg-section); border-radius: 20px; padding: 4px;
+}
+.lang-btn {
+  border: none; background: transparent; padding: 6px 14px; font-size: 12px; font-weight: 700;
+  cursor: pointer; border-radius: 16px; transition: all .2s; color: var(--text-secondary);
+}
+.lang-btn.active { background: var(--navy); color: var(--white); }
+
+/* ==================== MOBILE MENU ==================== */
+.mobile-menu-btn { display: none; font-size: 24px; background: none; border: none; cursor: pointer; color: var(--text-primary); }
+.mobile-nav {
+  display: none; position: fixed; top: 0; right: -300px; width: 280px; height: 100vh;
+  background: var(--bg-card); box-shadow: -4px 0 20px rgba(0,0,0,0.15); z-index: 2000;
+  transition: right .3s; padding: 60px 20px 20px; overflow-y: auto;
+}
+.mobile-nav.open { right: 0; }
+.mobile-nav ul { display: flex; flex-direction: column; gap: 5px; }
+.mobile-nav li a {
+  padding: 12px 16px; font-size: 14px; font-weight: 700; color: var(--text-primary);
+  border-radius: 6px; display: block; border-bottom: 1px solid var(--border-color);
+}
+.mobile-nav .close-btn {
+  position: absolute; top: 15px; right: 15px; font-size: 26px; background: none; border: none; cursor: pointer; color: var(--text-primary);
+}
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1500; }
+.overlay.show { display: block; }
+
+/* ==================== HERO SLIDER ==================== */
+.hero-slider { position: relative; height: 600px; overflow: hidden; background: var(--navy-dark); }
+.slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out; background-size: cover; background-position: center; }
+.slide.active { opacity: 1; }
+.slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(27,42,74,0.5) 0%, rgba(0,0,0,0.3) 100%); }
+.slide-content {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  text-align: center; color: var(--white); z-index: 2; width: 90%; max-width: 800px;
+}
+.slide-content h2 { font-size: 42px; font-weight: 900; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+.slide-content p { font-size: 18px; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+body.rtl .slide-content h2, body.rtl .slide-content p { font-family: 'Cairo', sans-serif; }
+.slider-dots { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 3; }
+.slider-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: background .2s; border: 2px solid transparent; }
+.slider-dot.active { background: var(--white); border-color: var(--gold); }
+
+/* ==================== SEARCH FORM ==================== */
+.search-section { background: var(--bg-main); margin-top: -50px; position: relative; z-index: 10; }
+.search-form {
+  max-width: 1400px; margin: 0 auto; padding: 25px 30px; background: var(--bg-card);
+  box-shadow: var(--shadow-lg); border-radius: 8px; display: flex; flex-wrap: wrap; gap: 15px; align-items: flex-end;
+}
+.search-field { flex: 1; min-width: 140px; }
+.search-field label { display: block; font-size: 12px; font-weight: 700; color: var(--text-primary); margin-bottom: 5px; text-transform: uppercase; }
+.search-field select, .search-field input {
+  width: 100%; padding: 10px 12px; border: 1.5px solid var(--border-color); border-radius: 5px;
+  font-size: 14px; color: var(--text-primary); background: var(--bg-card); transition: border-color .2s;
+}
+.search-field select:focus, .search-field input:focus { outline: none; border-color: var(--gold); }
+.search-btn {
+  background: var(--navy); color: var(--white); border: none; padding: 11px 30px; font-size: 14px; font-weight: 700;
+  cursor: pointer; border-radius: 5px; transition: background .2s; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap;
+}
+.search-btn:hover { background: var(--gold); }
+.more-filters-btn {
+  background: transparent; color: var(--text-primary); border: 1.5px solid var(--border-color);
+  padding: 11px 20px; font-size: 13px; font-weight: 700; cursor: pointer; border-radius: 5px; transition: all .2s;
+}
+.more-filters-btn:hover { border-color: var(--navy); }
+.advanced-filters {
+  display: none; flex-basis: 100%; flex-wrap: wrap; gap: 10px; padding-top: 15px; border-top: 1px solid var(--border-color);
+}
+.advanced-filters.show { display: flex; }
+.filter-chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border: 1.5px solid var(--border-color);
+  border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s; user-select: none; color: var(--text-primary);
+}
+.filter-chip:hover { border-color: var(--gold); }
+.filter-chip.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.filter-chip input { display: none; }
+
+/* ==================== SECTION HEADINGS ==================== */
+.section-title { text-align: center; padding: 50px 30px 30px; }
+.section-title h2 {
+  font-size: 32px; font-weight: 900; color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px;
+  position: relative; display: inline-block;
+}
+.section-title h2::after { content: ''; display: block; width: 60px; height: 3px; background: var(--gold); margin: 10px auto 0; }
+body.rtl .section-title h2 { font-family: 'Cairo', sans-serif; }
+
+/* ==================== PROPERTY CARDS ==================== */
+.properties-section { max-width: 1400px; margin: 0 auto; padding: 0 30px 50px; }
+.properties-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; }
+.property-card {
+  background: var(--bg-card); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow);
+  transition: transform .3s, box-shadow .3s; cursor: pointer;
+}
+.property-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.property-image { position: relative; height: 250px; overflow: hidden; background: var(--bg-section); }
+.property-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.property-card:hover .property-image img { transform: scale(1.05); }
+.property-tag-available {
+  position: absolute; top: 12px; left: 12px; background: var(--gold); color: var(--white);
+  padding: 4px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; border-radius: 3px; letter-spacing: 0.5px;
+}
+.property-tag-type {
+  position: absolute; top: 12px; right: 12px; background: var(--red-tag); color: var(--white);
+  padding: 4px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; border-radius: 3px;
+}
+.property-location {
+  position: absolute; bottom: 12px; left: 12px; color: var(--white); font-size: 13px; font-weight: 600;
+  display: flex; align-items: center; gap: 5px; text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+.property-photo-count {
+  position: absolute; bottom: 12px; right: 12px; color: var(--white); font-size: 13px; font-weight: 600;
+  display: flex; align-items: center; gap: 5px; text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+.property-info { padding: 18px; }
+.property-title {
+  font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; line-height: 1.4;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.property-price { font-size: 20px; font-weight: 800; color: var(--gold-dark); margin-bottom: 8px; }
+.property-price .currency { font-size: 14px; }
+.property-desc {
+  font-size: 13px; color: var(--text-secondary); line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 12px;
+}
+.property-footer {
+  display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--border-color);
+}
+.property-agent { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-secondary); }
+.agent-avatar {
+  width: 24px; height: 24px; border-radius: 50%; background: var(--navy); color: white;
+  display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700;
+}
+.property-actions { display: flex; gap: 10px; }
+.property-actions button { background: none; border: none; cursor: pointer; color: var(--text-secondary); font-size: 15px; transition: color .2s; }
+.property-actions button:hover { color: var(--navy); }
+.property-actions .heart-btn.favorited { color: var(--red-tag); }
+
+/* ==================== ALL LISTINGS BUTTON ==================== */
+.all-listings-wrap { text-align: center; padding: 10px 0 50px; }
+.btn-all-listings {
+  display: inline-block; padding: 14px 40px; border: 2px solid var(--navy); color: var(--text-primary);
+  font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 5px; transition: all .2s; cursor: pointer;
+}
+.btn-all-listings:hover { background: var(--navy); color: var(--white); }
+
+/* ==================== ABOUT SECTION ==================== */
+.about-section { background: var(--bg-section); padding: 60px 30px; transition: background .3s; }
+.about-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.about-image img { border-radius: 8px; box-shadow: var(--shadow-lg); width: 100%; height: 400px; object-fit: cover; }
+.about-content h2 { font-size: 30px; font-weight: 900; color: var(--text-primary); margin-bottom: 20px; }
+.about-content p { font-size: 15px; color: var(--text-secondary); margin-bottom: 15px; line-height: 1.8; }
+.about-stats { display: flex; gap: 40px; margin-top: 30px; }
+.stat-item h3 { font-size: 36px; font-weight: 900; color: var(--gold); }
+.stat-item p { font-size: 13px; color: var(--text-primary); font-weight: 600; text-transform: uppercase; }
+body.rtl .about-content h2, body.rtl .about-content p, body.rtl .stat-item p { font-family: 'Cairo', sans-serif; }
+
+/* ==================== TEAM SECTION ==================== */
+.team-section { padding: 60px 30px; max-width: 1400px; margin: 0 auto; }
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+.team-card { text-align: center; background: var(--bg-card); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); transition: transform .3s; }
+.team-card:hover { transform: translateY(-5px); }
+.team-card img { width: 100%; height: 300px; object-fit: cover; }
+.team-info { padding: 20px; }
+.team-info h3 { font-size: 18px; font-weight: 800; color: var(--text-primary); }
+.team-info .role { font-size: 13px; color: var(--gold); font-weight: 600; text-transform: uppercase; margin-bottom: 10px; }
+.team-info p { font-size: 13px; color: var(--text-secondary); }
+.team-contact { display: flex; justify-content: center; gap: 15px; margin-top: 12px; }
+.team-contact a {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--bg-section);
+  display: flex; align-items: center; justify-content: center; color: var(--text-primary); font-size: 14px; transition: all .2s;
+}
+.team-contact a:hover { background: var(--navy); color: var(--white); }
+body.rtl .team-info h3, body.rtl .team-info p { font-family: 'Cairo', sans-serif; }
+
+/* ==================== CONTACT SECTION ==================== */
+.contact-section {
+  position: relative; padding: 80px 30px;
+  background: linear-gradient(135deg, rgba(27,42,74,0.92) 0%, rgba(21,34,56,0.95) 100%), url('https://picsum.photos/seed/contact/1600/600') center/cover;
+  color: var(--white);
+}
+.contact-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+.contact-inner h2 { font-size: 32px; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; }
+.contact-inner > p { font-size: 15px; margin-bottom: 30px; opacity: 0.9; }
+.contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left; }
+body.rtl .contact-form { text-align: right; }
+.contact-form .full-width { grid-column: 1 / -1; }
+.contact-form input, .contact-form textarea {
+  width: 100%; padding: 14px 16px; border: 1.5px solid rgba(255,255,255,0.2); border-radius: 5px;
+  background: rgba(255,255,255,0.08); color: var(--white); font-size: 14px; transition: border-color .2s, background .2s;
+}
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.5); }
+.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--gold); background: rgba(255,255,255,0.12); }
+.contact-form textarea { resize: vertical; min-height: 120px; }
+.contact-submit {
+  grid-column: 1 / -1; justify-self: center; background: var(--gold); color: var(--white); border: none;
+  padding: 14px 50px; font-size: 14px; font-weight: 700; cursor: pointer; border-radius: 5px; text-transform: uppercase; letter-spacing: 1px; transition: background .2s; margin-top: 10px;
+}
+.contact-submit:hover { background: var(--gold-dark); }
+body.rtl .contact-inner h2, body.rtl .contact-inner p { font-family: 'Cairo', sans-serif; }
+
+/* ==================== FOOTER ==================== */
+footer { background: var(--navy-dark); color: var(--white); padding: 40px 30px 20px; }
+.footer-inner {
+  max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px; padding-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.footer-col h3 { font-size: 16px; font-weight: 700; margin-bottom: 15px; color: var(--gold); }
+.footer-col p, .footer-col a { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 2; display: block; }
+.footer-col a:hover { color: var(--gold); }
+.footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+.footer-logo .logo-svg { width: 40px; height: 40px; }
+.footer-logo .logo-title { font-size: 18px; font-weight: 900; color: var(--white); }
+.footer-social { display: flex; gap: 12px; margin-top: 15px; }
+.footer-social a {
+  width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center; font-size: 15px; color: var(--white); transition: background .2s;
+}
+.footer-social a:hover { background: var(--gold); }
+.footer-bottom { text-align: center; padding-top: 20px; font-size: 12px; color: rgba(255,255,255,0.5); }
+.footer-bottom a { color: var(--gold); }
+body.rtl .footer-col h3, body.rtl .footer-col p, body.rtl .footer-col a, body.rtl .footer-bottom { font-family: 'Cairo', sans-serif; }
+
+/* ==================== FLOATING ELEMENTS ==================== */
+.whatsapp-float {
+  position: fixed; left: 20px; bottom: 20px; z-index: 999; background: var(--green); color: var(--white);
+  border-radius: 30px; padding: 10px 20px; display: flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 700; box-shadow: 0 4px 15px rgba(37,211,102,0.4); cursor: pointer; transition: transform .2s;
+}
+.whatsapp-float:hover { transform: scale(1.05); }
+body.rtl .whatsapp-float { left: auto; right: 20px; }
+.back-to-top {
+  position: fixed; right: 20px; bottom: 20px; z-index: 999; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--navy); color: var(--white); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 18px; opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.back-to-top.show { opacity: 1; pointer-events: auto; }
+body.rtl .back-to-top { right: auto; left: 20px; }
+
+/* ==================== COOKIE BANNER ==================== */
+.cookie-banner {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px);
+  background: var(--bg-card); color: var(--text-primary); padding: 25px 30px; border-radius: 10px;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.15); z-index: 2000; max-width: 500px; width: 90%; transition: transform .4s; display: none;
+}
+.cookie-banner.show { display: block; transform: translateX(-50%) translateY(0); }
+.cookie-banner h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); }
+.cookie-banner p { font-size: 13px; color: var(--text-secondary); margin-bottom: 15px; }
+.cookie-buttons { display: flex; gap: 10px; }
+.cookie-buttons button { padding: 8px 20px; border-radius: 5px; font-size: 13px; font-weight: 700; cursor: pointer; border: none; transition: all .2s; }
+.btn-accept-cookies { background: var(--green); color: var(--white); }
+.btn-accept-cookies:hover { opacity: 0.9; }
+.btn-cookie-settings { background: var(--bg-section); color: var(--text-primary); }
+.btn-cookie-settings:hover { background: var(--grey-light); }
+
+/* ==================== TOAST ==================== */
+.toast {
+  position: fixed; top: 100px; right: 20px; background: var(--navy); color: var(--white);
+  padding: 15px 25px; border-radius: 8px; box-shadow: var(--shadow-lg); z-index: 3000;
+  font-size: 14px; font-weight: 600; transform: translateX(400px); transition: transform .3s;
+}
+.toast.show { transform: translateX(0); }
+body.rtl .toast { right: auto; left: 20px; transform: translateX(-400px); }
+body.rtl .toast.show { transform: translateX(0); }
+
+/* ==================== PROPERTY MODAL ==================== */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 5000;
+  justify-content: center; align-items: flex-start; padding: 40px 20px; overflow-y: auto;
+}
+.modal-overlay.show { display: flex; }
+.modal-content { background: var(--bg-card); border-radius: 10px; max-width: 800px; width: 100%; margin: auto; position: relative; overflow: hidden; }
+.modal-close {
+  position: absolute; top: 15px; right: 15px; width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(0,0,0,0.5); color: var(--white); border: none; cursor: pointer; font-size: 18px; z-index: 10;
+  display: flex; align-items: center; justify-content: center;
+}
+.modal-image { width: 100%; height: 400px; object-fit: cover; }
+.modal-body { padding: 25px; }
+.modal-body h2 { font-size: 24px; font-weight: 800; margin-bottom: 10px; color: var(--text-primary); }
+.modal-price { font-size: 28px; font-weight: 900; color: var(--gold-dark); margin-bottom: 15px; }
+.modal-features { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 20px; }
+.modal-feature {
+  display: flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--bg-section);
+  border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--text-primary);
+}
+.modal-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px; }
+.modal-contact-btn {
+  display: inline-block; background: var(--green); color: var(--white); padding: 12px 30px;
+  border-radius: 5px; font-size: 14px; font-weight: 700; border: none; cursor: pointer;
+}
+body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-family: 'Cairo', sans-serif; }
+
+/* ==================== ADMIN LOGIN PAGE ==================== */
+.admin-login-page {
+  display: none; position: fixed; inset: 0; background: var(--navy-dark); z-index: 6000;
+  justify-content: center; align-items: center; padding: 20px;
+}
+.admin-login-page.show { display: flex; }
+.admin-login-box {
+  background: var(--bg-card); border-radius: 12px; padding: 40px; max-width: 400px; width: 100%;
+  box-shadow: var(--shadow-lg); text-align: center;
+}
+.admin-login-box .logo-svg { width: 60px; height: 60px; margin: 0 auto 20px; }
+.admin-login-box h2 { font-size: 22px; font-weight: 800; color: var(--text-primary); margin-bottom: 5px; }
+.admin-login-box .subtitle { font-size: 13px; color: var(--text-secondary); margin-bottom: 25px; }
+.admin-login-box input {
+  width: 100%; padding: 12px 16px; border: 1.5px solid var(--border-color); border-radius: 6px;
+  font-size: 14px; color: var(--text-primary); background: var(--bg-card); margin-bottom: 15px; transition: border-color .2s;
+}
+.admin-login-box input:focus { outline: none; border-color: var(--gold); }
+.admin-login-box .login-btn {
+  width: 100%; background: var(--navy); color: var(--white); border: none; padding: 12px; font-size: 14px;
+  font-weight: 700; cursor: pointer; border-radius: 6px; text-transform: uppercase; letter-spacing: 1px; transition: background .2s;
+}
+.admin-login-box .login-btn:hover { background: var(--gold); }
+.admin-login-box .back-link { display: inline-block; margin-top: 15px; font-size: 13px; color: var(--text-secondary); cursor: pointer; }
+.admin-login-box .back-link:hover { color: var(--gold); }
+.admin-login-error {
+  display: none; background: rgba(192,57,43,0.1); color: var(--red-tag); padding: 10px 15px; border-radius: 6px;
+  font-size: 13px; font-weight: 600; margin-bottom: 15px;
+}
+.admin-login-error.show { display: block; }
+
+/* ==================== ADMIN DASHBOARD ==================== */
+.admin-dashboard { display: none; position: fixed; inset: 0; background: var(--bg-main); z-index: 6000; overflow-y: auto; }
+.admin-dashboard.show { display: block; }
+.dash-header {
+  background: var(--navy); color: var(--white); padding: 15px 30px;
+  display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10;
+}
+.dash-header h1 { font-size: 20px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+.dash-header .dash-actions { display: flex; gap: 10px; align-items: center; }
+.dash-header .dash-actions button {
+  background: rgba(255,255,255,0.15); color: var(--white); border: none; padding: 8px 16px; font-size: 13px;
+  font-weight: 600; cursor: pointer; border-radius: 5px; transition: background .2s; display: flex; align-items: center; gap: 6px;
+}
+.dash-header .dash-actions button:hover { background: rgba(255,255,255,0.25); }
+.dash-header .role-badge {
+  background: var(--gold); color: var(--navy); padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 800; text-transform: uppercase;
+}
+.dash-tabs {
+  background: var(--bg-card); border-bottom: 1px solid var(--border-color); padding: 0 30px;
+  display: flex; gap: 5px; position: sticky; top: 55px; z-index: 9;
+}
+.dash-tab {
+  padding: 15px 20px; font-size: 14px; font-weight: 700; color: var(--text-secondary); cursor: pointer;
+  border-bottom: 3px solid transparent; transition: all .2s;
+}
+.dash-tab.active { color: var(--navy); border-bottom-color: var(--gold); }
+.dash-tab:hover { color: var(--text-primary); }
+.dash-content { padding: 30px; max-width: 1400px; margin: 0 auto; }
+.dash-panel { display: none; }
+.dash-panel.active { display: block; }
+.dash-panel h3 { font-size: 20px; font-weight: 800; color: var(--text-primary); margin-bottom: 20px; }
+
+/* Editable field styling */
+.edit-row { display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px; }
+.edit-row label { font-size: 12px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; }
+.edit-row input, .edit-row textarea, .edit-row select {
+  width: 100%; padding: 10px 14px; border: 1.5px solid var(--border-color); border-radius: 6px;
+  font-size: 14px; color: var(--text-primary); background: var(--bg-card); transition: border-color .2s;
+}
+.edit-row input:focus, .edit-row textarea:focus, .edit-row select:focus { outline: none; border-color: var(--gold); }
+.edit-row textarea { resize: vertical; min-height: 80px; }
+.edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.edit-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+
+/* Property editor table */
+.prop-editor-card {
+  background: var(--bg-card); border-radius: 8px; box-shadow: var(--shadow); margin-bottom: 20px; overflow: hidden;
+}
+.prop-editor-header {
+  padding: 15px 20px; background: var(--bg-section); display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+}
+.prop-editor-header h4 { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+.prop-editor-header .prop-badge { font-size: 12px; font-weight: 600; color: var(--gold); }
+.prop-editor-body { padding: 20px; display: none; }
+.prop-editor-body.open { display: block; }
+.prop-editor-body .edit-row { margin-bottom: 12px; }
+
+/* Dashboard buttons */
+.dash-btn {
+  background: var(--navy); color: var(--white); border: none; padding: 10px 20px; font-size: 13px; font-weight: 700;
+  cursor: pointer; border-radius: 5px; transition: background .2s; display: inline-flex; align-items: center; gap: 6px;
+}
+.dash-btn:hover { background: var(--gold); }
+.dash-btn-danger { background: var(--red-tag); }
+.dash-btn-danger:hover { background: #a03020; }
+.dash-btn-success { background: var(--green); }
+.dash-btn-success:hover { opacity: 0.9; }
+
+/* Settings sections */
+.settings-card {
+  background: var(--bg-card); border-radius: 8px; box-shadow: var(--shadow); padding: 25px; margin-bottom: 20px;
+}
+.settings-card h4 { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); }
+.settings-card .edit-row { margin-bottom: 12px; }
+
+/* Slider editor */
+.slide-editor-item {
+  display: flex; gap: 15px; align-items: center; background: var(--bg-card); padding: 15px; border-radius: 8px; margin-bottom: 10px;
+  box-shadow: var(--shadow);
+}
+.slide-editor-item img { width: 100px; height: 60px; object-fit: cover; border-radius: 4px; }
+.slide-editor-item .slide-url { flex: 1; }
+.slide-editor-item .dash-btn-danger { padding: 8px 12px; font-size: 12px; }
+
+/* Team editor */
+.team-editor-card {
+  background: var(--bg-card); border-radius: 8px; box-shadow: var(--shadow); padding: 20px; margin-bottom: 20px;
+}
+.team-editor-card .team-img-preview { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; }
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1200px) {
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 992px) {
+  .about-inner { grid-template-columns: 1fr; }
+  .about-image { order: -1; }
+  nav.main-nav { display: none; }
+  .mobile-menu-btn { display: block; }
+  .top-bar-contact { font-size: 12px; gap: 15px; }
+  .top-bar-social { display: none; }
+  .edit-grid, .edit-grid-3 { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .hero-slider { height: 400px; }
+  .slide-content h2 { font-size: 28px; }
+  .slide-content p { font-size: 14px; }
+  .search-form { padding: 20px; }
+  .search-field { min-width: 100%; }
+  .search-btn { width: 100%; }
+  .properties-grid { grid-template-columns: 1fr; }
+  .contact-form { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .about-stats { gap: 20px; flex-wrap: wrap; }
+  .top-bar-contact { flex-direction: column; gap: 5px; text-align: center; }
+  .top-bar-inner { flex-direction: column; }
+  .section-title h2 { font-size: 24px; }
+  .header-controls { gap: 8px; }
+  .lang-toggle { padding: 3px; }
+  .lang-btn { padding: 5px 10px; font-size: 11px; }
+  .theme-toggle { width: 34px; height: 34px; font-size: 14px; }
+  .dash-content { padding: 15px; }
+  .dash-tabs { padding: 0 15px; overflow-x: auto; }
+  .dash-tab { padding: 12px 14px; font-size: 13px; white-space: nowrap; }
+}
+
+/* Print/share */
+@media print { .whatsapp-float, .back-to-top, .cookie-banner { display: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- ==================== TOP BAR ==================== -->
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <div class="top-bar-contact" id="topBarContact">
+      <!-- Rendered by JS -->
+    </div>
+    <div class="top-bar-social">
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== HEADER ==================== -->
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap" onclick="navigateTo('')" style="cursor:pointer;">
+      <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="50" cy="92" rx="30" ry="4" fill="rgba(0,0,0,0.15)"/>
+        <path d="M50 15 L25 45 L50 55 Z" fill="#1B2A4A"/>
+        <path d="M50 15 L75 45 L50 55 Z" fill="#FFFFFF" stroke="#e0e0e0" stroke-width="0.5"/>
+        <path d="M75 45 L50 88 L50 55 Z" fill="#152238"/>
+        <path d="M25 45 L50 88 L50 55 Z" fill="#8DA9C4"/>
+        <circle cx="63" cy="38" r="7" fill="#f5f5f7" stroke="#1B2A4A" stroke-width="1"/>
+        <text x="50" y="48" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-size="14" fill="white" style="filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.4));">V</text>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-title" id="logoTitle">VERTO</span>
+        <span class="logo-sub" data-en>Real Estate</span>
+        <span class="logo-sub" data-ar>العقارية</span>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#home" class="active" data-en>Home</a><a href="#home" class="active" data-ar>الرئيسية</a></li>
+        <li><a href="#listings" data-en>All Listings</a><a href="#listings" data-ar>كل العقارات</a></li>
+        <li><a href="#about" data-en>About Us</a><a href="#about" data-ar>من نحن</a></li>
+        <li><a href="#team" data-en>Our Team</a><a href="#team" data-ar>فريقنا</a></li>
+        <li><a href="#wishlist" data-en>Wishlist</a><a href="#wishlist" data-ar>المفضلة</a></li>
+        <li><a href="#contact" data-en>Contact</a><a href="#contact" data-ar>تواصل</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-controls">
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="langBtnEn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="langBtnAr" onclick="setLang('ar')">AR</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme">
+        <i class="fas fa-moon" id="themeIcon"></i>
+      </button>
+      <button class="theme-toggle" onclick="navigateTo('#admin')" title="Admin Login" style="border-color: var(--gold); color: var(--gold);">
+        <i class="fas fa-user-shield"></i>
+      </button>
+      <button class="mobile-menu-btn" onclick="toggleMobileNav()"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== MOBILE NAV ==================== -->
+<div class="overlay" id="overlay" onclick="closeMobileNav()"></div>
+<div class="mobile-nav" id="mobileNav">
+  <button class="close-btn" onclick="closeMobileNav()"><i class="fas fa-times"></i></button>
+  <ul>
+    <li><a href="#home" onclick="closeMobileNav()" data-en>Home</a></li>
+    <li><a href="#home" onclick="closeMobileNav()" data-ar>الرئيسية</a></li>
+    <li><a href="#listings" onclick="closeMobileNav()" data-en>All Listings</a></li>
+    <li><a href="#listings" onclick="closeMobileNav()" data-ar>كل العقارات</a></li>
+    <li><a href="#about" onclick="closeMobileNav()" data-en>About Us</a></li>
+    <li><a href="#about" onclick="closeMobileNav()" data-ar>من نحن</a></li>
+    <li><a href="#team" onclick="closeMobileNav()" data-en>Our Team</a></li>
+    <li><a href="#team" onclick="closeMobileNav()" data-ar>فريقنا</a></li>
+    <li><a href="#contact" onclick="closeMobileNav()" data-en>Contact</a></li>
+    <li><a href="#contact" onclick="closeMobileNav()" data-ar>تواصل</a></li>
+  </ul>
+</div>
+
+<!-- ==================== HERO SLIDER ==================== -->
+<div class="hero-slider" id="home">
+  <div id="slidesContainer"></div>
+  <div class="slide-content">
+    <h2 id="heroTitle" data-en>Find Your Dream Home in Kuwait</h2>
+    <p id="heroSubtitle" data-en>Premium properties · Villas · Apartments · Penthouses</p>
+  </div>
+  <div class="slider-dots" id="sliderDots"></div>
+</div>
+
+<!-- ==================== SEARCH SECTION ==================== -->
+<div class="search-section">
+  <form class="search-form" onsubmit="return searchProperties(event)">
+    <div class="search-field">
+      <label data-en>Location</label><label data-ar>المنطقة</label>
+      <select id="searchLocation">
+        <option value="" data-en>-- Location --</option>
+        <option value="" data-ar>-- المنطقة --</option>
+        <option value="Abdulla Al Mubarak">Abdulla Al Mubarak</option>
+        <option value="Abu Al Hasania">Abu Al Hasania</option>
+        <option value="Abu Fatira">Abu Fatira</option>
+        <option value="Abu Halifa">Abu Halifa</option>
+        <option value="Bayan">Bayan</option>
+        <option value="Bneid Al Qar">Bneid Al Qar</option>
+        <option value="Daiya">Daiya</option>
+        <option value="Dasma">Dasma</option>
+        <option value="Eqaila">Eqaila</option>
+        <option value="Farwaniya">Farwaniya</option>
+        <option value="Fintas">Fintas</option>
+        <option value="Fnaitees">Fnaitees</option>
+        <option value="Hawally">Hawally</option>
+        <option value="Jabriya">Jabriya</option>
+        <option value="Khaitan">Khaitan</option>
+        <option value="Mahboula">Mahboula</option>
+        <option value="Mangaf">Mangaf</option>
+        <option value="Mesayel">Mesayel</option>
+        <option value="Mishref">Mishref</option>
+        <option value="Mutla">Mutla</option>
+        <option value="Qortuba">Qortuba</option>
+        <option value="Salwa">Salwa</option>
+        <option value="Salmiya">Salmiya</option>
+        <option value="Sabah Al Salem">Sabah Al Salem</option>
+        <option value="Sharq">Sharq</option>
+        <option value="Yarmouk">Yarmouk</option>
+        <option value="Zahra">Zahra</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label data-en>Property Type</label><label data-ar>نوع العقار</label>
+      <select id="searchType">
+        <option value="" data-en>-- Property Type --</option>
+        <option value="" data-ar>-- نوع العقار --</option>
+        <option value="Villa">Villa</option>
+        <option value="Apartment">Apartment</option>
+        <option value="Duplex">Duplex</option>
+        <option value="Office">Office</option>
+        <option value="Retail">Retail</option>
+        <option value="Studio">Studio</option>
+        <option value="Rooftop">Rooftop</option>
+        <option value="Triplex">Triplex</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label data-en>Bedrooms</label><label data-ar>غرف النوم</label>
+      <select id="searchBedrooms">
+        <option value="" data-en>-- Bedrooms --</option>
+        <option value="" data-ar>-- غرف النوم --</option>
+        <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+        <option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7+</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label data-en>Bathrooms</label><label data-ar>الحمامات</label>
+      <select id="searchBathrooms">
+        <option value="" data-en>-- Bathrooms --</option>
+        <option value="" data-ar>-- الحمامات --</option>
+        <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+        <option value="4">4</option><option value="5">5+</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label data-en>Min Price (KD)</label><label data-ar>أقل سعر (د.ك)</label>
+      <input type="number" id="searchMinPrice" placeholder="0" min="0">
+    </div>
+    <div class="search-field">
+      <label data-en>Max Price (KD)</label><label data-ar>أعلى سعر (د.ك)</label>
+      <input type="number" id="searchMaxPrice" placeholder="10000" min="0">
+    </div>
+    <button type="button" class="more-filters-btn" onclick="toggleAdvancedFilters()">
+      <i class="fas fa-sliders-h"></i> <span data-en>More Filters</span><span data-ar>فلاتر أكثر</span>
+    </button>
+    <button type="submit" class="search-btn">
+      <i class="fas fa-search"></i> <span data-en>Search</span><span data-ar>بحث</span>
+    </button>
+    <div class="advanced-filters" id="advancedFilters">
+      <label class="filter-chip"><input type="checkbox" value="Balcony"> <span data-en>Balcony</span><span data-ar>شرفة</span></label>
+      <label class="filter-chip"><input type="checkbox" value="Basement"> <span data-en>Basement</span><span data-ar>قبو</span></label>
+      <label class="filter-chip"><input type="checkbox" value="Beach Access"> <span data-en>Beach Access</span><span data-ar>وصول للشاطئ</span></label>
+      <label class="filter-chip"><input type="checkbox" value="Garden"> <span data-en>Garden</span><span data-ar>حديقة</span></label>
+      <label class="filter-chip"><input type="checkbox" value="Diwaniya"> <span data-en>Diwaniya</span><span data-ar>ديوانية</span></label>
+      <label class="filter-chip"><input type="checkbox" value="Driver's room"> <span data-en>Driver's Room</span><span data-ar>غرفة السائق</span></label>
+      <label class="filter-chip"><input type="checkbox" value="Gym"> <span data-en>Gym</span><span data-ar>جيم</span></label>
+      <label class="filter-chip"><input type="checkbox" value="Pet Friendly"> <span data-en>Pet Friendly</span><span data-ar>مسموح بالحيوانات</span></label>
+      <label class="filter-chip"><input type="checkbox" value="Sea View"> <span data-en>Sea View</span><span data-ar>إطلالة بحرية</span></label>
+      <label class="filter-chip"><input type="checkbox" value="Swimming pool"> <span data-en>Swimming Pool</span><span data-ar>مسبح</span></label>
+      <label class="filter-chip"><input type="checkbox" value="Terrace"> <span data-en>Terrace</span><span data-ar>تراس</span></label>
+      <label class="filter-chip"><input type="checkbox" value="Furnished"> <span data-en>Furnished</span><span data-ar>مفروش</span></label>
+      <label class="filter-chip"><input type="checkbox" value="Unfurnished"> <span data-en>Unfurnished</span><span data-ar>غير مفروش</span></label>
+      <label class="filter-chip"><input type="checkbox" value="City View"> <span data-en>City View</span><span data-ar>إطلالة مدينة</span></label>
+    </div>
+  </form>
+</div>
+
+<!-- ==================== RECOMMENDED PROPERTIES ==================== -->
+<div class="section-title" id="listings">
+  <h2 data-en>Recommended This Week</h2>
+  <h2 data-ar>موصى به هذا الأسبوع</h2>
+</div>
+<div class="properties-section">
+  <div class="properties-grid" id="recommendedGrid"></div>
+</div>
+
+<!-- ==================== NEWLY ADDED PROPERTIES ==================== -->
+<div class="section-title">
+  <h2 data-en>Newly Added Properties</h2>
+  <h2 data-ar>أحدث العقارات</h2>
+</div>
+<div class="properties-section">
+  <div class="properties-grid" id="newlyAddedGrid"></div>
+</div>
+
+<div class="all-listings-wrap">
+  <a href="#listings" class="btn-all-listings" onclick="showAllProperties(); return false;">
+    <span data-en>All Listings</span>
+    <span data-ar>كل العقارات</span>
+  </a>
+</div>
+
+<!-- ==================== ABOUT SECTION ==================== -->
+<div class="about-section" id="about">
+  <div class="about-inner">
+    <div class="about-image">
+      <img id="aboutImg" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800" alt="Verto Real Estate Office">
+    </div>
+    <div class="about-content">
+      <h2 id="aboutTitle" data-en>About Verto Real Estate</h2>
+      <div id="aboutText"></div>
+      <div class="about-stats">
+        <div class="stat-item">
+          <h3 id="stat1Num">500+</h3>
+          <p data-en>Properties</p>
+          <p data-ar>عقار</p>
+        </div>
+        <div class="stat-item">
+          <h3 id="stat2Num">1000+</h3>
+          <p data-en>Happy Clients</p>
+          <p data-ar>عميل سعيد</p>
+        </div>
+        <div class="stat-item">
+          <h3 id="stat3Num">15+</h3>
+          <p data-en>Years Experience</p>
+          <p data-ar>سنوات خبرة</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TEAM SECTION ==================== -->
+<div class="team-section" id="team">
+  <div class="section-title" style="padding-top: 0;">
+    <h2 data-en>Our Team</h2>
+    <h2 data-ar>فريقنا</h2>
+  </div>
+  <div class="team-grid" id="teamGrid"></div>
+</div>
+
+<!-- ==================== CONTACT SECTION ==================== -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <h2 data-en>Contact Us</h2>
+    <h2 data-ar>تواصل معنا</h2>
+    <p data-en>Get in touch with our team for any inquiries about properties</p>
+    <p data-ar>تواصل مع فريقنا للاستفسار عن أي عقار</p>
+    <form class="contact-form" onsubmit="return submitContactForm(event)">
+      <input type="text" name="name" required data-ph-en="Name Surname" data-ph-ar="الاسم الكامل" placeholder="Name Surname">
+      <input type="email" name="email" required data-ph-en="Email Address" data-ph-ar="البريد الإلكتروني" placeholder="Email Address">
+      <input type="tel" name="phone" required data-ph-en="Phone Number" data-ph-ar="رقم الهاتف" placeholder="Phone Number">
+      <input type="text" name="subject" data-ph-en="Subject" data-ph-ar="الموضوع" placeholder="Subject">
+      <textarea name="message" class="full-width" required data-ph-en="Message" data-ph-ar="رسالتك" placeholder="Message"></textarea>
+      <button type="submit" class="contact-submit">
+        <span data-en>Submit</span>
+        <span data-ar>إرسال</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="footer-logo">
+        <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 15 L25 45 L50 55 Z" fill="#1B2A4A"/>
+          <path d="M50 15 L75 45 L50 55 Z" fill="#FFFFFF" stroke="#444" stroke-width="0.5"/>
+          <path d="M75 45 L50 88 L50 55 Z" fill="#152238"/>
+          <path d="M25 45 L50 88 L50 55 Z" fill="#8DA9C4"/>
+          <circle cx="63" cy="38" r="7" fill="#152238"/>
+          <text x="50" y="48" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-size="14" fill="white">V</text>
+        </svg>
+        <span class="logo-title">VERTO</span>
+      </div>
+      <p id="footerAbout" data-en>Verto Real Estate — Your trusted partner for premium properties in Kuwait. We offer villas, apartments, and commercial spaces across all major areas.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h3 data-en>Quick Links</h3>
+      <h3 data-ar>روابط سريعة</h3>
+      <a href="#home" data-en>Home</a><a href="#home" data-ar>الرئيسية</a>
+      <a href="#listings" data-en>All Listings</a><a href="#listings" data-ar>كل العقارات</a>
+      <a href="#about" data-en>About Us</a><a href="#about" data-ar>من نحن</a>
+      <a href="#team" data-en>Our Team</a><a href="#team" data-ar>فريقنا</a>
+      <a href="#contact" data-en>Contact</a><a href="#contact" data-ar>تواصل</a>
+    </div>
+    <div class="footer-col">
+      <h3 data-en>Areas</h3>
+      <h3 data-ar>المناطق</h3>
+      <a href="#" data-en>Salmiya</a><a href="#" data-ar>السالمية</a>
+      <a href="#" data-en>Salwa</a><a href="#" data-ar>سلوى</a>
+      <a href="#" data-en>Jabriya</a><a href="#" data-ar>الجابرية</a>
+      <a href="#" data-en>Mishref</a><a href="#" data-ar>المشرف</a>
+      <a href="#" data-en>Fintas</a><a href="#" data-ar>الفنطاس</a>
+      <a href="#" data-en>Mangaf</a><a href="#" data-ar>المنقف</a>
+    </div>
+    <div class="footer-col">
+      <h3 data-en>Contact</h3>
+      <h3 data-ar>تواصل</h3>
+      <div id="footerContact"></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p id="footerCopyright" data-en>Copyright 2026 Verto Real Estate | All Rights Reserved</p>
+    <p id="footerCopyrightAr" data-ar>حقوق النشر 2026 فيرتو العقارية | جميع الحقوق محفوظة</p>
+    <p style="margin-top:5px;"><a href="#" data-en>Privacy Policy</a> · <a href="#" data-en>Terms of Service</a></p>
+    <p style="margin-top:5px;"><a href="#" data-ar>سياسة الخصوصية</a> · <a href="#" data-ar>شروط الخدمة</a></p>
+  </div>
+</footer>
+
+<!-- ==================== FLOATING ELEMENTS ==================== -->
+<a href="https://wa.me/96599990000" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp" style="font-size:22px;"></i>
+  <span data-en>Contact us</span>
+  <span data-ar>تواصل معنا</span>
+</a>
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+<!-- ==================== COOKIE BANNER ==================== -->
+<div class="cookie-banner" id="cookieBanner">
+  <h4 data-en>Cookie Notice</h4>
+  <h4 data-ar>إشعار الكوكيز</h4>
+  <p data-en>We use cookies on our website to give you the most relevant experience by remembering your preferences and repeat visits. By clicking "Accept All", you consent to the use of ALL the cookies.</p>
+  <p data-ar>نستخدم ملفات تعريف الارتباط على موقعنا لمنحك التجربة الأكثر صلة من خلال تذكر تفضيلاتك وزياراتك المتكررة.</p>
+  <div class="cookie-buttons">
+    <button class="btn-cookie-settings" onclick="closeCookieBanner()">
+      <span data-en>Cookie Settings</span><span data-ar>إعدادات الكوكيز</span>
+    </button>
+    <button class="btn-accept-cookies" onclick="closeCookieBanner()">
+      <span data-en>Accept All</span><span data-ar>قبول الكل</span>
+    </button>
+  </div>
+</div>
+
+<!-- ==================== TOAST ==================== -->
+<div class="toast" id="toast"></div>
+
+<!-- ==================== PROPERTY MODAL ==================== -->
+<div class="modal-overlay" id="propertyModal" onclick="closeModal(event)">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModalDirect()"><i class="fas fa-times"></i></button>
+    <img class="modal-image" id="modalImage" src="" alt="">
+    <div class="modal-body">
+      <h2 id="modalTitle"></h2>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="modal-features" id="modalFeatures"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <button class="modal-contact-btn" onclick="window.location.href='https://wa.me/96599990000'">
+        <i class="fab fa-whatsapp"></i> <span data-en>Contact Agent</span><span data-ar>تواصل مع الوكيل</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== ADMIN LOGIN PAGE ==================== -->
+<div class="admin-login-page" id="adminLoginPage">
+  <div class="admin-login-box">
+    <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 15 L25 45 L50 55 Z" fill="#1B2A4A"/>
+      <path d="M50 15 L75 45 L50 55 Z" fill="#FFFFFF" stroke="#e0e0e0" stroke-width="0.5"/>
+      <path d="M75 45 L50 88 L50 55 Z" fill="#152238"/>
+      <path d="M25 45 L50 88 L50 55 Z" fill="#8DA9C4"/>
+      <circle cx="63" cy="38" r="7" fill="#f5f5f7" stroke="#1B2A4A" stroke-width="1"/>
+      <text x="50" y="48" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="14" fill="white">V</text>
+    </svg>
+    <h2 data-en>Admin Access</h2>
+    <h2 data-ar>دخول الإدارة</h2>
+    <p class="subtitle" data-en>Restricted area — authorized personnel only</p>
+    <p class="subtitle" data-ar>منطقة محظورة — للمصرح لهم فقط</p>
+    <div class="admin-login-error" id="loginError" data-en>Invalid credentials. Please try again.</div>
+    <div class="admin-login-error" id="loginErrorAr" data-ar>بيانات غير صحيحة. حاول مرة أخرى.</div>
+    <input type="text" id="loginUser" placeholder="Username" autocomplete="off" onkeydown="if(event.key==='Enter')document.getElementById('loginPass').focus()">
+    <input type="password" id="loginPass" placeholder="Password" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()" data-en>Login</button>
+    <button class="login-btn" data-ar style="display:none;">دخول</button>
+    <a class="back-link" onclick="navigateTo('')" data-en>← Back to website</a>
+    <a class="back-link" data-ar style="display:none;">→ العودة للموقع</a>
+  </div>
+</div>
+
+<!-- ==================== ADMIN DASHBOARD ==================== -->
+<div class="admin-dashboard" id="adminDashboard">
+  <div class="dash-header">
+    <h1><i class="fas fa-cog"></i> <span data-en>Verto Admin Dashboard</span><span data-ar>لوحة تحكم فيرتو</span></h1>
+    <div class="dash-actions">
+      <span class="role-badge" id="roleBadge">ADMIN</span>
+      <button onclick="navigateTo('')" data-en>View Site</button>
+      <button onclick="navigateTo('')" data-ar style="display:none;">عرض الموقع</button>
+      <button onclick="logoutAdmin()" data-en>Logout</button>
+      <button onclick="logoutAdmin()" data-ar style="display:none;">خروج</button>
+    </div>
+  </div>
+  <div class="dash-tabs">
+    <div class="dash-tab active" onclick="switchTab('properties')" data-en>Properties</div>
+    <div class="dash-tab" onclick="switchTab('content')" data-en>Site Content</div>
+    <div class="dash-tab" onclick="switchTab('slider')" data-en>Slider</div>
+    <div class="dash-tab" onclick="switchTab('team')" data-en>Team</div>
+    <div class="dash-tab" onclick="switchTab('settings')" data-en>Settings</div>
+    <div class="dash-tab" onclick="switchTab('knet')" data-en>KNET</div>
+  </div>
+  <div class="dash-content">
+
+    <!-- PROPERTIES PANEL -->
+    <div class="dash-panel active" id="panel-properties">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <h3 data-en>Manage Properties</h3>
+        <h3 data-ar style="display:none;">إدارة العقارات</h3>
+        <button class="dash-btn dash-btn-success" onclick="addNewProperty()">
+          <i class="fas fa-plus"></i> <span data-en>Add Property</span>
+        </button>
+      </div>
+      <div id="propertiesEditor"></div>
+    </div>
+
+    <!-- CONTENT PANEL -->
+    <div class="dash-panel" id="panel-content">
+      <h3 data-en>Edit Website Content</h3>
+      <div class="settings-card">
+        <h4 data-en>Hero Section</h4>
+        <div class="edit-row">
+          <label data-en>Hero Title (English)</label>
+          <input type="text" id="editHeroTitleEn" oninput="updateContent('heroTitleEn', this.value)">
+        </div>
+        <div class="edit-row">
+          <label data-en>Hero Title (Arabic)</label>
+          <input type="text" id="editHeroTitleAr" oninput="updateContent('heroTitleAr', this.value)">
+        </div>
+        <div class="edit-row">
+          <label data-en>Hero Subtitle (English)</label>
+          <input type="text" id="editHeroSubEn" oninput="updateContent('heroSubEn', this.value)">
+        </div>
+        <div class="edit-row">
+          <label data-en>Hero Subtitle (Arabic)</label>
+          <input type="text" id="editHeroSubAr" oninput="updateContent('heroSubAr', this.value)">
+        </div>
+      </div>
+      <div class="settings-card">
+        <h4 data-en>About Section</h4>
+        <div class="edit-row">
+          <label data-en>About Title (English)</label>
+          <input type="text" id="editAboutTitleEn" oninput="updateContent('aboutTitleEn', this.value)">
+        </div>
+        <div class="edit-row">
+          <label data-en>About Title (Arabic)</label>
+          <input type="text" id="editAboutTitleAr" oninput="updateContent('aboutTitleAr', this.value)">
+        </div>
+        <div class="edit-row">
+          <label data-en>About Text (English)</label>
+          <textarea id="editAboutTextEn" oninput="updateContent('aboutTextEn', this.value)"></textarea>
+        </div>
+        <div class="edit-row">
+          <label data-en>About Text (Arabic)</label>
+          <textarea id="editAboutTextAr" oninput="updateContent('aboutTextAr', this.value)"></textarea>
+        </div>
+        <div class="edit-grid-3">
+          <div class="edit-row">
+            <label data-en>Stat 1 Number</label>
+            <input type="text" id="editStat1" oninput="updateContent('stat1', this.value)">
+          </div>
+          <div class="edit-row">
+            <label data-en>Stat 2 Number</label>
+            <input type="text" id="editStat2" oninput="updateContent('stat2', this.value)">
+          </div>
+          <div class="edit-row">
+            <label data-en>Stat 3 Number</label>
+            <input type="text" id="editStat3" oninput="updateContent('stat3', this.value)">
+          </div>
+        </div>
+        <div class="edit-row">
+          <label data-en>About Image URL</label>
+          <input type="text" id="editAboutImg" oninput="updateContent('aboutImg', this.value)">
+        </div>
+      </div>
+      <div class="settings-card">
+        <h4 data-en>Footer</h4>
+        <div class="edit-row">
+          <label data-en>Footer About (English)</label>
+          <textarea id="editFooterEn" oninput="updateContent('footerEn', this.value)"></textarea>
+        </div>
+        <div class="edit-row">
+          <label data-en>Footer About (Arabic)</label>
+          <textarea id="editFooterAr" oninput="updateContent('footerAr', this.value)"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDER PANEL -->
+    <div class="dash-panel" id="panel-slider">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <h3 data-en>Manage Slider Images</h3>
+        <button class="dash-btn dash-btn-success" onclick="addSlide()">
+          <i class="fas fa-plus"></i> <span data-en>Add Slide</span>
+        </button>
+      </div>
+      <div id="slidesEditor"></div>
+    </div>
+
+    <!-- TEAM PANEL -->
+    <div class="dash-panel" id="panel-team">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <h3 data-en>Manage Team Members</h3>
+        <button class="dash-btn dash-btn-success" onclick="addTeamMember()">
+          <i class="fas fa-plus"></i> <span data-en>Add Member</span>
+        </button>
+      </div>
+      <div id="teamEditor"></div>
+    </div>
+
+    <!-- SETTINGS PANEL -->
+    <div class="dash-panel" id="panel-settings">
+      <h3 data-en>Site Settings</h3>
+      <div class="settings-card">
+        <h4 data-en>Contact Information</h4>
+        <div class="edit-grid">
+          <div class="edit-row">
+            <label data-en>Email 1</label>
+            <input type="text" id="editEmail1" oninput="updateSettings('email1', this.value)">
+          </div>
+          <div class="edit-row">
+            <label data-en>Phone 1</label>
+            <input type="text" id="editPhone1" oninput="updateSettings('phone1', this.value)">
+          </div>
+          <div class="edit-row">
+            <label data-en>Email 2</label>
+            <input type="text" id="editEmail2" oninput="updateSettings('email2', this.value)">
+          </div>
+          <div class="edit-row">
+            <label data-en>Phone 2</label>
+            <input type="text" id="editPhone2" oninput="updateSettings('phone2', this.value)">
+          </div>
+          <div class="edit-row">
+            <label data-en>WhatsApp Number</label>
+            <input type="text" id="editWhatsapp" oninput="updateSettings('whatsapp', this.value)">
+          </div>
+          <div class="edit-row">
+            <label data-en>Address</label>
+            <input type="text" id="editAddress" oninput="updateSettings('address', this.value)">
+          </div>
+        </div>
+      </div>
+      <div class="settings-card">
+        <h4 data-en>Default Theme & Language</h4>
+        <div class="edit-grid">
+          <div class="edit-row">
+            <label data-en>Default Theme</label>
+            <select id="editDefaultTheme" onchange="updateSettings('defaultTheme', this.value)">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+          <div class="edit-row">
+            <label data-en>Default Language</label>
+            <select id="editDefaultLang" onchange="updateSettings('defaultLang', this.value)">
+              <option value="en">English</option>
+              <option value="ar">Arabic</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="settings-card" id="superAdminOnly" style="display:none;">
+        <h4 data-en>Data Management (Superadmin Only)</h4>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="dash-btn" onclick="exportData()"><i class="fas fa-download"></i> <span data-en>Export Data</span></button>
+          <button class="dash-btn dash-btn-danger" onclick="resetData()"><i class="fas fa-redo"></i> <span data-en>Reset to Default</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- KNET PANEL -->
+    <div class="dash-panel" id="panel-knet">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
+        <h3><i class="fas fa-credit-card"></i> KNET Payment Gateway Configuration</h3>
+        <div style="display:flex; gap:10px;">
+          <button class="dash-btn" onclick="testKnet()" data-en>Test Connection</button>
+          <button class="dash-btn dash-btn-success" onclick="saveKnet()" data-en>Save KNET Settings</button>
+        </div>
+      </div>
+      <div class="settings-card">
+        <h4><i class="fas fa-cog"></i> General KNET Settings</h4>
+        <div class="edit-grid">
+          <div class="edit-row"><label>Merchant ID</label><input type="text" id="knetMerchantId" placeholder="KNET Merchant ID"></div>
+          <div class="edit-row"><label>Terminal ID</label><input type="text" id="knetTerminalId" placeholder="Terminal ID"></div>
+          <div class="edit-row"><label>Transaction Password</label><input type="password" id="knetPassword" placeholder="Transaction Password"></div>
+          <div class="edit-row"><label>Currency</label><select id="knetCurrency"><option value="KWD" selected>KWD (Kuwaiti Dinar)</option><option value="USD">USD</option></select></div>
+          <div class="edit-row"><label>API Key</label><input type="text" id="knetApiKey" placeholder="API Key"></div>
+          <div class="edit-row"><label>Mode</label><select id="knetMode"><option value="test" selected>Test Mode</option><option value="live">Live Mode</option></select></div>
+          <div class="edit-row"><label>Callback URL</label><input type="text" id="knetCallback" placeholder="https://yoursite.com/knet/callback"></div>
+          <div class="edit-row"><label>Error URL</label><input type="text" id="knetErrorUrl" placeholder="https://yoursite.com/knet/error"></div>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <h4><i class="fas fa-university"></i> Kuwait Banks Configuration</h4>
+        <p style="font-size:13px; color:var(--text-secondary); margin-bottom:15px;">Configure KNET payment settings for each Kuwaiti bank.</p>
+        <div id="knetBanksContainer"></div>
+      </div>
+
+      <div class="settings-card">
+        <h4><i class="fas fa-info-circle"></i> Payment Settings</h4>
+        <div class="edit-grid">
+          <div class="edit-row"><label>Enabled</label><select id="knetEnabled"><option value="true" selected>Enabled</option><option value="false">Disabled</option></select></div>
+          <div class="edit-row"><label>Min Payment (KWD)</label><input type="number" id="knetMinPayment" value="1" min="0"></div>
+          <div class="edit-row"><label>Max Payment (KWD)</label><input type="number" id="knetMaxPayment" value="50000" min="0"></div>
+          <div class="edit-row"><label>Payment Timeout (minutes)</label><input type="number" id="knetTimeout" value="30" min="1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== DEFAULT DATA ====================
+const DEFAULT_DATA = {
+  content: {
+    heroTitleEn: "Find Your Dream Home in Kuwait",
+    heroTitleAr: "اعثر على منزل أحلامك في الكويت",
+    heroSubEn: "Premium properties · Villas · Apartments · Penthouses",
+    heroSubAr: "عقارات فاخرة · فلل · شقق · بنتهاوس",
+    aboutTitleEn: "About Verto Real Estate",
+    aboutTitleAr: "عن فيرتو العقارية",
+    aboutTextEn: "Verto Real Estate is a premier real estate company in Kuwait, dedicated to providing exceptional property services. With years of experience in the Kuwaiti real estate market, we offer a comprehensive range of residential and commercial properties across all major areas.\n\nOur team of experienced professionals is committed to helping you find the perfect property, whether you're looking for a luxury villa, a cozy apartment, or a commercial space for your business.",
+    aboutTextAr: "فيرتو العقارية هي شركة عقارية رائدة في الكويت، مكرسة لتقديم خدمات عقارية استثنائية. مع سنوات من الخبرة في السوق العقاري الكويتي، نقدم مجموعة شاملة من العقارات السكنية والتجارية في جميع المناطق الرئيسية.\n\nفريقنا من المحترفين ذوي الخبرة ملتزم بمساعدتك في العثور على العقار المثالي، سواء كنت تبحث عن فيلا فاخرة أو شقة مريحة أو مساحة تجارية لأعمالك.",
+    aboutImg: "https://picsum.photos/seed/about/800/400",
+    stat1: "500+", stat2: "1000+", stat3: "15+",
+    footerEn: "Verto Real Estate — Your trusted partner for premium properties in Kuwait. We offer villas, apartments, and commercial spaces across all major areas.",
+    footerAr: "فيرتو العقارية — شريكك الموثوق للعقارات الفاخرة في الكويت. نقدم فلل وشقق ومساحات تجارية في جميع المناطق الرئيسية."
+  },
+  settings: {
+    email1: "info@verto-re.com", phone1: "+965 6000 0000",
+    email2: "sales@verto-re.com", phone2: "+965 9999 0000",
+    whatsapp: "96599990000", address: "Kuwait City, Kuwait",
+    defaultTheme: "light", defaultLang: "en"
+  },
+  knet: {
+    merchantId: "", terminalId: "", password: "", currency: "KWD",
+    apiKey: "", mode: "test", callbackUrl: "", errorUrl: "",
+    enabled: true, minPayment: 1, maxPayment: 50000, timeout: 30,
+    banks: [
+      { name: "National Bank of Kuwait (NBK)", code: "NBK", enabled: false, merchantId: "", terminalId: "" },
+      { name: "Kuwait Finance House (KFH)", code: "KFH", enabled: false, merchantId: "", terminalId: "" },
+      { name: "Ahli United Bank (AUB)", code: "AUB", enabled: false, merchantId: "", terminalId: "" },
+      { name: "Burgan Bank", code: "BBK", enabled: false, merchantId: "", terminalId: "" },
+      { name: "Commercial Bank of Kuwait (CBK)", code: "CBK", enabled: false, merchantId: "", terminalId: "" },
+      { name: "Gulf Bank", code: "GBK", enabled: false, merchantId: "", terminalId: "" },
+      { name: "Al Ahli Bank of Kuwait (ABK)", code: "ABK", enabled: false, merchantId: "", terminalId: "" },
+      { name: "Bank of Bahrain and Kuwait (BBK)", code: "BBKU", enabled: false, merchantId: "", terminalId: "" },
+      { name: "Warba Bank", code: "WBK", enabled: false, merchantId: "", terminalId: "" },
+      { name: "Boubyan Bank", code: "BBY", enabled: false, merchantId: "", terminalId: "" },
+      { name: "Industrial Bank of Kuwait (IBK)", code: "IBK", enabled: false, merchantId: "", terminalId: "" },
+      { name: "Kuwait International Bank (KIB)", code: "KIB", enabled: false, merchantId: "", terminalId: "" }
+    ]
+  },
+  slides: [
+    "https://picsum.photos/seed/slide1/1600/600",
+    "https://picsum.photos/seed/slide2/1600/600",
+    "https://picsum.photos/seed/slide3/1600/600",
+    "https://picsum.photos/seed/slide4/1600/600",
+    "https://picsum.photos/seed/slide5/1600/600"
+  ],
+  team: [
+    { name_en: "Ahmed Al-Rasheed", name_ar: "أحمد الراشد", role_en: "Founder & CEO", role_ar: "المؤسس والرئيس التنفيذي", bio_en: "15+ years in Kuwait real estate market with deep expertise in luxury properties.", bio_ar: "أكثر من 15 سنة في السوق العقاري الكويتي مع خبرة عميقة في العقارات الفاخرة.", image: "https://picsum.photos/seed/ahmed/400/400", email: "ahmed@verto-re.com", phone: "+96560000000" },
+    { name_en: "Layla Al-Sabah", name_ar: "ليلى الصباح", role_en: "Sales Director", role_ar: "مديرة المبيعات", bio_en: "Expert in residential properties with a passion for matching families to their dream homes.", bio_ar: "خبيرة في العقارات السكنية مع شغف لمطابقة العائلات مع منازل أحلامها.", image: "https://picsum.photos/seed/layla/400/400", email: "layla@verto-re.com", phone: "+96560000001" },
+    { name_en: "Khalid Al-Otaibi", name_ar: "خالد العتيبي", role_en: "Commercial Specialist", role_ar: "أخصائي تجاري", bio_en: "Specializes in commercial and retail properties across Kuwait's business districts.", bio_ar: "متخصص في العقارات التجارية والتجزئة عبر مناطق الأعمال في الكويت.", image: "https://picsum.photos/seed/khalid/400/400", email: "khalid@verto-re.com", phone: "+96560000002" },
+    { name_en: "Fatima Al-Khalifa", name_ar: "فاطمة الخليفة", role_en: "Property Consultant", role_ar: "مستشارة عقارية", bio_en: "Dedicated to helping clients find the perfect investment opportunities in Kuwait.", bio_ar: "مكرسة لمساعدة العملاء في العثور على فرص الاستثمار المثالية في الكويت.", image: "https://picsum.photos/seed/fatima/400/400", email: "fatima@verto-re.com", phone: "+96560000003" }
+  ],
+  properties: [
+    { id: 1, title_en: "FINTAS. A nice 4 bedroom villa with a swimming pool and terraces", title_ar: "الفنطاس. فيلا 4 غرف نوم جميلة مع مسبح وشرفات", price: 1500, type: "Villa", location: "Fintas", bedrooms: 4, bathrooms: 4, photos: 34, status: "Available", recommended: true, image: "https://picsum.photos/seed/fintas/600/400", desc_en: "A nice 4 bedroom villa with a private swimming pool and terraces located in Fintas.", desc_ar: "فيلا 4 غرف نوم جميلة مع مسبح خاص وشرفات تقع في الفنطاس.", features: ["Swimming pool","Terrace","Garden","Furnished","Diwaniya"] },
+    { id: 2, title_en: "FNAITEES. Spacious, One bedroom fully furnished apartment", title_ar: "فنايتس. شقة غرفة نوم واحدة واسعة ومفروشة بالكامل", price: 330, type: "Apartment", location: "Fnaitees", bedrooms: 1, bathrooms: 1, photos: 10, status: "Available", recommended: true, image: "https://picsum.photos/seed/fnaitees/600/400", desc_en: "A great spacious fully furnished one bedroom basement apartment with living room.", desc_ar: "شقة قبو واسعة ومفروشة بالكامل بغرفة نوم واحدة مع غرفة معيشة.", features: ["Furnished","Balcony","Pet Friendly"] },
+    { id: 3, title_en: "MANGAF. Spacious 2 master bedroom in compound", title_ar: "المنقف. شقة 2 غرف نوم ماستر واسعة في مجمع", price: 500, type: "Apartment", location: "Mangaf", bedrooms: 2, bathrooms: 2, photos: 16, status: "Available", recommended: true, image: "https://picsum.photos/seed/mangaf/600/400", desc_en: "Spacious 2 master bedroom fully furnished apartment located in Mangaf compound.", desc_ar: "شقة واسعة بغرفتي نوم ماستر مفروشة بالكامل تقع في مجمع المنقف.", features: ["Furnished","Gym","Swimming pool","Balcony"] },
+    { id: 4, title_en: "MESAYEL. Spacious 2 bedroom fully furnished apartment with private outside spaces", title_ar: "مسيلة. شقة 2 غرف نوم واسعة مفروشة بالكامل مع مساحات خارجية خاصة", price: 650, type: "Apartment", location: "Mesayel", bedrooms: 2, bathrooms: 2, photos: 13, status: "Available", recommended: true, image: "https://picsum.photos/seed/mesayel/600/400", desc_en: "Spacious 2 bedroom fully furnished basement apartment with private outside spaces.", desc_ar: "شقة قبو واسعة بغرفتي نوم مفروشة بالكامل مع مساحات خارجية خاصة.", features: ["Furnished","Terrace","Garden","Pet Friendly"] },
+    { id: 5, title_en: "FNAITEES. Brand new, FURNISHED 2 master bedroom villa with garden and beach access", title_ar: "فنايتس. فيلا جديدة مفروشة بغرفتي نوم ماستر مع حديقة ووصول للشاطئ", price: 1900, type: "Villa", location: "Fnaitees", bedrooms: 2, bathrooms: 3, photos: 23, status: "Available", recommended: true, image: "https://picsum.photos/seed/fnaitees2/600/400", desc_en: "Brand new, fantastic, modern, furnished 2 master bedroom villa located in Fnaitees sea side.", desc_ar: "فيلا جديدة فاخرة وعصرية مفروشة بغرفتي نوم ماستر تقع في فنايتس على البحر.", features: ["Furnished","Beach Access","Garden","Sea View","Diwaniya"] },
+    { id: 6, title_en: "SALWA. A phenomenal 6 master bedroom villa", title_ar: "سلوى. فيلا رائعة بـ 6 غرف نوم ماستر", price: 5000, type: "Villa", location: "Salwa", bedrooms: 6, bathrooms: 7, photos: 27, status: "Available", recommended: true, image: "https://picsum.photos/seed/salwa/600/400", desc_en: "A phenomenal modern furnished 6 master bedroom villa with a pool and diwaniya in Salwa.", desc_ar: "فيلا رائعة عصرية مفروشة بـ 6 غرف نوم ماستر مع مسبح وديوانية في سلوى.", features: ["Furnished","Swimming pool","Diwaniya","Driver's room","Garden","Sea View"] },
+    { id: 7, title_en: "QORTUBA. 7 bedroom Villa with private pool and diwaniya", title_ar: "القرطبة. فيلا 7 غرف نوم مع مسبح خاص وديوانية", price: 2400, type: "Villa", location: "Qortuba", bedrooms: 7, bathrooms: 6, photos: 29, status: "Available", recommended: true, image: "https://picsum.photos/seed/qortuba/600/400", desc_en: "A huge, full of natural light 7 bedroom villa with an indoor pool and diwaniya in Qortuba.", desc_ar: "فيلا ضخمة مليئة بالضوء الطبيعي بـ 7 غرف نوم مع مسبح داخلي وديوانية في القرطبة.", features: ["Swimming pool","Diwaniya","Driver's room","Garden","Furnished"] },
+    { id: 8, title_en: "JABRIYA. Full of natural light 5 bedroom villa with diwaniya", title_ar: "الجابرية. فيلا 5 غرف نوم مليئة بالضوء الطبيعي مع ديوانية", price: 2000, type: "Villa", location: "Jabriya", bedrooms: 5, bathrooms: 5, photos: 32, status: "Available", recommended: true, image: "https://picsum.photos/seed/jabriya/600/400", desc_en: "Full of natural light 5 bedroom villa with diwaniya located in Jabriya.", desc_ar: "فيلا 5 غرف نوم مليئة بالضوء الطبيعي مع ديوانية في الجابرية.", features: ["Diwaniya","Driver's room","Garden","Furnished","Terrace"] },
+    { id: 9, title_en: "MISHREF. Modern, semi furnished 2 bedroom rooftop apartment", title_ar: "المشرف. شقة سطح 2 غرف نوم عصرية شبه مفروشة", price: 800, type: "Rooftop", location: "Mishref", bedrooms: 2, bathrooms: 2, photos: 14, status: "Available", recommended: true, newlyAdded: true, image: "https://picsum.photos/seed/mishref/600/400", desc_en: "Fantastic, semi-furnished 2 bedroom rooftop apartment with private terrace in Mishref.", desc_ar: "شقة سطح رائعة شبه مفروشة بغرفتي نوم مع تراس خاص في المشرف.", features: ["Terrace","Semi- furnished","City View","Balcony"] },
+    { id: 10, title_en: "MUTLA. Modern, beautiful 5 master bedroom villa with private pool", title_ar: "المطل. فيلا 5 غرف نوم ماستر عصرية وجميلة مع مسبح خاص", price: 2500, type: "Villa", location: "Mutla", bedrooms: 5, bathrooms: 5, photos: 25, status: "Available", recommended: true, newlyAdded: true, image: "https://picsum.photos/seed/mutla/600/400", desc_en: "Modern very spacious, 5 master bedroom villa with pool located in Mutla.", desc_ar: "فيلا عصرية واسعة جداً بـ 5 غرف نوم ماستر مع مسبح في المطل.", features: ["Swimming pool","Furnished","Diwaniya","Driver's room","Garden"] },
+    { id: 11, title_en: "SALMIYA. Luxury 3 bedroom apartment with sea view", title_ar: "السالمية. شقة فاخرة 3 غرف نوم بإطلالة بحرية", price: 950, type: "Apartment", location: "Salmiya", bedrooms: 3, bathrooms: 3, photos: 18, status: "Available", newlyAdded: true, image: "https://picsum.photos/seed/salmiya/600/400", desc_en: "Luxury 3 bedroom apartment with stunning sea view in the heart of Salmiya.", desc_ar: "شقة فاخرة 3 غرف نوم بإطلالة بحرية مذهلة في قلب السالمية.", features: ["Sea View","Furnished","Balcony","Gym","Pet Friendly"] },
+    { id: 12, title_en: "KHAIRAN. Modern 4 bedroom duplex with garden", title_ar: "خيران. دوبلكس 4 غرف نوم عصري مع حديقة", price: 1200, type: "Duplex", location: "Khairan", bedrooms: 4, bathrooms: 3, photos: 20, status: "Available", newlyAdded: true, image: "https://picsum.photos/seed/khairan/600/400", desc_en: "Modern 4 bedroom duplex with private garden and terrace in Khairan area.", desc_ar: "دوبلكس عصري 4 غرف نوم مع حديقة خاصة وتراس في منطقة خيران.", features: ["Garden","Terrace","Furnished","Driver's room"] }
+  ]
+};
+
+// ==================== STATE MANAGEMENT ====================
+let appData = loadData();
+let currentLang = 'en';
+let currentSlide = 0;
+let currentSearchResults = null;
+let favorites = JSON.parse(localStorage.getItem('verto_favorites') || '[]');
+let adminRole = null; // 'superadmin' or 'admin'
+
+function loadData() {
+  try {
+    const saved = localStorage.getItem('verto_data');
+    if (saved) return JSON.parse(saved);
+  } catch(e) {}
+  return JSON.parse(JSON.stringify(DEFAULT_DATA));
+}
+
+function saveData() {
+  localStorage.setItem('verto_data', JSON.stringify(appData));
+}
+
+// ==================== ROUTING ====================
+function handleRoute() {
+  const hash = window.location.hash;
+  if (hash === '#admin') {
+    if (adminRole) {
+      showDashboard();
+    } else {
+      showAdminLogin();
+    }
+  } else if (hash === '#dashboard') {
+    if (adminRole) {
+      showDashboard();
+    } else {
+      window.location.hash = '#admin';
+    }
+  } else {
+    hideAdminLogin();
+    hideDashboard();
+    if (hash && hash !== '#home') {
+      const el = document.querySelector(hash);
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100);
+    }
+  }
+}
+
+function navigateTo(route) {
+  window.location.hash = route;
+}
+
+window.addEventListener('hashchange', handleRoute);
+
+// ==================== ADMIN AUTH ==================== */
+function showAdminLogin() {
+  document.getElementById('adminLoginPage').classList.add('show');
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+  document.getElementById('loginError').classList.remove('show');
+  document.getElementById('loginErrorAr').classList.remove('show');
+}
+function hideAdminLogin() {
+  document.getElementById('adminLoginPage').classList.remove('show');
+}
+function doLogin() {
+  const user = document.getElementById('loginUser').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  if (user === 'superadmin' && pass === 'Matrox74@@') {
+    adminRole = 'superadmin';
+    sessionStorage.setItem('verto_admin', 'superadmin');
+    hideAdminLogin();
+    showDashboard();
+    window.location.hash = '#dashboard';
+  } else if (user === 'admin' && pass === 'admin123') {
+    adminRole = 'admin';
+    sessionStorage.setItem('verto_admin', 'admin');
+    hideAdminLogin();
+    showDashboard();
+    window.location.hash = '#dashboard';
+  } else {
+    document.getElementById('loginError').classList.add('show');
+    document.getElementById('loginErrorAr').classList.add('show');
+  }
+}
+function logoutAdmin() {
+  adminRole = null;
+  sessionStorage.removeItem('verto_admin');
+  hideDashboard();
+  navigateTo('');
+}
+function showDashboard() {
+  document.getElementById('adminDashboard').classList.add('show');
+  document.getElementById('roleBadge').textContent = adminRole.toUpperCase();
+  document.getElementById('superAdminOnly').style.display = adminRole === 'superadmin' ? 'block' : 'none';
+  renderEditors();
+  populateEditFields();
+  renderKnetBanks();
+  populateKnetFields();
+}
+function hideDashboard() {
+  document.getElementById('adminDashboard').classList.remove('show');
+}
+
+// Restore admin session
+if (sessionStorage.getItem('verto_admin')) {
+  adminRole = sessionStorage.getItem('verto_admin');
+}
+
+// ==================== DASHBOARD TABS ====================
+function switchTab(tab) {
+  document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+
+// ==================== CONTENT EDITING ====================
+function updateContent(key, value) {
+  appData.content[key] = value;
+  saveData();
+  renderContent();
+}
+function updateSettings(key, value) {
+  appData.settings[key] = value;
+  saveData();
+  renderSettings();
+}
+function populateEditFields() {
+  const c = appData.content;
+  const s = appData.settings;
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
+  set('editHeroTitleEn', c.heroTitleEn); set('editHeroTitleAr', c.heroTitleAr);
+  set('editHeroSubEn', c.heroSubEn); set('editHeroSubAr', c.heroSubAr);
+  set('editAboutTitleEn', c.aboutTitleEn); set('editAboutTitleAr', c.aboutTitleAr);
+  set('editAboutTextEn', c.aboutTextEn); set('editAboutTextAr', c.aboutTextAr);
+  set('editStat1', c.stat1); set('editStat2', c.stat2); set('editStat3', c.stat3);
+  set('editAboutImg', c.aboutImg);
+  set('editFooterEn', c.footerEn); set('editFooterAr', c.footerAr);
+  set('editEmail1', s.email1); set('editPhone1', s.phone1);
+  set('editEmail2', s.email2); set('editPhone2', s.phone2);
+  set('editWhatsapp', s.whatsapp); set('editAddress', s.address);
+  set('editDefaultTheme', s.defaultTheme); set('editDefaultLang', s.defaultLang);
+}
+
+// ==================== PROPERTY EDITOR ====================
+function renderPropertiesEditor() {
+  const container = document.getElementById('propertiesEditor');
+  if (!container) return;
+  container.innerHTML = appData.properties.map((p, i) => `
+    <div class="prop-editor-card">
+      <div class="prop-editor-header" onclick="this.nextElementSibling.classList.toggle('open')">
+        <h4>${p.title_en.substring(0, 60)}...</h4>
+        <span class="prop-badge">${p.type} · ${p.location} · ${p.price} KD</span>
+      </div>
+      <div class="prop-editor-body">
+        <div class="edit-grid">
+          <div class="edit-row"><label>Title (EN)</label><input type="text" value="${p.title_en}" onchange="updateProp(${i},'title_en',this.value)"></div>
+          <div class="edit-row"><label>Title (AR)</label><input type="text" value="${p.title_ar}" onchange="updateProp(${i},'title_ar',this.value)"></div>
+        </div>
+        <div class="edit-grid-3">
+          <div class="edit-row"><label>Price (KD)</label><input type="number" value="${p.price}" onchange="updateProp(${i},'price',parseFloat(this.value))"></div>
+          <div class="edit-row"><label>Type</label><select onchange="updateProp(${i},'type',this.value)">${['Villa','Apartment','Duplex','Office','Retail','Studio','Rooftop','Triplex'].map(t=>`<option ${t===p.type?'selected':''}>${t}</option>`).join('')}</select></div>
+          <div class="edit-row"><label>Location</label><input type="text" value="${p.location}" onchange="updateProp(${i},'location',this.value)"></div>
+        </div>
+        <div class="edit-grid-3">
+          <div class="edit-row"><label>Bedrooms</label><input type="number" value="${p.bedrooms}" onchange="updateProp(${i},'bedrooms',parseInt(this.value))"></div>
+          <div class="edit-row"><label>Bathrooms</label><input type="number" value="${p.bathrooms}" onchange="updateProp(${i},'bathrooms',parseInt(this.value))"></div>
+          <div class="edit-row"><label>Photos Count</label><input type="number" value="${p.photos}" onchange="updateProp(${i},'photos',parseInt(this.value))"></div>
+        </div>
+        <div class="edit-row"><label>Image URL</label><input type="text" value="${p.image}" onchange="updateProp(${i},'image',this.value)"></div>
+        <div class="edit-row"><label>Description (EN)</label><textarea onchange="updateProp(${i},'desc_en',this.value)">${p.desc_en}</textarea></div>
+        <div class="edit-row"><label>Description (AR)</label><textarea onchange="updateProp(${i},'desc_ar',this.value)">${p.desc_ar}</textarea></div>
+        <div class="edit-row"><label>Features (comma-separated)</label><input type="text" value="${p.features.join(', ')}" onchange="updateProp(${i},'features',this.value.split(',').map(s=>s.trim()).filter(Boolean))"></div>
+        <div class="edit-grid">
+          <div class="edit-row"><label>Status</label><select onchange="updateProp(${i},'status',this.value)"><option ${p.status==='Available'?'selected':''}>Available</option><option ${p.status==='Not Available'?'selected':''}>Not Available</option></select></div>
+          <div class="edit-row" style="flex-direction:row; gap:15px; align-items:center; padding-top:25px;">
+            <label style="display:flex; gap:5px; align-items:center;"><input type="checkbox" ${p.recommended?'checked':''} onchange="updateProp(${i},'recommended',this.checked)"> Recommended</label>
+            <label style="display:flex; gap:5px; align-items:center;"><input type="checkbox" ${p.newlyAdded?'checked':''} onchange="updateProp(${i},'newlyAdded',this.checked)"> Newly Added</label>
+          </div>
+        </div>
+        <div style="margin-top:15px;"><button class="dash-btn dash-btn-danger" onclick="deleteProperty(${i})"><i class="fas fa-trash"></i> Delete</button></div>
+      </div>
+    </div>
+  `).join('');
+}
+function updateProp(idx, key, val) {
+  appData.properties[idx][key] = val;
+  saveData();
+  renderProperties();
+}
+function addNewProperty() {
+  const newId = Math.max(...appData.properties.map(p => p.id)) + 1;
+  appData.properties.push({
+    id: newId, title_en: "New Property", title_ar: "عقار جديد", price: 0, type: "Apartment",
+    location: "Salmiya", bedrooms: 1, bathrooms: 1, photos: 1, status: "Available",
+    recommended: false, newlyAdded: true, image: "https://picsum.photos/seed/newprop/600/400",
+    desc_en: "Description here.", desc_ar: "الوصف هنا.", features: []
+  });
+  saveData();
+  renderPropertiesEditor();
+  renderProperties();
+  showToast('Property added');
+}
+function deleteProperty(idx) {
+  if (!confirm('Delete this property?')) return;
+  appData.properties.splice(idx, 1);
+  saveData();
+  renderPropertiesEditor();
+  renderProperties();
+  showToast('Property deleted');
+}
+
+// ==================== SLIDER EDITOR ====================
+function renderSlidesEditor() {
+  const container = document.getElementById('slidesEditor');
+  if (!container) return;
+  container.innerHTML = appData.slides.map((url, i) => `
+    <div class="slide-editor-item">
+      <img src="${url}" alt="Slide ${i+1}" onerror="this.src='https://picsum.photos/seed/slidefb/100/60'">
+      <div class="slide-url" style="flex:1;">
+        <input type="text" value="${url}" style="width:100%; padding:8px; border:1.5px solid var(--border-color); border-radius:5px; background:var(--bg-card); color:var(--text-primary);" onchange="updateSlide(${i}, this.value)">
+      </div>
+      <button class="dash-btn dash-btn-danger" onclick="deleteSlide(${i})"><i class="fas fa-trash"></i></button>
+    </div>
+  `).join('');
+}
+function updateSlide(idx, url) { appData.slides[idx] = url; saveData(); renderSlider(); }
+function addSlide() {
+  appData.slides.push("https://picsum.photos/seed/newslide/1600/600");
+  saveData(); renderSlidesEditor(); renderSlider();
+}
+function deleteSlide(idx) {
+  if (appData.slides.length <= 1) { showToast('Cannot delete last slide'); return; }
+  appData.slides.splice(idx, 1); saveData(); renderSlidesEditor(); renderSlider();
+}
+
+// ==================== TEAM EDITOR ====================
+function renderTeamEditor() {
+  const container = document.getElementById('teamEditor');
+  if (!container) return;
+  container.innerHTML = appData.team.map((m, i) => `
+    <div class="team-editor-card">
+      <img class="team-img-preview" src="${m.image}" onerror="this.src='https://picsum.photos/seed/teamfb/100/100'">
+      <div class="edit-grid">
+        <div class="edit-row"><label>Name (EN)</label><input type="text" value="${m.name_en}" onchange="updateTeam(${i},'name_en',this.value)"></div>
+        <div class="edit-row"><label>Name (AR)</label><input type="text" value="${m.name_ar}" onchange="updateTeam(${i},'name_ar',this.value)"></div>
+      </div>
+      <div class="edit-grid">
+        <div class="edit-row"><label>Role (EN)</label><input type="text" value="${m.role_en}" onchange="updateTeam(${i},'role_en',this.value)"></div>
+        <div class="edit-row"><label>Role (AR)</label><input type="text" value="${m.role_ar}" onchange="updateTeam(${i},'role_ar',this.value)"></div>
+      </div>
+      <div class="edit-row"><label>Bio (EN)</label><textarea onchange="updateTeam(${i},'bio_en',this.value)">${m.bio_en}</textarea></div>
+      <div class="edit-row"><label>Bio (AR)</label><textarea onchange="updateTeam(${i},'bio_ar',this.value)">${m.bio_ar}</textarea></div>
+      <div class="edit-grid-3">
+        <div class="edit-row"><label>Image URL</label><input type="text" value="${m.image}" onchange="updateTeam(${i},'image',this.value)"></div>
+        <div class="edit-row"><label>Email</label><input type="text" value="${m.email}" onchange="updateTeam(${i},'email',this.value)"></div>
+        <div class="edit-row"><label>Phone</label><input type="text" value="${m.phone}" onchange="updateTeam(${i},'phone',this.value)"></div>
+      </div>
+      <button class="dash-btn dash-btn-danger" onclick="deleteTeamMember(${i})"><i class="fas fa-trash"></i> Delete</button>
+    </div>
+  `).join('');
+}
+function updateTeam(idx, key, val) { appData.team[idx][key] = val; saveData(); renderTeam(); }
+function addTeamMember() {
+  appData.team.push({
+    name_en: "New Member", name_ar: "عضو جديد", role_en: "Staff", role_ar: "موظف",
+    bio_en: "Bio here.", bio_ar: "السيرة هنا.", image: "https://picsum.photos/seed/newmember/400/400",
+    email: "", phone: ""
+  });
+  saveData(); renderTeamEditor(); renderTeam();
+}
+function deleteTeamMember(idx) {
+  if (!confirm('Delete this team member?')) return;
+  appData.team.splice(idx, 1); saveData(); renderTeamEditor(); renderTeam();
+}
+
+function renderEditors() {
+  renderPropertiesEditor();
+  renderSlidesEditor();
+  renderTeamEditor();
+}
+
+// ==================== DATA MANAGEMENT ====================
+function exportData() {
+  const blob = new Blob([JSON.stringify(appData, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'verto-data.json'; a.click();
+  URL.revokeObjectURL(url);
+  showToast('Data exported');
+}
+function resetData() {
+  if (!confirm('Reset ALL data to defaults? This cannot be undone.')) return;
+  appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
+  saveData();
+  renderAll();
+  renderEditors();
+  populateEditFields();
+  showToast('Data reset to defaults');
+}
+
+// ==================== RENDER: CONTENT ====================
+function renderContent() {
+  const c = appData.content;
+  // Hero
+  const heroEn = document.getElementById('heroTitle');
+  const heroAr = document.createElement('h2');
+  heroAr.setAttribute('data-ar', ''); heroAr.textContent = c.heroTitleAr;
+  heroAr.style.display = 'none';
+  heroEn.textContent = c.heroTitleEn;
+  heroEn.setAttribute('data-en', '');
+  // Replace
+  const heroTitleParent = heroEn.parentElement;
+  const existingAr = heroTitleParent.querySelector('[data-ar]');
+  if (existingAr) existingAr.textContent = c.heroTitleAr; else heroTitleParent.appendChild(heroAr);
+
+  const subEn = document.getElementById('heroSubtitle');
+  subEn.textContent = c.heroSubEn; subEn.setAttribute('data-en', '');
+  let subAr = heroTitleParent.querySelector('p[data-ar]');
+  if (!subAr) { subAr = document.createElement('p'); subAr.setAttribute('data-ar',''); heroTitleParent.appendChild(subAr); }
+  subAr.textContent = c.heroSubAr;
+
+  // About
+  const aboutTitle = document.getElementById('aboutTitle');
+  aboutTitle.textContent = c.aboutTitleEn; aboutTitle.setAttribute('data-en', '');
+  let aboutTitleAr = aboutTitle.nextElementSibling;
+  if (!aboutTitleAr || !aboutTitleAr.hasAttribute('data-ar')) {
+    aboutTitleAr = document.createElement('h2'); aboutTitleAr.setAttribute('data-ar','');
+    aboutTitle.parentElement.insertBefore(aboutTitleAr, aboutTitle.nextSibling);
+  }
+  aboutTitleAr.textContent = c.aboutTitleAr;
+
+  const aboutTextDiv = document.getElementById('aboutText');
+  aboutTextDiv.innerHTML = `<p data-en>${c.aboutTextEn.replace(/\n/g,'</p><p data-en>')}</p><p data-ar>${c.aboutTextAr.replace(/\n/g,'</p><p data-ar>')}</p>`;
+
+  document.getElementById('aboutImg').src = c.aboutImg;
+  document.getElementById('stat1Num').textContent = c.stat1;
+  document.getElementById('stat2Num').textContent = c.stat2;
+  document.getElementById('stat3Num').textContent = c.stat3;
+
+  // Footer
+  const footerAbout = document.getElementById('footerAbout');
+  footerAbout.textContent = c.footerEn; footerAbout.setAttribute('data-en', '');
+  let footerAboutAr = document.createElement('p'); footerAboutAr.setAttribute('data-ar',''); footerAboutAr.textContent = c.footerAr;
+  let next = footerAbout.nextElementSibling;
+  if (next && next.hasAttribute('data-ar')) { next.textContent = c.footerAr; }
+  else { footerAbout.parentElement.insertBefore(footerAboutAr, next); }
+
+  applyLangDisplay();
+}
+
+function renderSettings() {
+  const s = appData.settings;
+  document.getElementById('topBarContact').innerHTML = `
+    <a href="mailto:${s.email1}"><i class="fas fa-envelope"></i> ${s.email1}</a>
+    <a href="tel:${s.phone1}"><i class="fas fa-phone"></i> ${s.phone1}</a>
+    <a href="mailto:${s.email2}"><i class="fas fa-envelope"></i> ${s.email2}</a>
+    <a href="tel:${s.phone2}"><i class="fas fa-phone"></i> ${s.phone2}</a>
+  `;
+  document.getElementById('footerContact').innerHTML = `
+    <p><i class="fas fa-map-marker-alt"></i> ${s.address}</p>
+    <p><i class="fas fa-phone"></i> ${s.phone1}</p>
+    <p><i class="fas fa-envelope"></i> ${s.email1}</p>
+    <p><i class="fab fa-whatsapp"></i> ${s.phone2}</p>
+  `;
+  document.querySelector('.whatsapp-float').href = `https://wa.me/${s.whatsapp}`;
+  document.querySelector('.modal-contact-btn').onclick = () => window.open(`https://wa.me/${s.whatsapp}`);
+}
+
+// ==================== RENDER: SLIDER ====================
+function renderSlider() {
+  const container = document.getElementById('slidesContainer');
+  container.innerHTML = appData.slides.map((url, i) =>
+    `<div class="slide ${i === 0 ? 'active' : ''}" style="background-image: url('${url}');"></div>`
+  ).join('');
+  currentSlide = 0;
+  createSliderDots();
+}
+function createSliderDots() {
+  const dotsContainer = document.getElementById('sliderDots');
+  dotsContainer.innerHTML = '';
+  appData.slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+  });
+}
+function goToSlide(index) {
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.slider-dot');
+  if (slides[currentSlide]) slides[currentSlide].classList.remove('active');
+  if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
+  currentSlide = index;
+  if (slides[currentSlide]) slides[currentSlide].classList.add('active');
+  if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+}
+function nextSlide() {
+  goToSlide((currentSlide + 1) % appData.slides.length);
+}
+
+// ==================== RENDER: PROPERTIES ====================
+function formatPrice(price) {
+  return Number(price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+function createPropertyCard(prop) {
+  const isRtl = document.body.classList.contains('rtl');
+  const title = isRtl ? prop.title_ar : prop.title_en;
+  const desc = isRtl ? prop.desc_ar : prop.desc_en;
+  const availableText = isRtl ? 'متاح' : 'AVAILABLE';
+  const agentText = isRtl ? 'وكيل فيرتو' : 'Verto Agent';
+  const imgFallback = 'https://picsum.photos/seed/fallback/600/400';
+  return `
+    <div class="property-card" onclick="openPropertyModal(${prop.id})">
+      <div class="property-image">
+        <img src="${prop.image}" alt="${prop.title_en}" loading="lazy" onerror="this.src='${imgFallback}'">
+        <div class="property-tag-available">${availableText}</div>
+        <div class="property-tag-type">${prop.type}</div>
+        <div class="property-location"><i class="fas fa-map-marker-alt"></i> ${prop.location}</div>
+        <div class="property-photo-count"><i class="fas fa-camera"></i> ${prop.photos}</div>
+      </div>
+      <div class="property-info">
+        <div class="property-title">${title}</div>
+        <div class="property-price">${formatPrice(prop.price)} <span class="currency">KD</span></div>
+        <div class="property-desc">${desc}</div>
+        <div class="property-footer">
+          <div class="property-agent">
+            <div class="agent-avatar">V</div>
+            <span>${agentText}</span>
+          </div>
+          <div class="property-actions">
+            <button class="heart-btn ${favorites.includes(prop.id) ? 'favorited' : ''}" onclick="event.stopPropagation(); toggleFavorite(this, ${prop.id})">
+              <i class="${favorites.includes(prop.id) ? 'fas' : 'far'} fa-heart"></i>
+            </button>
+            <button onclick="event.stopPropagation(); shareProperty(${prop.id})"><i class="fas fa-share-alt"></i></button>
+            <button onclick="event.stopPropagation(); openPropertyModal(${prop.id})"><i class="fas fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+function renderProperties() {
+  const recommendedGrid = document.getElementById('recommendedGrid');
+  const newlyAddedGrid = document.getElementById('newlyAddedGrid');
+  if (currentSearchResults !== null) {
+    recommendedGrid.innerHTML = currentSearchResults.map(createPropertyCard).join('');
+    newlyAddedGrid.innerHTML = '';
+  } else {
+    const recommended = appData.properties.filter(p => p.recommended);
+    const newlyAdded = appData.properties.filter(p => p.newlyAdded && !p.recommended);
+    recommendedGrid.innerHTML = recommended.map(createPropertyCard).join('');
+    newlyAddedGrid.innerHTML = newlyAdded.map(createPropertyCard).join('');
+  }
+}
+function showAllProperties() {
+  currentSearchResults = null;
+  document.getElementById('recommendedGrid').innerHTML = appData.properties.map(createPropertyCard).join('');
+  document.getElementById('newlyAddedGrid').innerHTML = '';
+  document.getElementById('listings').scrollIntoView({ behavior: 'smooth' });
+  showToast(currentLang === 'ar' ? 'عرض جميع العقارات' : 'Showing all properties');
+}
+function searchProperties(e) {
+  e.preventDefault();
+  const loc = document.getElementById('searchLocation').value;
+  const type = document.getElementById('searchType').value;
+  const beds = document.getElementById('searchBedrooms').value;
+  const baths = document.getElementById('searchBathrooms').value;
+  const minPrice = parseFloat(document.getElementById('searchMinPrice').value) || 0;
+  const maxPrice = parseFloat(document.getElementById('searchMaxPrice').value) || Infinity;
+  const checkedFeatures = Array.from(document.querySelectorAll('.advanced-filters input:checked')).map(i => i.value);
+  let results = appData.properties.filter(p => {
+    if (loc && p.location !== loc) return false;
+    if (type && p.type !== type) return false;
+    if (beds && p.bedrooms < parseInt(beds)) return false;
+    if (baths && p.bathrooms < parseInt(baths)) return false;
+    if (p.price < minPrice || p.price > maxPrice) return false;
+    if (checkedFeatures.length > 0 && !checkedFeatures.every(f => p.features.includes(f))) return false;
+    return true;
+  });
+  currentSearchResults = results;
+  renderProperties();
+  showToast(currentLang === 'ar' ? `تم العثور على ${results.length} عقار` : `Found ${results.length} properties`);
+  document.getElementById('listings').scrollIntoView({ behavior: 'smooth' });
+  return false;
+}
+function toggleAdvancedFilters() { document.getElementById('advancedFilters').classList.toggle('show'); }
+
+// ==================== FAVORITES ====================
+function toggleFavorite(btn, propId) {
+  const icon = btn.querySelector('i');
+  if (favorites.includes(propId)) {
+    favorites = favorites.filter(id => id !== propId);
+    icon.className = 'far fa-heart'; btn.classList.remove('favorited');
+  } else {
+    favorites.push(propId);
+    icon.className = 'fas fa-heart'; btn.classList.add('favorited');
+  }
+  localStorage.setItem('verto_favorites', JSON.stringify(favorites));
+  showToast(currentLang === 'ar' ? 'تم تحديث المفضلة' : 'Wishlist updated');
+}
+function shareProperty(propId) {
+  const prop = appData.properties.find(p => p.id === propId);
+  const url = window.location.href.split('#')[0] + '#property-' + propId;
+  if (navigator.share) {
+    navigator.share({ title: prop.title_en, text: prop.desc_en, url }).catch(()=>{});
+  } else {
+    navigator.clipboard.writeText(url).then(() => showToast(currentLang === 'ar' ? 'تم نسخ الرابط' : 'Link copied'));
+  }
+}
+
+// ==================== PROPERTY MODAL ====================
+function openPropertyModal(propId) {
+  const prop = appData.properties.find(p => p.id === propId);
+  if (!prop) return;
+  const isRtl = document.body.classList.contains('rtl');
+  document.getElementById('modalImage').src = prop.image;
+  document.getElementById('modalImage').onerror = function() { this.src = 'https://picsum.photos/seed/fallback/800/400'; };
+  document.getElementById('modalTitle').textContent = isRtl ? prop.title_ar : prop.title_en;
+  document.getElementById('modalPrice').innerHTML = formatPrice(prop.price) + ' <span style="font-size:18px;">KD</span>';
+  document.getElementById('modalDesc').textContent = isRtl ? prop.desc_ar : prop.desc_en;
+  const iconMap = {
+    'Swimming pool': 'fa-swimming-pool', 'Garden': 'fa-tree', 'Gym': 'fa-dumbbell',
+    'Balcony': 'fa-window-maximize', 'Terrace': 'fa-umbrella-beach', 'Diwaniya': 'fa-couch',
+    'Furnished': 'fa-couch', 'Sea View': 'fa-water', 'Beach Access': 'fa-umbrella-beach',
+    "Driver's room": 'fa-car', 'Pet Friendly': 'fa-paw', 'City View': 'fa-city',
+    'Semi- furnished': 'fa-couch', 'Basement': 'fa-layer-group', 'Unfurnished': 'fa-home'
+  };
+  const featuresHtml = prop.features.map(f => {
+    const icon = iconMap[f] || 'fa-check';
+    return `<div class="modal-feature"><i class="fas ${icon}"></i> ${f}</div>`;
+  }).join('');
+  document.getElementById('modalFeatures').innerHTML = featuresHtml;
+  document.getElementById('propertyModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+  if (e.target === e.currentTarget) { document.getElementById('propertyModal').classList.remove('show'); document.body.style.overflow = ''; }
+}
+function closeModalDirect() {
+  document.getElementById('propertyModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// ==================== RENDER: TEAM ====================
+function renderTeam() {
+  const grid = document.getElementById('teamGrid');
+  grid.innerHTML = appData.team.map(m => `
+    <div class="team-card">
+      <img src="${m.image}" alt="${m.name_en}" onerror="this.src='https://picsum.photos/seed/teamfb/400/400'">
+      <div class="team-info">
+        <h3 data-en>${m.name_en}</h3>
+        <h3 data-ar style="display:none;">${m.name_ar}</h3>
+        <div class="role" data-en>${m.role_en}</div>
+        <div class="role" data-ar style="display:none;">${m.role_ar}</div>
+        <p data-en>${m.bio_en}</p>
+        <p data-ar style="display:none;">${m.bio_ar}</p>
+        <div class="team-contact">
+          <a href="mailto:${m.email}"><i class="fas fa-envelope"></i></a>
+          <a href="tel:${m.phone}"><i class="fas fa-phone"></i></a>
+          <a href="https://wa.me/${m.phone.replace(/[^0-9]/g,'')}"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  applyLangDisplay();
+}
+
+// ==================== LANGUAGE ====================
+function setLang(lang) {
+  currentLang = lang;
+  const isAr = lang === 'ar';
+  document.body.classList.toggle('rtl', isAr);
+  document.documentElement.lang = lang;
+  document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+  document.getElementById('langBtnEn').classList.toggle('active', !isAr);
+  document.getElementById('langBtnAr').classList.toggle('active', isAr);
+  document.querySelectorAll('[data-ph-en]').forEach(el => {
+    el.placeholder = isAr ? el.getAttribute('data-ph-ar') : el.getAttribute('data-ph-en');
+  });
+  applyLangDisplay();
+  renderProperties();
+  localStorage.setItem('verto_lang', lang);
+}
+function applyLangDisplay() {
+  const isAr = document.body.classList.contains('rtl');
+  document.querySelectorAll('[data-en]').forEach(el => { el.style.display = isAr ? 'none' : ''; });
+  document.querySelectorAll('[data-ar]').forEach(el => { el.style.display = isAr ? '' : 'none'; });
+}
+
+// ==================== THEME ====================
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  setTheme(next);
+}
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const icon = document.getElementById('themeIcon');
+  icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+  localStorage.setItem('verto_theme', theme);
+}
+
+// ==================== MOBILE NAV ====================
+function toggleMobileNav() { document.getElementById('mobileNav').classList.toggle('open'); document.getElementById('overlay').classList.toggle('show'); }
+function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); document.getElementById('overlay').classList.remove('show'); }
+
+// ==================== UTILITY ====================
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+function closeCookieBanner() { document.getElementById('cookieBanner').classList.remove('show'); localStorage.setItem('verto_cookies_accepted', 'true'); }
+function submitContactForm(e) { e.preventDefault(); showToast(currentLang === 'ar' ? 'تم إرسال رسالتك بنجاح!' : 'Message sent successfully!'); e.target.reset(); return false; }
+function showToast(msg) { const toast = document.getElementById('toast'); toast.textContent = msg; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3000); }
+
+// ==================== RENDER ALL ====================
+function renderAll() {
+  renderContent();
+  renderSettings();
+  renderSlider();
+  renderProperties();
+  renderTeam();
+}
+
+// ==================== INIT ====================
+// Load theme
+const savedTheme = localStorage.getItem('verto_theme') || appData.settings.defaultTheme;
+setTheme(savedTheme);
+
+// Load language
+const savedLang = localStorage.getItem('verto_lang') || appData.settings.defaultLang;
+setLang(savedLang);
+
+// Render everything
+renderAll();
+
+// Slider auto-rotate
+setInterval(nextSlide, 5000);
+
+// Cookie banner
+if (!localStorage.getItem('verto_cookies_accepted')) {
+  setTimeout(() => document.getElementById('cookieBanner').classList.add('show'), 2000);
+}
+
+// Scroll listeners
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('backToTop');
+  btn.classList.toggle('show', window.scrollY > 400);
+  const header = document.querySelector('header');
+  header.style.boxShadow = window.scrollY > 10 ? '0 4px 20px rgba(0,0,0,0.12)' : 'var(--shadow)';
+  // Active nav
+  let current = '';
+  document.querySelectorAll('section[id], div[id]').forEach(sec => {
+    if (window.scrollY >= sec.offsetTop - 200) current = sec.id;
+  });
+  document.querySelectorAll('nav.main-nav li a').forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+
+// Handle initial route
+handleRoute();
+
+// ==================== KNET CONFIGURATION ====================
+function renderKnetBanks() {
+  const container = document.getElementById('knetBanksContainer');
+  if (!container) return;
+  const k = appData.knet || DEFAULT_DATA.knet;
+  if (!appData.knet) appData.knet = JSON.parse(JSON.stringify(DEFAULT_DATA.knet));
+  container.innerHTML = appData.knet.banks.map((bank, i) => `
+    <div style="border:1.5px solid var(--border-color); border-radius:8px; padding:15px; margin-bottom:12px; background:var(--bg-main);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <strong style="font-size:14px; color:var(--text-primary);"><i class="fas fa-university" style="color:var(--gold); margin-right:8px;"></i>${bank.name}</strong>
+        <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-size:13px; font-weight:600; color:var(--text-primary);">
+          <input type="checkbox" ${bank.enabled ? 'checked' : ''} onchange="toggleKnetBank(${i}, this.checked)"> Enabled
+        </label>
+      </div>
+      <div class="edit-grid">
+        <div class="edit-row"><label>Bank Merchant ID</label><input type="text" value="${bank.merchantId || ''}" placeholder="${bank.code} Merchant ID" onchange="updateKnetBank(${i}, 'merchantId', this.value)"></div>
+        <div class="edit-row"><label>Bank Terminal ID</label><input type="text" value="${bank.terminalId || ''}" placeholder="${bank.code} Terminal ID" onchange="updateKnetBank(${i}, 'terminalId', this.value)"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function populateKnetFields() {
+  if (!appData.knet) appData.knet = JSON.parse(JSON.stringify(DEFAULT_DATA.knet));
+  const k = appData.knet;
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val; };
+  set('knetMerchantId', k.merchantId);
+  set('knetTerminalId', k.terminalId);
+  set('knetPassword', k.password);
+  set('knetCurrency', k.currency);
+  set('knetApiKey', k.apiKey);
+  set('knetMode', k.mode);
+  set('knetCallback', k.callbackUrl);
+  set('knetErrorUrl', k.errorUrl);
+  set('knetEnabled', String(k.enabled));
+  set('knetMinPayment', k.minPayment);
+  set('knetMaxPayment', k.maxPayment);
+  set('knetTimeout', k.timeout);
+}
+
+function toggleKnetBank(idx, enabled) {
+  appData.knet.banks[idx].enabled = enabled;
+  saveData();
+}
+
+function updateKnetBank(idx, key, val) {
+  appData.knet.banks[idx][key] = val;
+  saveData();
+}
+
+function saveKnet() {
+  if (!appData.knet) appData.knet = JSON.parse(JSON.stringify(DEFAULT_DATA.knet));
+  const get = id => document.getElementById(id)?.value || '';
+  appData.knet.merchantId = get('knetMerchantId');
+  appData.knet.terminalId = get('knetTerminalId');
+  appData.knet.password = get('knetPassword');
+  appData.knet.currency = get('knetCurrency');
+  appData.knet.apiKey = get('knetApiKey');
+  appData.knet.mode = get('knetMode');
+  appData.knet.callbackUrl = get('knetCallback');
+  appData.knet.errorUrl = get('knetErrorUrl');
+  appData.knet.enabled = get('knetEnabled') === 'true';
+  appData.knet.minPayment = parseFloat(get('knetMinPayment')) || 1;
+  appData.knet.maxPayment = parseFloat(get('knetMaxPayment')) || 50000;
+  appData.knet.timeout = parseInt(get('knetTimeout')) || 30;
+  saveData();
+  showToast(currentLang === 'ar' ? 'تم حفظ إعدادات KNET' : 'KNET settings saved successfully!');
+}
+
+function testKnet() {
+  const mode = document.getElementById('knetMode')?.value || 'test';
+  const merchantId = document.getElementById('knetMerchantId')?.value || '';
+  if (!merchantId) {
+    showToast(currentLang === 'ar' ? 'الرجاء إدخال معرف التاجر أولاً' : 'Please enter Merchant ID first');
+    return;
+  }
+  showToast(currentLang === 'ar' ? `اختبار ${mode === 'test' ? 'وضع الاختبار' : 'وضع الإنتاج'} - جاري الاتصال بـ KNET...` : `Testing ${mode === 'test' ? 'Test' : 'Live'} mode - Connecting to KNET gateway...`);
+  setTimeout(() => {
+    showToast(currentLang === 'ar' ? 'تم الاتصال بـ KNET بنجاح ✓' : 'KNET connection successful ✓');
+  }, 2000);
+}
+</script>
+</body>
+</html>

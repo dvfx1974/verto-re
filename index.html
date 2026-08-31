@@ -1259,6 +1259,7 @@ img, video, svg { max-width: 100%; }
 
     <!-- PROPERTIES PANEL -->
     <div class="dash-panel active" id="panel-properties">
+      <div id="planUsageCard" style="background:var(--bg-card); border:2px solid var(--gold); border-radius:10px; padding:15px 20px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;"></div>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
         <h3 data-en>Manage Properties</h3>
         <h3 data-ar style="display:none;">إدارة العقارات</h3>
@@ -1586,20 +1587,38 @@ try { currentUser = JSON.parse(localStorage.getItem('verto_current_user')); } ca
 
 // ==================== SUBSCRIPTION PLANS ====================
 const PLANS = [
+  { id: 'free', price: 0, name_en: 'Free', name_ar: 'مجاني',
+    listingLimit: 1, photoLimit: 3, videoLimit: 0,
+    features_en: ['1 property listing', '3 photos per listing', 'No video', 'Browse all listings', 'Save favorites'],
+    features_ar: ['عقار واحد', '3 صور لكل عقار', 'بدون فيديو', 'تصفح جميع العقارات', 'حفظ المفضلة'] },
   { id: 'basic', price: 15, name_en: 'Starter', name_ar: 'المبتدئ',
-    features_en: ['Browse all listings', 'Save unlimited favorites', 'Contact agents via WhatsApp', 'Email alerts (weekly)', '1 featured listing'],
-    features_ar: ['تصفح جميع العقارات', 'حفظ المفضلة بلا حدود', 'تواصل مع الوكلاء عبر واتساب', 'تنبيهات بريدية أسبوعية', 'عقار واحد مميز'] },
+    listingLimit: 5, photoLimit: 10, videoLimit: 1,
+    features_en: ['5 property listings', '10 photos per listing', '1 video per listing', 'Contact agents via WhatsApp', 'Email alerts (weekly)'],
+    features_ar: ['5 عقارات', '10 صور لكل عقار', 'فيديو واحد لكل عقار', 'تواصل مع الوكلاء عبر واتساب', 'تنبيهات بريدية أسبوعية'] },
   { id: 'silver', price: 35, name_en: 'Silver', name_ar: 'الفضي',
     featured: true,
-    features_en: ['Everything in Starter', '5 featured listings', 'Priority in search results', 'Email alerts (daily)', 'Your agency logo on listings', 'View contact stats'],
-    features_ar: ['كل مميزات المبتدئ', '5 عقارات مميزة', 'أولوية في نتائج البحث', 'تنبيهات بريدية يومية', 'شعار شركتك على العقارات', 'إحصائيات المشاهدات'] },
+    listingLimit: 15, photoLimit: 20, videoLimit: 3,
+    features_en: ['15 property listings', '20 photos per listing', '3 videos per listing', 'Priority in search results', 'Your agency logo on listings'],
+    features_ar: ['15 عقار', '20 صورة لكل عقار', '3 فيديو لكل عقار', 'أولوية في نتائج البحث', 'شعار شركتك على العقارات'] },
   { id: 'gold', price: 60, name_en: 'Gold', name_ar: 'الذهبي',
-    features_en: ['Everything in Silver', '15 featured listings', 'Top placement on homepage', 'Your own agent page', 'Video tours on listings', 'Social media promotion'],
-    features_ar: ['كل مميزات الفضي', '15 عقار مميز', 'أعلى عرض في الصفحة الرئيسية', 'صفحة وكيل خاصة بك', 'جولات فيديو على العقارات', 'ترويج على وسائل التواصل'] },
+    listingLimit: 40, photoLimit: 35, videoLimit: 8,
+    features_en: ['40 property listings', '35 photos per listing', '8 videos per listing', 'Top placement on homepage', 'Your own agent page'],
+    features_ar: ['40 عقار', '35 صورة لكل عقار', '8 فيديو لكل عقار', 'أعلى عرض في الصفحة الرئيسية', 'صفحة وكيل خاصة بك'] },
   { id: 'platinum', price: 100, name_en: 'Platinum', name_ar: 'البلاتيني',
-    features_en: ['Everything in Gold', 'Unlimited featured listings', 'Homepage banner ad', 'Dedicated account manager', 'KNET payment for your clients', 'Monthly performance report'],
-    features_ar: ['كل مميزات الذهبي', 'عقارات مميزة بلا حدود', 'إعلان بانر في الصفحة الرئيسية', 'مدير حساب مخصص', 'دفع KNET لعملائك', 'تقرير أداء شهري'] }
+    listingLimit: Infinity, photoLimit: 60, videoLimit: 20,
+    features_en: ['Unlimited listings', '60 photos per listing', '20 videos per listing', 'Homepage banner ad', 'Dedicated account manager'],
+    features_ar: ['عقارات بلا حدود', '60 صورة لكل عقار', '20 فيديو لكل عقار', 'إعلان بانر في الصفحة الرئيسية', 'مدير حساب مخصص'] }
 ];
+
+function getPlan() {
+  const id = (currentUser && currentUser.plan) || 'free';
+  return PLANS.find(p => p.id === id) || PLANS[0];
+}
+function getUserListingCount() {
+  // Count properties created by the current user (admin counts separately as unlimited)
+  if (!currentUser) return 0;
+  return appData.properties.filter(p => p.ownerEmail === currentUser.email).length;
+}
 
 function renderPricing() {
   const grid = document.getElementById('pricingGrid');
@@ -2102,9 +2121,28 @@ function renderMediaGallery(media, idx) {
 }
 function handlePhotoUpload(idx, files, input) {
   if (!appData.properties[idx].media) appData.properties[idx].media = [];
+  const prop = appData.properties[idx];
+  const plan = getPlan();
+  const isAr = document.body.classList.contains('rtl');
+  const currentPhotos = prop.media.filter(m => m.type === 'photo').length;
+  const room = Math.max(0, plan.photoLimit - currentPhotos);
+  if (room === 0) {
+    showToast(isAr
+      ? `وصلت إلى حد الصور (${plan.photoLimit}) في باقة ${plan.name_ar} — قم بالترقية`
+      : `Photo limit reached (${plan.photoLimit}) on ${plan.name_en} plan — upgrade for more`);
+    input.value = '';
+    return;
+  }
+  const fileList = Array.from(files).slice(0, room);
+  if (fileList.length < files.length) {
+    showToast(isAr
+      ? `سيتم رفع ${fileList.length} صورة فقط — الحد ${plan.photoLimit}`
+      : `Only ${fileList.length} photo(s) allowed — plan limit is ${plan.photoLimit}`);
+  }
   let count = 0;
-  let total = files.length;
-  Array.from(files).forEach(file => {
+  let total = fileList.length;
+  if (total === 0) { input.value = ''; return; }
+  fileList.forEach(file => {
     if (file.size > 2 * 1024 * 1024) {
       // Compress large images via canvas
       const reader = new FileReader();
@@ -2137,9 +2175,28 @@ function handlePhotoUpload(idx, files, input) {
 }
 function handleVideoUpload(idx, files, input) {
   if (!appData.properties[idx].media) appData.properties[idx].media = [];
+  const prop = appData.properties[idx];
+  const plan = getPlan();
+  const isAr = document.body.classList.contains('rtl');
+  const currentVideos = prop.media.filter(m => m.type === 'video').length;
+  const room = Math.max(0, plan.videoLimit - currentVideos);
+  if (room === 0) {
+    showToast(plan.videoLimit === 0
+      ? (isAr ? 'باقتك لا تشمل الفيديو — قم بالترقية لإضافة فيديو' : `Your plan doesn't include video — upgrade to add videos`)
+      : (isAr ? `وصلت إلى حد الفيديو (${plan.videoLimit}) — قم بالترقية` : `Video limit reached (${plan.videoLimit}) — upgrade for more`));
+    input.value = '';
+    return;
+  }
+  const fileList = Array.from(files).slice(0, room);
+  if (fileList.length < files.length) {
+    showToast(isAr
+      ? `سيتم رفع ${fileList.length} فيديو فقط — الحد ${plan.videoLimit}`
+      : `Only ${fileList.length} video(s) allowed — plan limit is ${plan.videoLimit}`);
+  }
   let count = 0;
-  let total = files.length;
-  Array.from(files).forEach(file => {
+  let total = fileList.length;
+  if (total === 0) { input.value = ''; return; }
+  fileList.forEach(file => {
     if (file.size > 5 * 1024 * 1024) {
       showToast('Video "' + file.name + '" is large (' + Math.round(file.size/1024/1024) + 'MB) — may exceed storage limit');
     }
@@ -2165,16 +2222,31 @@ function refreshMediaGallery(idx) {
   renderProperties();
 }
 function addNewProperty() {
-  const newId = Math.max(...appData.properties.map(p => p.id)) + 1;
+  // Plan limit enforcement: regular users limited by their plan; superadmin/admin unlimited
+  if (currentUser && adminRole === null) {
+    const plan = getPlan();
+    const used = getUserListingCount();
+    if (used >= plan.listingLimit) {
+      const isAr = document.body.classList.contains('rtl');
+      showToast(isAr
+        ? `وصلت إلى الحد الأقصى (${plan.listingLimit} عقار) في باقة ${plan.name_ar} — قم بالترقية`
+        : `You reached your ${plan.name_en} plan limit (${plan.listingLimit} listings) — upgrade to add more`);
+      document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+  }
+  const newId = Math.max(0, ...appData.properties.map(p => p.id)) + 1;
   appData.properties.push({
     id: newId, title_en: "New Property", title_ar: "عقار جديد", price: 0, type: "Apartment",
-    location: "Salmiya", bedrooms: 1, bathrooms: 1, photos: 1, status: "Available",
+    purpose: "rent", location: "Salmiya", bedrooms: 1, bathrooms: 1, photos: 1, status: "Available",
     recommended: false, newlyAdded: true, image: "https://picsum.photos/seed/newprop/600/400",
-    desc_en: "Description here.", desc_ar: "الوصف هنا.", features: [], media: []
+    desc_en: "Description here.", desc_ar: "الوصف هنا.", features: [], media: [],
+    ownerEmail: currentUser ? currentUser.email : null
   });
   saveData();
   renderPropertiesEditor();
   renderProperties();
+  updatePlanUsageCard();
   showToast('Property added');
 }
 function deleteProperty(idx) {
@@ -2254,6 +2326,38 @@ function renderEditors() {
   renderPropertiesEditor();
   renderSlidesEditor();
   renderTeamEditor();
+  updatePlanUsageCard();
+}
+
+// Plan usage card in dashboard
+function updatePlanUsageCard() {
+  const card = document.getElementById('planUsageCard');
+  if (!card) return;
+  const isAr = document.body.classList.contains('rtl');
+  if (!currentUser) {
+    card.innerHTML = '<span style="font-size:13px; color:var(--text-secondary);">' +
+      (isAr ? 'لم تسجل الدخول — سجل الدخول لربط عقاراتك بباقتك' : 'Not signed in — login to link listings to your plan') + '</span>';
+    return;
+  }
+  const plan = getPlan();
+  const isAdmin = adminRole !== null;
+  const limitText = isAdmin ? '∞' : plan.listingLimit;
+  const used = isAdmin ? appData.properties.length : getUserListingCount();
+  const pct = plan.listingLimit === Infinity || isAdmin ? 0 : Math.min(100, Math.round(used / plan.listingLimit * 100));
+  const planLabel = isAdmin
+    ? (isAr ? 'مدير — كل المميزات مفتوحة' : 'Admin — all limits open')
+    : (isAr ? `باقتك: ${plan.name_ar} (${plan.price} د.ك/شهر)` : `Your plan: ${plan.name_en} (${plan.price} KD/month)`);
+  card.innerHTML = `
+    <div>
+      <div style="font-weight:800; font-size:15px; color:var(--text-primary);"><i class="fas fa-crown" style="color:var(--gold); margin-right:8px;"></i>${planLabel}</div>
+      <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">
+        ${isAr ? `العقارات: ${used} من ${limitText} · صور/عقار: ${plan.photoLimit} · فيديو/عقار: ${plan.videoLimit}`
+               : `Listings: ${used} of ${limitText} · Photos/listing: ${plan.photoLimit} · Videos/listing: ${plan.videoLimit}`}
+      </div>
+      ${pct > 0 ? `<div style="height:6px; background:var(--bg-section); border-radius:3px; margin-top:8px; max-width:300px;"><div style="height:100%; width:${pct}%; background:${pct >= 100 ? 'var(--red-tag)' : 'var(--gold)'}; border-radius:3px;"></div></div>` : ''}
+    </div>
+    ${!isAdmin ? `<a href="#pricing" onclick="hideDashboard(); history.replaceState(null,'',location.pathname);" style="background:var(--gold); color:var(--navy-dark); padding:8px 18px; border-radius:6px; font-size:13px; font-weight:700;">${isAr ? 'ترقية الباقة' : 'Upgrade Plan'}</a>` : ''}
+  `;
 }
 
 // ==================== DATA MANAGEMENT ====================

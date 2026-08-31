@@ -9,6 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script>VERTO_PUBLISHED_DATA_PLACEHOLDER</script>
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Verto RE">
+<meta name="theme-color" content="#1B2A4A">
+<link rel="apple-touch-icon" href="icon-192.png">
 <style>
 /* ==================== CSS RESET & BASE ==================== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -393,7 +399,100 @@ body.rtl .back-to-top { right: auto; left: 20px; }
 body.rtl .toast { right: auto; left: 20px; transform: translateX(-400px); }
 body.rtl .toast.show { transform: translateX(0); }
 
-/* ==================== PROPERTY MODAL ==================== */
+/* ==================== PRICING PLANS ==================== */
+.pricing-section { padding: 20px 30px 60px; background: var(--bg-section); transition: background .3s; }
+.pricing-grid {
+  max-width: 1200px; margin: 0 auto; display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 20px;
+}
+.pricing-card {
+  background: var(--bg-card); border-radius: 12px; padding: 30px 25px; text-align: center;
+  box-shadow: var(--shadow); transition: transform .3s, box-shadow .3s; position: relative;
+  border: 2px solid transparent; display: flex; flex-direction: column;
+}
+.pricing-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+.pricing-card.featured { border-color: var(--gold); transform: scale(1.04); }
+.pricing-card.featured:hover { transform: scale(1.04) translateY(-8px); }
+.pricing-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--gold); color: var(--navy-dark); padding: 4px 18px; border-radius: 20px;
+  font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+}
+.plan-name { font-size: 18px; font-weight: 800; color: var(--text-primary); margin-bottom: 5px; }
+.plan-price { font-size: 42px; font-weight: 900; color: var(--gold-dark); margin: 10px 0; }
+.plan-price .plan-currency { font-size: 16px; font-weight: 700; color: var(--text-secondary); }
+.plan-period { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+.plan-features { list-style: none; text-align: left; margin-bottom: 25px; flex-grow: 1; }
+.plan-features li { padding: 7px 0; font-size: 13px; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
+.plan-features li i { color: #27ae60; font-size: 12px; }
+.plan-features li.na { opacity: 0.4; }
+.plan-features li.na i { color: var(--text-secondary); }
+.plan-btn {
+  background: var(--navy); color: white; border: none; padding: 13px 20px; border-radius: 8px;
+  font-size: 14px; font-weight: 700; cursor: pointer; transition: background .2s; width: 100%;
+}
+.plan-btn:hover { background: var(--gold); }
+.pricing-card.featured .plan-btn { background: var(--gold); color: var(--navy-dark); }
+.pricing-card.featured .plan-btn:hover { background: var(--navy); color: white; }
+
+/* ==================== AUTH MODAL ==================== */
+.auth-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 5500;
+  justify-content: center; align-items: center; padding: 20px;
+}
+.auth-overlay.show { display: flex; }
+.auth-box {
+  background: var(--bg-card); border-radius: 12px; padding: 35px; max-width: 420px; width: 100%;
+  box-shadow: var(--shadow-lg); position: relative;
+}
+.auth-box h2 { font-size: 22px; font-weight: 800; color: var(--text-primary); margin-bottom: 5px; text-align: center; }
+.auth-box .auth-sub { font-size: 13px; color: var(--text-secondary); text-align: center; margin-bottom: 20px; }
+.auth-box input {
+  width: 100%; padding: 12px 16px; border: 1.5px solid var(--border-color); border-radius: 6px;
+  font-size: 14px; color: var(--text-primary); background: var(--bg-card); margin-bottom: 12px; transition: border-color .2s;
+}
+.auth-box input:focus { outline: none; border-color: var(--gold); }
+.auth-tabs { display: flex; gap: 5px; margin-bottom: 20px; background: var(--bg-section); border-radius: 8px; padding: 4px; }
+.auth-tab { flex: 1; padding: 10px; text-align: center; font-size: 13px; font-weight: 700; cursor: pointer; border-radius: 6px; color: var(--text-secondary); transition: all .2s; }
+.auth-tab.active { background: var(--navy); color: white; }
+.auth-error { display: none; background: rgba(192,57,43,0.1); color: var(--red-tag); padding: 10px; border-radius: 6px; font-size: 13px; font-weight: 600; margin-bottom: 12px; text-align: center; }
+.auth-error.show { display: block; }
+.auth-btn {
+  width: 100%; background: var(--navy); color: white; border: none; padding: 13px; font-size: 14px;
+  font-weight: 700; cursor: pointer; border-radius: 6px; transition: background .2s;
+}
+.auth-btn:hover { background: var(--gold); }
+.auth-close { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--text-secondary); }
+.user-menu-wrap { position: relative; }
+.user-badge {
+  display: flex; align-items: center; gap: 6px; background: var(--bg-section); border: 1.5px solid var(--border-color);
+  padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 700; color: var(--text-primary);
+}
+.user-badge:hover { border-color: var(--gold); }
+.user-dropdown {
+  display: none; position: absolute; top: 45px; right: 0; background: var(--bg-card); border-radius: 8px;
+  box-shadow: var(--shadow-lg); min-width: 180px; z-index: 1200; overflow: hidden; border: 1px solid var(--border-color);
+}
+.user-dropdown.show { display: block; }
+.user-dropdown a, .user-dropdown button {
+  display: block; width: 100%; text-align: left; padding: 12px 16px; font-size: 13px; font-weight: 600;
+  color: var(--text-primary); background: none; border: none; cursor: pointer;
+}
+.user-dropdown a:hover, .user-dropdown button:hover { background: var(--bg-section); }
+
+/* ==================== PWA / INSTALL PROMPT ==================== */
+.install-banner {
+  display: none; position: fixed; bottom: 80px; left: 20px; z-index: 998;
+  background: var(--navy); color: white; padding: 14px 20px; border-radius: 12px;
+  box-shadow: var(--shadow-lg); display: none; align-items: center; gap: 12px; max-width: 340px;
+}
+.install-banner.show { display: flex; }
+.install-banner i { font-size: 24px; color: var(--gold); }
+.install-banner button {
+  background: var(--gold); color: var(--navy-dark); border: none; padding: 8px 16px;
+  border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 13px;
+}
+
 .modal-overlay {
   display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 5000;
   justify-content: center; align-items: flex-start; padding: 40px 20px; overflow-y: auto;
@@ -668,6 +767,19 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
       <button class="theme-toggle" onclick="navigateTo('#admin')" title="Admin Login" style="border-color: var(--gold); color: var(--gold);">
         <i class="fas fa-user-shield"></i>
       </button>
+      <div class="user-menu-wrap" id="userMenuWrap" style="display:none;">
+        <div class="user-badge" onclick="toggleUserDropdown()">
+          <i class="fas fa-user-circle"></i> <span id="userMenuName"></span>
+        </div>
+        <div class="user-dropdown" id="userDropdown">
+          <a href="#pricing" onclick="toggleUserDropdown()"><i class="fas fa-crown" style="color:var(--gold); margin-right:6px;"></i> <span data-en>My Plan</span></a>
+          <a href="#wishlist" onclick="toggleUserDropdown()"><i class="fas fa-heart" style="margin-right:6px;"></i> <span data-en>Wishlist</span></a>
+          <button onclick="logoutUser()"><i class="fas fa-sign-out-alt" style="margin-right:6px;"></i> <span data-en>Logout</span></button>
+        </div>
+      </div>
+      <button class="theme-toggle" id="signInBtn" onclick="openAuthModal('login')" title="Sign In / Sign Up">
+        <i class="fas fa-user"></i>
+      </button>
       <button class="mobile-menu-btn" onclick="toggleMobileNav()"><i class="fas fa-bars"></i></button>
     </div>
   </div>
@@ -705,37 +817,36 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
 <div class="search-section">
   <form class="search-form" onsubmit="return searchProperties(event)">
     <div class="search-field">
-      <label data-en>Location</label><label data-ar>المنطقة</label>
+      <label data-en>Purpose</label><label data-ar>الغرض</label>
+      <select id="searchPurpose">
+        <option value="" data-en>-- Purpose --</option>
+        <option value="" data-ar>-- الغرض --</option>
+        <option value="rent" data-en>For Rent</option>
+        <option value="rent" data-ar>للإيجار</option>
+        <option value="buy" data-en>For Sale / Buy</option>
+        <option value="buy" data-ar>للبيع / شراء</option>
+        <option value="land" data-en>Land for Sale</option>
+        <option value="land" data-ar>أراضٍ للبيع</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label data-en>Governorate</label><label data-ar>المحافظة</label>
+      <select id="searchGovernorate" onchange="populateAreas()">
+        <option value="" data-en>-- All Governorates --</option>
+        <option value="" data-ar>-- جميع المحافظات --</option>
+        <option value="capital" data-en>Capital (العاصمة)</option>
+        <option value="hawalli" data-en>Hawalli (حولي)</option>
+        <option value="farwaniya" data-en>Farwaniya (الفروانية)</option>
+        <option value="ahmadi" data-en>Ahmadi (الأحمدي)</option>
+        <option value="jahra" data-en>Jahra (الجهراء)</option>
+        <option value="mubarak" data-en>Mubarak Al-Kabeer (مبارك الكبير)</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label data-en>Area</label><label data-ar>المنطقة</label>
       <select id="searchLocation">
-        <option value="" data-en>-- Location --</option>
-        <option value="" data-ar>-- المنطقة --</option>
-        <option value="Abdulla Al Mubarak">Abdulla Al Mubarak</option>
-        <option value="Abu Al Hasania">Abu Al Hasania</option>
-        <option value="Abu Fatira">Abu Fatira</option>
-        <option value="Abu Halifa">Abu Halifa</option>
-        <option value="Bayan">Bayan</option>
-        <option value="Bneid Al Qar">Bneid Al Qar</option>
-        <option value="Daiya">Daiya</option>
-        <option value="Dasma">Dasma</option>
-        <option value="Eqaila">Eqaila</option>
-        <option value="Farwaniya">Farwaniya</option>
-        <option value="Fintas">Fintas</option>
-        <option value="Fnaitees">Fnaitees</option>
-        <option value="Hawally">Hawally</option>
-        <option value="Jabriya">Jabriya</option>
-        <option value="Khaitan">Khaitan</option>
-        <option value="Mahboula">Mahboula</option>
-        <option value="Mangaf">Mangaf</option>
-        <option value="Mesayel">Mesayel</option>
-        <option value="Mishref">Mishref</option>
-        <option value="Mutla">Mutla</option>
-        <option value="Qortuba">Qortuba</option>
-        <option value="Salwa">Salwa</option>
-        <option value="Salmiya">Salmiya</option>
-        <option value="Sabah Al Salem">Sabah Al Salem</option>
-        <option value="Sharq">Sharq</option>
-        <option value="Yarmouk">Yarmouk</option>
-        <option value="Zahra">Zahra</option>
+        <option value="" data-en>-- All Areas --</option>
+        <option value="" data-ar>-- جميع المناطق --</option>
       </select>
     </div>
     <div class="search-field">
@@ -751,6 +862,7 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
         <option value="Studio">Studio</option>
         <option value="Rooftop">Rooftop</option>
         <option value="Triplex">Triplex</option>
+        <option value="Land">Land</option>
       </select>
     </div>
     <div class="search-field">
@@ -827,6 +939,17 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
     <span data-en>All Listings</span>
     <span data-ar>كل العقارات</span>
   </a>
+</div>
+
+<!-- ==================== SUBSCRIPTION PLANS ==================== -->
+<div class="pricing-section" id="pricing">
+  <div class="section-title">
+    <h2 data-en>Membership Plans</h2>
+    <h2 data-ar>باقات الاشتراك</h2>
+    <p style="color:var(--text-secondary); max-width:600px; margin:0 auto;" data-en>Unlock premium features — list your own properties, get priority placement and reach thousands of buyers</p>
+    <p style="color:var(--text-secondary); max-width:600px; margin:0 auto;" data-ar>افتح المميزات المميزة — أضف عقاراتك، احصل على عرض مميز واصل لآلاف المشترين</p>
+  </div>
+  <div class="pricing-grid" id="pricingGrid"></div>
 </div>
 
 <!-- ==================== ABOUT SECTION ==================== -->
@@ -953,6 +1076,20 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
 </a>
 <button class="back-to-top" id="backToTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
 
+<!-- Install as App banner -->
+<div class="install-banner" id="installBanner">
+  <i class="fas fa-mobile-alt"></i>
+  <div style="flex:1;">
+    <div style="font-size:13px; font-weight:700;" data-en>Install Verto App</div>
+    <div style="font-size:13px; font-weight:700;" data-ar style="display:none;">ثبّت تطبيق فيرتو</div>
+    <div style="font-size:11px; opacity:0.8;" data-en>Works like a native app on your phone</div>
+    <div style="font-size:11px; opacity:0.8;" data-ar style="display:none;">يعمل كتطبيق أصلي على هاتفك</div>
+  </div>
+  <button onclick="promptInstall()" data-en>Install</button>
+  <button onclick="promptInstall()" data-ar style="display:none;">تثبيت</button>
+  <button onclick="dismissInstall()" style="background:transparent; color:white; padding:4px;"><i class="fas fa-times"></i></button>
+</div>
+
 <!-- ==================== COOKIE BANNER ==================== -->
 <div class="cookie-banner" id="cookieBanner">
   <h4 data-en>Cookie Notice</h4>
@@ -1011,6 +1148,28 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
         <i class="fab fa-whatsapp"></i> <span data-en>Contact Agent</span><span data-ar>تواصل مع الوكيل</span>
       </button>
     </div>
+  </div>
+</div>
+
+<!-- ==================== USER AUTH MODAL ==================== -->
+<div class="auth-overlay" id="authOverlay" onclick="closeAuthModal(event)">
+  <div class="auth-box" onclick="event.stopPropagation()">
+    <button class="auth-close" onclick="closeAuthModalDirect()"><i class="fas fa-times"></i></button>
+    <div class="auth-tabs">
+      <div class="auth-tab active" id="authTabLogin" onclick="switchAuthTab('login')" data-en>Login</div>
+      <div class="auth-tab" id="authTabSignup" onclick="switchAuthTab('signup')" data-en>Sign Up</div>
+    </div>
+    <h2 id="authTitle" data-en>Welcome Back</h2>
+    <p class="auth-sub" id="authSub" data-en>Login to save favorites and manage your listings</p>
+    <div class="auth-error" id="authError"></div>
+    <div id="signupNameField" style="display:none;">
+      <input type="text" id="authName" placeholder="Full Name" autocomplete="name">
+    </div>
+    <input type="email" id="authEmail" placeholder="Email Address" autocomplete="email">
+    <input type="password" id="authPassword" placeholder="Password (min 8 characters)" autocomplete="current-password">
+    <button class="auth-btn" id="authSubmitBtn" onclick="submitAuth()" data-en>Login</button>
+    <p style="font-size:11px; color:var(--text-secondary); text-align:center; margin-top:12px;" data-en>Your password is encrypted and never stored in plain text</p>
+    <p style="font-size:11px; color:var(--text-secondary); text-align:center; margin-top:4px;" data-ar style="display:none;">كلمة المرور مشفرة ولا يتم تخزينها كنص عادي</p>
   </div>
 </div>
 
@@ -1312,7 +1471,174 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
 </div>
 
 <script>
-// ==================== DEFAULT DATA ====================
+// ==================== USER AUTHENTICATION (SHA-256 hashed) ====================
+async function sha256(text) {
+  const msgBuffer = new TextEncoder().encode(text);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function getUsers() {
+  try { return JSON.parse(localStorage.getItem('verto_users') || '{}'); } catch(e) { return {}; }
+}
+function saveUsers(users) { localStorage.setItem('verto_users', JSON.stringify(users)); }
+
+let currentAuthMode = 'login';
+function openAuthModal(mode) {
+  switchAuthTab(mode || 'login');
+  document.getElementById('authOverlay').classList.add('show');
+  document.getElementById('authError').classList.remove('show');
+}
+function closeAuthModal(e) { if (e.target === e.currentTarget) document.getElementById('authOverlay').classList.remove('show'); }
+function closeAuthModalDirect() { document.getElementById('authOverlay').classList.remove('show'); }
+function switchAuthTab(mode) {
+  currentAuthMode = mode;
+  document.getElementById('authTabLogin').classList.toggle('active', mode === 'login');
+  document.getElementById('authTabSignup').classList.toggle('active', mode === 'signup');
+  document.getElementById('signupNameField').style.display = mode === 'signup' ? 'block' : 'none';
+  document.getElementById('authTitle').textContent = mode === 'signup' ? 'Create Account' : 'Welcome Back';
+  document.getElementById('authSubmitBtn').textContent = mode === 'signup' ? 'Sign Up' : 'Login';
+  document.getElementById('authError').classList.remove('show');
+}
+function showAuthError(msg) {
+  const el = document.getElementById('authError');
+  el.textContent = msg; el.classList.add('show');
+}
+async function submitAuth() {
+  const email = document.getElementById('authEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('authPassword').value;
+  const name = document.getElementById('authName').value.trim();
+  if (!email || !email.includes('@') || !email.includes('.')) { showAuthError(currentLang === 'ar' ? 'الرجاء إدخال بريد إلكتروني صحيح' : 'Please enter a valid email address'); return; }
+  if (pass.length < 8) { showAuthError(currentLang === 'ar' ? 'كلمة المرور يجب أن تكون 8 أحرف على الأقل' : 'Password must be at least 8 characters'); return; }
+  const users = getUsers();
+  const hash = await sha256(pass + 'verto_salt_2026');
+  if (currentAuthMode === 'signup') {
+    if (!name) { showAuthError(currentLang === 'ar' ? 'الرجاء إدخال اسمك' : 'Please enter your name'); return; }
+    if (users[email]) { showAuthError(currentLang === 'ar' ? 'هذا البريد مسجل بالفعل — سجل الدخول' : 'This email is already registered — please login'); return; }
+    users[email] = { name: name, hash: hash, plan: 'free', created: new Date().toISOString() };
+    saveUsers(users);
+    setCurrentUser({ email: email, name: name, plan: 'free' });
+    closeAuthModalDirect();
+    showToast(currentLang === 'ar' ? '✓ تم إنشاء حسابك بنجاح' : '✓ Account created successfully');
+  } else {
+    const user = users[email];
+    if (!user || user.hash !== hash) { showAuthError(currentLang === 'ar' ? 'بريد إلكتروني أو كلمة مرور غير صحيحة' : 'Invalid email or password'); return; }
+    setCurrentUser({ email: email, name: user.name, plan: user.plan || 'free' });
+    closeAuthModalDirect();
+    showToast((currentLang === 'ar' ? '✓ أهلاً بك ' : '✓ Welcome ') + user.name);
+  }
+}
+let currentUser = null;
+function setCurrentUser(user) {
+  currentUser = user;
+  if (user) {
+    localStorage.setItem('verto_current_user', JSON.stringify(user));
+  } else {
+    localStorage.removeItem('verto_current_user');
+  }
+  updateUserUI();
+}
+function logoutUser() { setCurrentUser(null); toggleUserDropdown(); showToast(currentLang === 'ar' ? 'تم تسجيل الخروج' : 'Logged out'); }
+function toggleUserDropdown() { document.getElementById('userDropdown').classList.toggle('show'); }
+function updateUserUI() {
+  const wrap = document.getElementById('userMenuWrap');
+  const signIn = document.getElementById('signInBtn');
+  if (currentUser) {
+    wrap.style.display = 'block'; signIn.style.display = 'none';
+    document.getElementById('userMenuName').textContent = currentUser.name.split(' ')[0];
+  } else {
+    wrap.style.display = 'none'; signIn.style.display = 'block';
+  }
+}
+// Restore session
+try { currentUser = JSON.parse(localStorage.getItem('verto_current_user')); } catch(e) { currentUser = null; }
+
+// ==================== SUBSCRIPTION PLANS ====================
+const PLANS = [
+  { id: 'basic', price: 15, name_en: 'Starter', name_ar: 'المبتدئ',
+    features_en: ['Browse all listings', 'Save unlimited favorites', 'Contact agents via WhatsApp', 'Email alerts (weekly)', '1 featured listing'],
+    features_ar: ['تصفح جميع العقارات', 'حفظ المفضلة بلا حدود', 'تواصل مع الوكلاء عبر واتساب', 'تنبيهات بريدية أسبوعية', 'عقار واحد مميز'] },
+  { id: 'silver', price: 35, name_en: 'Silver', name_ar: 'الفضي',
+    featured: true,
+    features_en: ['Everything in Starter', '5 featured listings', 'Priority in search results', 'Email alerts (daily)', 'Your agency logo on listings', 'View contact stats'],
+    features_ar: ['كل مميزات المبتدئ', '5 عقارات مميزة', 'أولوية في نتائج البحث', 'تنبيهات بريدية يومية', 'شعار شركتك على العقارات', 'إحصائيات المشاهدات'] },
+  { id: 'gold', price: 60, name_en: 'Gold', name_ar: 'الذهبي',
+    features_en: ['Everything in Silver', '15 featured listings', 'Top placement on homepage', 'Your own agent page', 'Video tours on listings', 'Social media promotion'],
+    features_ar: ['كل مميزات الفضي', '15 عقار مميز', 'أعلى عرض في الصفحة الرئيسية', 'صفحة وكيل خاصة بك', 'جولات فيديو على العقارات', 'ترويج على وسائل التواصل'] },
+  { id: 'platinum', price: 100, name_en: 'Platinum', name_ar: 'البلاتيني',
+    features_en: ['Everything in Gold', 'Unlimited featured listings', 'Homepage banner ad', 'Dedicated account manager', 'KNET payment for your clients', 'Monthly performance report'],
+    features_ar: ['كل مميزات الذهبي', 'عقارات مميزة بلا حدود', 'إعلان بانر في الصفحة الرئيسية', 'مدير حساب مخصص', 'دفع KNET لعملائك', 'تقرير أداء شهري'] }
+];
+
+function renderPricing() {
+  const grid = document.getElementById('pricingGrid');
+  if (!grid) return;
+  const isAr = document.body.classList.contains('rtl');
+  grid.innerHTML = PLANS.map(plan => {
+    const features = isAr ? plan.features_ar : plan.features_en;
+    const name = isAr ? plan.name_ar : plan.name_en;
+    const btnText = isAr ? 'اشترك الآن' : 'Subscribe Now';
+    return `<div class="pricing-card ${plan.featured ? 'featured' : ''}">
+      ${plan.featured ? '<div class="pricing-badge" data-en>Most Popular</div><div class="pricing-badge" data-ar style="display:none;">الأكثر شعبية</div>' : ''}
+      <div class="plan-name">${name}</div>
+      <div class="plan-price">${plan.price} <span class="plan-currency">KD</span></div>
+      <div class="plan-period" data-en>per month</div>
+      <div class="plan-period" data-ar style="display:none;">شهرياً</div>
+      <ul class="plan-features">${features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}</ul>
+      <button class="plan-btn" onclick="subscribePlan('${plan.id}')">${btnText}</button>
+    </div>`;
+  }).join('');
+}
+
+function subscribePlan(planId) {
+  const plan = PLANS.find(p => p.id === planId);
+  if (!currentUser) {
+    openAuthModal('signup');
+    showToast(currentLang === 'ar' ? 'سجل أولاً للاشتراك' : 'Please sign up first to subscribe');
+    return;
+  }
+  // Update user plan locally (payment integration via KNET would go here)
+  const users = getUsers();
+  if (users[currentUser.email]) {
+    users[currentUser.email].plan = planId;
+    saveUsers(users);
+  }
+  currentUser.plan = planId;
+  localStorage.setItem('verto_current_user', JSON.stringify(currentUser));
+  const isAr = document.body.classList.contains('rtl');
+  const planName = isAr ? plan.name_ar : plan.name_en;
+  showToast(isAr ? `✓ تم تفعيل باقة ${planName} - ${plan.price} د.ك/شهر` : `✓ ${planName} plan activated - ${plan.price} KD/month`);
+}
+
+
+const KUWAIT_AREAS = {
+  capital: ["Sharq","Dasma","Daiya","Bneid Al Qar","Kaifan","Shamiya","Nuzha","Mansouriya","Qadsiya","Yarmouk","Qortuba","Qurain","Rawda","Adailiya","Shaab","Shuwaikh","Sulaibikhat","Jaber Al Ahmed","Gharnata","Surra","Abdullah Al Salem"],
+  hawalli: ["Hawally","Salmiya","Salwa","Shaab","Jabriya","Rumaithiya","Maidan Hawally","Mishref","Zahra","Bayan","Hittin","Messila","West Mishref","Mubarak Al Abdullah"],
+  farwaniya: ["Farwaniya","Khaitan","Jleeb Al-Shuyoukh","Ardiya","Rabiyah","Omariya","Dajeej","Fahaheel Industrial","Shuwaikh Industrial","Sulaibiya"],
+  ahmadi: ["Ahmadi","Fahaheel","Fintas","Mahboula","Abu Halifa","Mangaf","Fnaitees","Mesayel","Sabah Al Salem","Abu Fatira","Al Qurain","Al Qusour","Eqaila","Wafra","Sabahiya","Zour","Khairan"],
+  jahra: ["Jahra","Qasr","Sulaibiya Agricultural","Mutla","Kabad","Oyoun","Jahra Industrial"],
+  mubarak: ["Al-Masayel","Abu Al Hasania","Sabhan","Adan","Mubarak Al Kabeer","Qurain","Misila","Fnaitees"]
+};
+
+function populateAreas() {
+  const gov = document.getElementById('searchGovernorate').value;
+  const areaSel = document.getElementById('searchLocation');
+  const isAr = document.body.classList.contains('rtl');
+  areaSel.innerHTML = isAr
+    ? '<option value="">-- جميع المناطق --</option>'
+    : '<option value="">-- All Areas --</option>';
+  const areas = gov ? (KUWAIT_AREAS[gov] || []) : Object.values(KUWAIT_AREAS).flat();
+  // Sort alphabetically, dedupe
+  const unique = [...new Set(areas)].sort();
+  unique.forEach(a => {
+    const opt = document.createElement('option');
+    opt.value = a; opt.textContent = a;
+    areaSel.appendChild(opt);
+  });
+}
+
+
 const DEFAULT_DATA = {
   content: {
     heroTitleEn: "Find Your Dream Home in Kuwait",
@@ -1367,18 +1693,22 @@ const DEFAULT_DATA = {
     { name_en: "Fatima Al-Khalifa", name_ar: "فاطمة الخليفة", role_en: "Property Consultant", role_ar: "مستشارة عقارية", bio_en: "Dedicated to helping clients find the perfect investment opportunities in Kuwait.", bio_ar: "مكرسة لمساعدة العملاء في العثور على فرص الاستثمار المثالية في الكويت.", image: "https://picsum.photos/seed/fatima/400/400", email: "fatima@verto-re.com", phone: "+96560000003" }
   ],
   properties: [
-    { id: 1, title_en: "FINTAS. A nice 4 bedroom villa with a swimming pool and terraces", title_ar: "الفنطاس. فيلا 4 غرف نوم جميلة مع مسبح وشرفات", price: 1500, type: "Villa", location: "Fintas", bedrooms: 4, bathrooms: 4, photos: 34, status: "Available", recommended: true, image: "https://picsum.photos/seed/fintas/600/400", desc_en: "A nice 4 bedroom villa with a private swimming pool and terraces located in Fintas.", desc_ar: "فيلا 4 غرف نوم جميلة مع مسبح خاص وشرفات تقع في الفنطاس.", features: ["Swimming pool","Terrace","Garden","Furnished","Diwaniya"] },
-    { id: 2, title_en: "FNAITEES. Spacious, One bedroom fully furnished apartment", title_ar: "فنايتس. شقة غرفة نوم واحدة واسعة ومفروشة بالكامل", price: 330, type: "Apartment", location: "Fnaitees", bedrooms: 1, bathrooms: 1, photos: 10, status: "Available", recommended: true, image: "https://picsum.photos/seed/fnaitees/600/400", desc_en: "A great spacious fully furnished one bedroom basement apartment with living room.", desc_ar: "شقة قبو واسعة ومفروشة بالكامل بغرفة نوم واحدة مع غرفة معيشة.", features: ["Furnished","Balcony","Pet Friendly"] },
-    { id: 3, title_en: "MANGAF. Spacious 2 master bedroom in compound", title_ar: "المنقف. شقة 2 غرف نوم ماستر واسعة في مجمع", price: 500, type: "Apartment", location: "Mangaf", bedrooms: 2, bathrooms: 2, photos: 16, status: "Available", recommended: true, image: "https://picsum.photos/seed/mangaf/600/400", desc_en: "Spacious 2 master bedroom fully furnished apartment located in Mangaf compound.", desc_ar: "شقة واسعة بغرفتي نوم ماستر مفروشة بالكامل تقع في مجمع المنقف.", features: ["Furnished","Gym","Swimming pool","Balcony"] },
-    { id: 4, title_en: "MESAYEL. Spacious 2 bedroom fully furnished apartment with private outside spaces", title_ar: "مسيلة. شقة 2 غرف نوم واسعة مفروشة بالكامل مع مساحات خارجية خاصة", price: 650, type: "Apartment", location: "Mesayel", bedrooms: 2, bathrooms: 2, photos: 13, status: "Available", recommended: true, image: "https://picsum.photos/seed/mesayel/600/400", desc_en: "Spacious 2 bedroom fully furnished basement apartment with private outside spaces.", desc_ar: "شقة قبو واسعة بغرفتي نوم مفروشة بالكامل مع مساحات خارجية خاصة.", features: ["Furnished","Terrace","Garden","Pet Friendly"] },
-    { id: 5, title_en: "FNAITEES. Brand new, FURNISHED 2 master bedroom villa with garden and beach access", title_ar: "فنايتس. فيلا جديدة مفروشة بغرفتي نوم ماستر مع حديقة ووصول للشاطئ", price: 1900, type: "Villa", location: "Fnaitees", bedrooms: 2, bathrooms: 3, photos: 23, status: "Available", recommended: true, image: "https://picsum.photos/seed/fnaitees2/600/400", desc_en: "Brand new, fantastic, modern, furnished 2 master bedroom villa located in Fnaitees sea side.", desc_ar: "فيلا جديدة فاخرة وعصرية مفروشة بغرفتي نوم ماستر تقع في فنايتس على البحر.", features: ["Furnished","Beach Access","Garden","Sea View","Diwaniya"] },
-    { id: 6, title_en: "SALWA. A phenomenal 6 master bedroom villa", title_ar: "سلوى. فيلا رائعة بـ 6 غرف نوم ماستر", price: 5000, type: "Villa", location: "Salwa", bedrooms: 6, bathrooms: 7, photos: 27, status: "Available", recommended: true, image: "https://picsum.photos/seed/salwa/600/400", desc_en: "A phenomenal modern furnished 6 master bedroom villa with a pool and diwaniya in Salwa.", desc_ar: "فيلا رائعة عصرية مفروشة بـ 6 غرف نوم ماستر مع مسبح وديوانية في سلوى.", features: ["Furnished","Swimming pool","Diwaniya","Driver's room","Garden","Sea View"] },
-    { id: 7, title_en: "QORTUBA. 7 bedroom Villa with private pool and diwaniya", title_ar: "القرطبة. فيلا 7 غرف نوم مع مسبح خاص وديوانية", price: 2400, type: "Villa", location: "Qortuba", bedrooms: 7, bathrooms: 6, photos: 29, status: "Available", recommended: true, image: "https://picsum.photos/seed/qortuba/600/400", desc_en: "A huge, full of natural light 7 bedroom villa with an indoor pool and diwaniya in Qortuba.", desc_ar: "فيلا ضخمة مليئة بالضوء الطبيعي بـ 7 غرف نوم مع مسبح داخلي وديوانية في القرطبة.", features: ["Swimming pool","Diwaniya","Driver's room","Garden","Furnished"] },
-    { id: 8, title_en: "JABRIYA. Full of natural light 5 bedroom villa with diwaniya", title_ar: "الجابرية. فيلا 5 غرف نوم مليئة بالضوء الطبيعي مع ديوانية", price: 2000, type: "Villa", location: "Jabriya", bedrooms: 5, bathrooms: 5, photos: 32, status: "Available", recommended: true, image: "https://picsum.photos/seed/jabriya/600/400", desc_en: "Full of natural light 5 bedroom villa with diwaniya located in Jabriya.", desc_ar: "فيلا 5 غرف نوم مليئة بالضوء الطبيعي مع ديوانية في الجابرية.", features: ["Diwaniya","Driver's room","Garden","Furnished","Terrace"] },
-    { id: 9, title_en: "MISHREF. Modern, semi furnished 2 bedroom rooftop apartment", title_ar: "المشرف. شقة سطح 2 غرف نوم عصرية شبه مفروشة", price: 800, type: "Rooftop", location: "Mishref", bedrooms: 2, bathrooms: 2, photos: 14, status: "Available", recommended: true, newlyAdded: true, image: "https://picsum.photos/seed/mishref/600/400", desc_en: "Fantastic, semi-furnished 2 bedroom rooftop apartment with private terrace in Mishref.", desc_ar: "شقة سطح رائعة شبه مفروشة بغرفتي نوم مع تراس خاص في المشرف.", features: ["Terrace","Semi- furnished","City View","Balcony"] },
-    { id: 10, title_en: "MUTLA. Modern, beautiful 5 master bedroom villa with private pool", title_ar: "المطل. فيلا 5 غرف نوم ماستر عصرية وجميلة مع مسبح خاص", price: 2500, type: "Villa", location: "Mutla", bedrooms: 5, bathrooms: 5, photos: 25, status: "Available", recommended: true, newlyAdded: true, image: "https://picsum.photos/seed/mutla/600/400", desc_en: "Modern very spacious, 5 master bedroom villa with pool located in Mutla.", desc_ar: "فيلا عصرية واسعة جداً بـ 5 غرف نوم ماستر مع مسبح في المطل.", features: ["Swimming pool","Furnished","Diwaniya","Driver's room","Garden"] },
-    { id: 11, title_en: "SALMIYA. Luxury 3 bedroom apartment with sea view", title_ar: "السالمية. شقة فاخرة 3 غرف نوم بإطلالة بحرية", price: 950, type: "Apartment", location: "Salmiya", bedrooms: 3, bathrooms: 3, photos: 18, status: "Available", newlyAdded: true, image: "https://picsum.photos/seed/salmiya/600/400", desc_en: "Luxury 3 bedroom apartment with stunning sea view in the heart of Salmiya.", desc_ar: "شقة فاخرة 3 غرف نوم بإطلالة بحرية مذهلة في قلب السالمية.", features: ["Sea View","Furnished","Balcony","Gym","Pet Friendly"] },
-    { id: 12, title_en: "KHAIRAN. Modern 4 bedroom duplex with garden", title_ar: "خيران. دوبلكس 4 غرف نوم عصري مع حديقة", price: 1200, type: "Duplex", location: "Khairan", bedrooms: 4, bathrooms: 3, photos: 20, status: "Available", newlyAdded: true, image: "https://picsum.photos/seed/khairan/600/400", desc_en: "Modern 4 bedroom duplex with private garden and terrace in Khairan area.", desc_ar: "دوبلكس عصري 4 غرف نوم مع حديقة خاصة وتراس في منطقة خيران.", features: ["Garden","Terrace","Furnished","Driver's room"] }
+    { id: 1, title_en: "FINTAS. A nice 4 bedroom villa with a swimming pool and terraces", title_ar: "الفنطاس. فيلا 4 غرف نوم جميلة مع مسبح وشرفات", price: 1500, type: "Villa", purpose: "rent", location: "Fintas", bedrooms: 4, bathrooms: 4, photos: 34, status: "Available", recommended: true, image: "https://picsum.photos/seed/fintas/600/400", desc_en: "A nice 4 bedroom villa with a private swimming pool and terraces located in Fintas.", desc_ar: "فيلا 4 غرف نوم جميلة مع مسبح خاص وشرفات تقع في الفنطاس.", features: ["Swimming pool","Terrace","Garden","Furnished","Diwaniya"] },
+    { id: 2, title_en: "FNAITEES. Spacious, One bedroom fully furnished apartment", title_ar: "فنايتس. شقة غرفة نوم واحدة واسعة ومفروشة بالكامل", price: 330, type: "Apartment", purpose: "rent", location: "Fnaitees", bedrooms: 1, bathrooms: 1, photos: 10, status: "Available", recommended: true, image: "https://picsum.photos/seed/fnaitees/600/400", desc_en: "A great spacious fully furnished one bedroom basement apartment with living room.", desc_ar: "شقة قبو واسعة ومفروشة بالكامل بغرفة نوم واحدة مع غرفة معيشة.", features: ["Furnished","Balcony","Pet Friendly"] },
+    { id: 3, title_en: "MANGAF. Spacious 2 master bedroom in compound", title_ar: "المنقف. شقة 2 غرف نوم ماستر واسعة في مجمع", price: 500, type: "Apartment", purpose: "rent", location: "Mangaf", bedrooms: 2, bathrooms: 2, photos: 16, status: "Available", recommended: true, image: "https://picsum.photos/seed/mangaf/600/400", desc_en: "Spacious 2 master bedroom fully furnished apartment located in Mangaf compound.", desc_ar: "شقة واسعة بغرفتي نوم ماستر مفروشة بالكامل تقع في مجمع المنقف.", features: ["Furnished","Gym","Swimming pool","Balcony"] },
+    { id: 4, title_en: "MESAYEL. Spacious 2 bedroom fully furnished apartment with private outside spaces", title_ar: "مسيلة. شقة 2 غرف نوم واسعة مفروشة بالكامل مع مساحات خارجية خاصة", price: 650, type: "Apartment", purpose: "rent", location: "Mesayel", bedrooms: 2, bathrooms: 2, photos: 13, status: "Available", recommended: true, image: "https://picsum.photos/seed/mesayel/600/400", desc_en: "Spacious 2 bedroom fully furnished basement apartment with private outside spaces.", desc_ar: "شقة قبو واسعة بغرفتي نوم مفروشة بالكامل مع مساحات خارجية خاصة.", features: ["Furnished","Terrace","Garden","Pet Friendly"] },
+    { id: 5, title_en: "FNAITEES. Brand new, FURNISHED 2 master bedroom villa with garden and beach access", title_ar: "فنايتس. فيلا جديدة مفروشة بغرفتي نوم ماستر مع حديقة ووصول للشاطئ", price: 1900, type: "Villa", purpose: "rent", location: "Fnaitees", bedrooms: 2, bathrooms: 3, photos: 23, status: "Available", recommended: true, image: "https://picsum.photos/seed/fnaitees2/600/400", desc_en: "Brand new, fantastic, modern, furnished 2 master bedroom villa located in Fnaitees sea side.", desc_ar: "فيلا جديدة فاخرة وعصرية مفروشة بغرفتي نوم ماستر تقع في فنايتس على البحر.", features: ["Furnished","Beach Access","Garden","Sea View","Diwaniya"] },
+    { id: 6, title_en: "SALWA. A phenomenal 6 master bedroom villa", title_ar: "سلوى. فيلا رائعة بـ 6 غرف نوم ماستر", price: 5000, type: "Villa", purpose: "rent", location: "Salwa", bedrooms: 6, bathrooms: 7, photos: 27, status: "Available", recommended: true, image: "https://picsum.photos/seed/salwa/600/400", desc_en: "A phenomenal modern furnished 6 master bedroom villa with a pool and diwaniya in Salwa.", desc_ar: "فيلا رائعة عصرية مفروشة بـ 6 غرف نوم ماستر مع مسبح وديوانية في سلوى.", features: ["Furnished","Swimming pool","Diwaniya","Driver's room","Garden","Sea View"] },
+    { id: 7, title_en: "QORTUBA. 7 bedroom Villa with private pool and diwaniya", title_ar: "القرطبة. فيلا 7 غرف نوم مع مسبح خاص وديوانية", price: 2400, type: "Villa", purpose: "rent", location: "Qortuba", bedrooms: 7, bathrooms: 6, photos: 29, status: "Available", recommended: true, image: "https://picsum.photos/seed/qortuba/600/400", desc_en: "A huge, full of natural light 7 bedroom villa with an indoor pool and diwaniya in Qortuba.", desc_ar: "فيلا ضخمة مليئة بالضوء الطبيعي بـ 7 غرف نوم مع مسبح داخلي وديوانية في القرطبة.", features: ["Swimming pool","Diwaniya","Driver's room","Garden","Furnished"] },
+    { id: 8, title_en: "JABRIYA. Full of natural light 5 bedroom villa with diwaniya", title_ar: "الجابرية. فيلا 5 غرف نوم مليئة بالضوء الطبيعي مع ديوانية", price: 2000, type: "Villa", purpose: "rent", location: "Jabriya", bedrooms: 5, bathrooms: 5, photos: 32, status: "Available", recommended: true, image: "https://picsum.photos/seed/jabriya/600/400", desc_en: "Full of natural light 5 bedroom villa with diwaniya located in Jabriya.", desc_ar: "فيلا 5 غرف نوم مليئة بالضوء الطبيعي مع ديوانية في الجابرية.", features: ["Diwaniya","Driver's room","Garden","Furnished","Terrace"] },
+    { id: 9, title_en: "MISHREF. Modern, semi furnished 2 bedroom rooftop apartment", title_ar: "المشرف. شقة سطح 2 غرف نوم عصرية شبه مفروشة", price: 800, type: "Rooftop", purpose: "rent", location: "Mishref", bedrooms: 2, bathrooms: 2, photos: 14, status: "Available", recommended: true, newlyAdded: true, image: "https://picsum.photos/seed/mishref/600/400", desc_en: "Fantastic, semi-furnished 2 bedroom rooftop apartment with private terrace in Mishref.", desc_ar: "شقة سطح رائعة شبه مفروشة بغرفتي نوم مع تراس خاص في المشرف.", features: ["Terrace","Semi- furnished","City View","Balcony"] },
+    { id: 10, title_en: "MUTLA. Modern, beautiful 5 master bedroom villa with private pool", title_ar: "المطل. فيلا 5 غرف نوم ماستر عصرية وجميلة مع مسبح خاص", price: 2500, type: "Villa", purpose: "rent", location: "Mutla", bedrooms: 5, bathrooms: 5, photos: 25, status: "Available", recommended: true, newlyAdded: true, image: "https://picsum.photos/seed/mutla/600/400", desc_en: "Modern very spacious, 5 master bedroom villa with pool located in Mutla.", desc_ar: "فيلا عصرية واسعة جداً بـ 5 غرف نوم ماستر مع مسبح في المطل.", features: ["Swimming pool","Furnished","Diwaniya","Driver's room","Garden"] },
+    { id: 11, title_en: "SALMIYA. Luxury 3 bedroom apartment with sea view", title_ar: "السالمية. شقة فاخرة 3 غرف نوم بإطلالة بحرية", price: 950, type: "Apartment", purpose: "rent", location: "Salmiya", bedrooms: 3, bathrooms: 3, photos: 18, status: "Available", newlyAdded: true, image: "https://picsum.photos/seed/salmiya/600/400", desc_en: "Luxury 3 bedroom apartment with stunning sea view in the heart of Salmiya.", desc_ar: "شقة فاخرة 3 غرف نوم بإطلالة بحرية مذهلة في قلب السالمية.", features: ["Sea View","Furnished","Balcony","Gym","Pet Friendly"] },
+    { id: 12, title_en: "KHAIRAN. Modern 4 bedroom duplex with garden", title_ar: "خيران. دوبلكس 4 غرف نوم عصري مع حديقة", price: 1200, type: "Duplex", purpose: "rent", location: "Khairan", bedrooms: 4, bathrooms: 3, photos: 20, status: "Available", newlyAdded: true, image: "https://picsum.photos/seed/khairan/600/400", desc_en: "Modern 4 bedroom duplex with private garden and terrace in Khairan area.", desc_ar: "دوبلكس عصري 4 غرف نوم مع حديقة خاصة وتراس في منطقة خيران.", features: ["Garden","Terrace","Furnished","Driver's room"] },
+    { id: 13, title_en: "SALWA. Luxury 5 bedroom villa FOR SALE with pool", title_ar: "سلوى. فيلا فاخرة 5 غرف نوم للبيع مع مسبح", price: 385000, type: "Villa", purpose: "buy", location: "Salwa", bedrooms: 5, bathrooms: 6, photos: 41, status: "Available", newlyAdded: true, image: "https://picsum.photos/seed/salwabuy/600/400", desc_en: "Outstanding freehold-style 5 bedroom villa for sale in prime Salwa location with private pool and garage.", desc_ar: "فيلا فاخرة 5 غرف نوم للبيع في موقع سلوى المتميز مع مسبح خاص وجراج.", features: ["Swimming pool","Garden","Diwaniya","Driver's room","Furnished"] },
+    { id: 14, title_en: "JABRIYA. Commercial land plot 1000m2 FOR SALE", title_ar: "الجابرية. قطعة أرض تجارية 1000 متر مربع للبيع", price: 520000, type: "Land", purpose: "land", location: "Jabriya", bedrooms: 0, bathrooms: 0, photos: 8, status: "Available", newlyAdded: true, image: "https://picsum.photos/seed/jabriyaland/600/400", desc_en: "Prime commercial land plot of 1000 square meters in Jabriya, corner location, ready for building permit.", desc_ar: "قطعة أرض تجارية مميزة بمساحة 1000 متر مربع في الجابرية، موقع زاوية، جاهزة لترخيص البناء.", features: ["Commercial"] },
+    { id: 15, title_en: "WAFRA. Agricultural land 5000m2 FOR SALE", title_ar: "الوفراء. أرض زراعية 5000 متر مربع للبيع", price: 95000, type: "Land", purpose: "land", location: "Wafra", bedrooms: 0, bathrooms: 0, photos: 12, status: "Available", recommended: true, image: "https://picsum.photos/seed/wafraland/600/400", desc_en: "Large agricultural land of 5000 square meters in Wafra with water well and fence.", desc_ar: "أرض زراعية كبيرة بمساحة 5000 متر مربع في الوفراء مع بئر ماء وسور.", features: ["Garden"] },
+    { id: 16, title_en: "MISHREF. Residential land 750m2 FOR SALE", title_ar: "المشرف. أرض سكنية 750 متر مربع للبيع", price: 410000, type: "Land", purpose: "land", location: "Mishref", bedrooms: 0, bathrooms: 0, photos: 6, status: "Available", newlyAdded: true, image: "https://picsum.photos/seed/mishrefland/600/400", desc_en: "Residential land plot of 750 square meters in Mishref on a wide street.", desc_ar: "قطعة أرض سكنية بمساحة 750 متر مربع في المشرف على شارع واسع.", features: ["City View"] }
   ]
 };
 
@@ -1660,8 +1990,9 @@ function renderPropertiesEditor() {
         </div>
         <div class="edit-grid-3">
           <div class="edit-row"><label>Price (KD)</label><input type="number" value="${p.price}" onchange="updateProp(${i},'price',parseFloat(this.value))"></div>
-          <div class="edit-row"><label>Type</label><select onchange="updateProp(${i},'type',this.value)">${['Villa','Apartment','Duplex','Office','Retail','Studio','Rooftop','Triplex'].map(t=>`<option ${t===p.type?'selected':''}>${t}</option>`).join('')}</select></div>
+          <div class="edit-row"><label>Type</label><select onchange="updateProp(${i},'type',this.value)">${['Villa','Apartment','Duplex','Office','Retail','Studio','Rooftop','Triplex','Land'].map(t=>`<option ${t===p.type?'selected':''}>${t}</option>`).join('')}</select></div>
           <div class="edit-row"><label>Location</label><input type="text" value="${p.location}" onchange="updateProp(${i},'location',this.value)"></div>
+          <div class="edit-row"><label>Purpose</label><select onchange="updateProp(${i},'purpose',this.value)"><option value="rent" ${p.purpose==='rent'?'selected':''}>For Rent</option><option value="buy" ${p.purpose==='buy'?'selected':''}>For Sale</option><option value="land" ${p.purpose==='land'?'selected':''}>Land</option></select></div>
         </div>
         <div class="edit-grid-3">
           <div class="edit-row"><label>Bedrooms</label><input type="number" value="${p.bedrooms}" onchange="updateProp(${i},'bedrooms',parseInt(this.value))"></div>
@@ -2059,6 +2390,8 @@ function showAllProperties() {
 }
 function searchProperties(e) {
   e.preventDefault();
+  const purpose = document.getElementById('searchPurpose').value;
+  const gov = document.getElementById('searchGovernorate').value;
   const loc = document.getElementById('searchLocation').value;
   const type = document.getElementById('searchType').value;
   const beds = document.getElementById('searchBedrooms').value;
@@ -2066,8 +2399,13 @@ function searchProperties(e) {
   const minPrice = parseFloat(document.getElementById('searchMinPrice').value) || 0;
   const maxPrice = parseFloat(document.getElementById('searchMaxPrice').value) || Infinity;
   const checkedFeatures = Array.from(document.querySelectorAll('.advanced-filters input:checked')).map(i => i.value);
+  const govAreas = gov ? (KUWAIT_AREAS[gov] || []) : null;
   let results = appData.properties.filter(p => {
+    if (purpose === 'land' && p.type !== 'Land') return false;
+    if (purpose === 'rent' && p.purpose === 'buy') return false;
+    if (purpose === 'buy' && p.purpose === 'rent') return false;
     if (loc && p.location !== loc) return false;
+    if (!loc && govAreas && !govAreas.includes(p.location)) return false;
     if (type && p.type !== type) return false;
     if (beds && p.bedrooms < parseInt(beds)) return false;
     if (baths && p.bathrooms < parseInt(baths)) return false;
@@ -2292,6 +2630,9 @@ function renderAll() {
   renderSlider();
   renderProperties();
   renderTeam();
+  renderPricing();
+  populateAreas();
+  updateUserUI();
 }
 
 // ==================== INIT ====================
@@ -2333,6 +2674,41 @@ window.addEventListener('scroll', () => {
 
 // Handle initial route
 handleRoute();
+
+// Close user dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  const wrap = document.getElementById('userMenuWrap');
+  if (wrap && !wrap.contains(e.target)) {
+    const dd = document.getElementById('userDropdown');
+    if (dd) dd.classList.remove('show');
+  }
+});
+
+// ==================== PWA SUPPORT ====================
+// Install prompt for iOS/Android home screen app
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const banner = document.getElementById('installBanner');
+  if (banner && !localStorage.getItem('verto_install_dismissed')) banner.classList.add('show');
+});
+function promptInstall() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => { deferredPrompt = null; document.getElementById('installBanner').classList.remove('show'); });
+  } else {
+    // iOS Safari manual instructions
+    const isAr = document.body.classList.contains('rtl');
+    showToast(isAr ? 'على آيفون: اضغط زر المشاركة ثم "Add to Home Screen"' : 'On iPhone: tap Share button then "Add to Home Screen"');
+    document.getElementById('installBanner').classList.remove('show');
+  }
+}
+function dismissInstall() { document.getElementById('installBanner').classList.remove('show'); localStorage.setItem('verto_install_dismissed', 'true'); }
+// Register service worker for offline support
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
 
 // ==================== KNET CONFIGURATION ====================
 function renderKnetBanks() {

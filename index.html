@@ -1908,7 +1908,7 @@ function handleRoute() {
     hideDashboard();
     if (hash && hash !== '#home') {
       const el = document.querySelector(hash);
-      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100);
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 400);
     }
   }
 }

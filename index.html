@@ -948,11 +948,15 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
   <div class="modal-content">
     <button class="modal-close" onclick="closeModalDirect()"><i class="fas fa-times"></i></button>
     <img class="modal-image" id="modalImage" src="" alt="">
+    <div id="modalVideoContainer" style="display:none; width:100%; height:400px; background:#000;">
+      <video id="modalVideo" controls style="width:100%; height:100%; object-fit:contain;"></video>
+    </div>
     <div class="modal-body">
       <h2 id="modalTitle"></h2>
       <div class="modal-price" id="modalPrice"></div>
       <div class="modal-features" id="modalFeatures"></div>
       <div class="modal-desc" id="modalDesc"></div>
+      <div id="modalMediaGallery" style="margin-bottom:20px;"></div>
       <button class="modal-contact-btn" onclick="window.location.href='https://wa.me/96599990000'">
         <i class="fab fa-whatsapp"></i> <span data-en>Contact Agent</span><span data-ar>تواصل مع الوكيل</span>
       </button>
@@ -1013,16 +1017,31 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
         <h3 data-en>Manage Properties</h3>
         <h3 data-ar style="display:none;">إدارة العقارات</h3>
-        <button class="dash-btn dash-btn-success" onclick="addNewProperty()">
-          <i class="fas fa-plus"></i> <span data-en>Add Property</span>
-        </button>
+        <div style="display:flex; gap:10px;">
+          <button class="dash-btn dash-btn-success" onclick="saveAllChanges()">
+            <i class="fas fa-save"></i> <span data-en>Save Changes</span><span data-ar style="display:none;">حفظ التغييرات</span>
+          </button>
+          <button class="dash-btn" onclick="addNewProperty()">
+            <i class="fas fa-plus"></i> <span data-en>Add Property</span>
+          </button>
+        </div>
       </div>
       <div id="propertiesEditor"></div>
+      <div style="text-align:center; padding:20px 0;">
+        <button class="dash-btn dash-btn-success" onclick="saveAllChanges()" style="padding:14px 40px; font-size:16px;">
+          <i class="fas fa-save"></i> <span data-en>Save All Changes</span><span data-ar style="display:none;">حفظ جميع التغييرات</span>
+        </button>
+      </div>
     </div>
 
     <!-- CONTENT PANEL -->
     <div class="dash-panel" id="panel-content">
-      <h3 data-en>Edit Website Content</h3>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <h3 data-en>Edit Website Content</h3>
+        <button class="dash-btn dash-btn-success" onclick="saveAllChanges()">
+          <i class="fas fa-save"></i> <span data-en>Save Changes</span><span data-ar style="display:none;">حفظ التغييرات</span>
+        </button>
+      </div>
       <div class="settings-card">
         <h4 data-en>Hero Section</h4>
         <div class="edit-row">
@@ -1090,6 +1109,11 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
           <textarea id="editFooterAr" oninput="updateContent('footerAr', this.value)"></textarea>
         </div>
       </div>
+      <div style="text-align:center; padding:20px 0;">
+        <button class="dash-btn dash-btn-success" onclick="saveAllChanges()" style="padding:14px 40px; font-size:16px;">
+          <i class="fas fa-save"></i> <span data-en>Save All Changes</span><span data-ar style="display:none;">حفظ جميع التغييرات</span>
+        </button>
+      </div>
     </div>
 
     <!-- SLIDER PANEL -->
@@ -1101,6 +1125,11 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
         </button>
       </div>
       <div id="slidesEditor"></div>
+      <div style="text-align:center; padding:20px 0;">
+        <button class="dash-btn dash-btn-success" onclick="saveAllChanges()" style="padding:14px 40px; font-size:16px;">
+          <i class="fas fa-save"></i> <span data-en>Save All Changes</span><span data-ar style="display:none;">حفظ جميع التغييرات</span>
+        </button>
+      </div>
     </div>
 
     <!-- TEAM PANEL -->
@@ -1112,6 +1141,11 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
         </button>
       </div>
       <div id="teamEditor"></div>
+      <div style="text-align:center; padding:20px 0;">
+        <button class="dash-btn dash-btn-success" onclick="saveAllChanges()" style="padding:14px 40px; font-size:16px;">
+          <i class="fas fa-save"></i> <span data-en>Save All Changes</span><span data-ar style="display:none;">حفظ جميع التغييرات</span>
+        </button>
+      </div>
     </div>
 
     <!-- SETTINGS PANEL -->
@@ -1171,6 +1205,11 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
           <button class="dash-btn" onclick="exportData()"><i class="fas fa-download"></i> <span data-en>Export Data</span></button>
           <button class="dash-btn dash-btn-danger" onclick="resetData()"><i class="fas fa-redo"></i> <span data-en>Reset to Default</span></button>
         </div>
+      </div>
+      <div style="text-align:center; padding:20px 0;">
+        <button class="dash-btn dash-btn-success" onclick="saveAllChanges()" style="padding:14px 40px; font-size:16px;">
+          <i class="fas fa-save"></i> <span data-en>Save All Changes</span><span data-ar style="display:none;">حفظ جميع التغييرات</span>
+        </button>
       </div>
     </div>
 
@@ -1397,8 +1436,14 @@ if (sessionStorage.getItem('verto_admin')) {
 function switchTab(tab) {
   document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
-  event.target.classList.add('active');
-  document.getElementById('panel-' + tab).classList.add('active');
+  // Find the tab that matches and activate it
+  document.querySelectorAll('.dash-tab').forEach(t => {
+    if (t.getAttribute('onclick') && t.getAttribute('onclick').includes("'" + tab + "'")) {
+      t.classList.add('active');
+    }
+  });
+  const panel = document.getElementById('panel-' + tab);
+  if (panel) panel.classList.add('active');
 }
 
 // ==================== CONTENT EDITING ====================
@@ -1411,6 +1456,59 @@ function updateSettings(key, value) {
   appData.settings[key] = value;
   saveData();
   renderSettings();
+}
+function saveAllChanges() {
+  // Collect all content fields from the edit inputs
+  const get = id => { const el = document.getElementById(id); return el ? el.value : ''; };
+  if (document.getElementById('editHeroTitleEn')) {
+    appData.content.heroTitleEn = get('editHeroTitleEn');
+    appData.content.heroTitleAr = get('editHeroTitleAr');
+    appData.content.heroSubEn = get('editHeroSubEn');
+    appData.content.heroSubAr = get('editHeroSubAr');
+    appData.content.aboutTitleEn = get('editAboutTitleEn');
+    appData.content.aboutTitleAr = get('editAboutTitleAr');
+    appData.content.aboutTextEn = get('editAboutTextEn');
+    appData.content.aboutTextAr = get('editAboutTextAr');
+    appData.content.stat1 = get('editStat1');
+    appData.content.stat2 = get('editStat2');
+    appData.content.stat3 = get('editStat3');
+    appData.content.aboutImg = get('editAboutImg');
+    appData.content.footerEn = get('editFooterEn');
+    appData.content.footerAr = get('editFooterAr');
+  }
+  if (document.getElementById('editEmail1')) {
+    appData.settings.email1 = get('editEmail1');
+    appData.settings.phone1 = get('editPhone1');
+    appData.settings.email2 = get('editEmail2');
+    appData.settings.phone2 = get('editPhone2');
+    appData.settings.whatsapp = get('editWhatsapp');
+    appData.settings.address = get('editAddress');
+    appData.settings.defaultTheme = get('editDefaultTheme');
+    appData.settings.defaultLang = get('editDefaultLang');
+  }
+  // KNET fields
+  if (document.getElementById('knetMerchantId')) {
+    if (!appData.knet) appData.knet = JSON.parse(JSON.stringify(DEFAULT_DATA.knet));
+    appData.knet.merchantId = get('knetMerchantId');
+    appData.knet.terminalId = get('knetTerminalId');
+    appData.knet.password = get('knetPassword');
+    appData.knet.currency = get('knetCurrency');
+    appData.knet.apiKey = get('knetApiKey');
+    appData.knet.mode = get('knetMode');
+    appData.knet.callbackUrl = get('knetCallback');
+    appData.knet.errorUrl = get('knetErrorUrl');
+    appData.knet.enabled = get('knetEnabled') === 'true';
+    appData.knet.minPayment = parseFloat(get('knetMinPayment')) || 1;
+    appData.knet.maxPayment = parseFloat(get('knetMaxPayment')) || 50000;
+    appData.knet.timeout = parseInt(get('knetTimeout')) || 30;
+  }
+  saveData();
+  renderAll();
+  renderEditors();
+  populateEditFields();
+  renderKnetBanks();
+  populateKnetFields();
+  showToast(currentLang === 'ar' ? '✓ تم حفظ جميع التغييرات بنجاح' : '✓ All changes saved successfully');
 }
 function populateEditFields() {
   const c = appData.content;
@@ -1454,7 +1552,28 @@ function renderPropertiesEditor() {
           <div class="edit-row"><label>Bathrooms</label><input type="number" value="${p.bathrooms}" onchange="updateProp(${i},'bathrooms',parseInt(this.value))"></div>
           <div class="edit-row"><label>Photos Count</label><input type="number" value="${p.photos}" onchange="updateProp(${i},'photos',parseInt(this.value))"></div>
         </div>
-        <div class="edit-row"><label>Image URL</label><input type="text" value="${p.image}" onchange="updateProp(${i},'image',this.value)"></div>
+        <div class="edit-row"><label>Main Image URL</label><input type="text" value="${p.image}" onchange="updateProp(${i},'image',this.value)"></div>
+
+        <!-- MEDIA GALLERY: Photos + Videos upload -->
+        <div style="border:1.5px solid var(--border-color); border-radius:8px; padding:15px; margin:15px 0; background:var(--bg-main);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <strong style="font-size:14px; color:var(--text-primary);"><i class="fas fa-photo-video" style="color:var(--gold); margin-right:8px;"></i>Photos & Videos Gallery</strong>
+            <div style="display:flex; gap:8px;">
+              <label style="cursor:pointer; background:var(--navy); color:white; padding:8px 16px; border-radius:5px; font-size:13px; font-weight:600; display:flex; align-items:center; gap:6px;">
+                <i class="fas fa-image"></i> Upload Photos
+                <input type="file" accept="image/*" multiple style="display:none;" onchange="handlePhotoUpload(${i}, this.files, this)">
+              </label>
+              <label style="cursor:pointer; background:var(--navy); color:white; padding:8px 16px; border-radius:5px; font-size:13px; font-weight:600; display:flex; align-items:center; gap:6px;">
+                <i class="fas fa-video"></i> Upload Videos
+                <input type="file" accept="video/*" multiple style="display:none;" onchange="handleVideoUpload(${i}, this.files, this)">
+              </label>
+            </div>
+          </div>
+          <div id="mediaGallery_${i}" style="display:flex; flex-wrap:wrap; gap:10px;">
+            ${renderMediaGallery(p.media || [], i)}
+          </div>
+        </div>
+
         <div class="edit-row"><label>Description (EN)</label><textarea onchange="updateProp(${i},'desc_en',this.value)">${p.desc_en}</textarea></div>
         <div class="edit-row"><label>Description (AR)</label><textarea onchange="updateProp(${i},'desc_ar',this.value)">${p.desc_ar}</textarea></div>
         <div class="edit-row"><label>Features (comma-separated)</label><input type="text" value="${p.features.join(', ')}" onchange="updateProp(${i},'features',this.value.split(',').map(s=>s.trim()).filter(Boolean))"></div>
@@ -1475,13 +1594,95 @@ function updateProp(idx, key, val) {
   saveData();
   renderProperties();
 }
+function renderMediaGallery(media, idx) {
+  if (!media || media.length === 0) return '<p style="color:var(--text-secondary); font-size:13px;">No photos or videos uploaded yet. Use the upload buttons above to add media from your PC.</p>';
+  return media.map((m, mi) => {
+    if (m.type === 'video') {
+      return `<div style="position:relative; width:120px; height:90px; border-radius:6px; overflow:hidden; border:1.5px solid var(--border-color);">
+        <video src="${m.data}" style="width:100%; height:100%; object-fit:cover;" muted></video>
+        <div style="position:absolute; top:2px; left:2px; background:rgba(0,0,0,0.6); color:white; font-size:9px; padding:2px 5px; border-radius:3px;"><i class="fas fa-video"></i></div>
+        <button onclick="removeMedia(${idx},${mi})" style="position:absolute; top:2px; right:2px; background:rgba(192,57,43,0.9); color:white; border:none; width:20px; height:20px; border-radius:50%; cursor:pointer; font-size:11px;">&times;</button>
+      </div>`;
+    } else {
+      return `<div style="position:relative; width:120px; height:90px; border-radius:6px; overflow:hidden; border:1.5px solid var(--border-color);">
+        <img src="${m.data}" style="width:100%; height:100%; object-fit:cover;">
+        <div style="position:absolute; top:2px; left:2px; background:rgba(0,0,0,0.6); color:white; font-size:9px; padding:2px 5px; border-radius:3px;"><i class="fas fa-image"></i></div>
+        <button onclick="removeMedia(${idx},${mi})" style="position:absolute; top:2px; right:2px; background:rgba(192,57,43,0.9); color:white; border:none; width:20px; height:20px; border-radius:50%; cursor:pointer; font-size:11px;">&times;</button>
+      </div>`;
+    }
+  }).join('');
+}
+function handlePhotoUpload(idx, files, input) {
+  if (!appData.properties[idx].media) appData.properties[idx].media = [];
+  let count = 0;
+  let total = files.length;
+  Array.from(files).forEach(file => {
+    if (file.size > 2 * 1024 * 1024) {
+      // Compress large images via canvas
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          const maxW = 800;
+          canvas.width = Math.min(img.width, maxW);
+          canvas.height = img.height * (canvas.width / img.width);
+          canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+          appData.properties[idx].media.push({ type: 'photo', data: canvas.toDataURL('image/jpeg', 0.7) });
+          count++;
+          if (count === total) { saveData(); refreshMediaGallery(idx); showToast(count + ' photo(s) uploaded'); }
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        appData.properties[idx].media.push({ type: 'photo', data: e.target.result });
+        count++;
+        if (count === total) { saveData(); refreshMediaGallery(idx); showToast(count + ' photo(s) uploaded'); }
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+  input.value = '';
+}
+function handleVideoUpload(idx, files, input) {
+  if (!appData.properties[idx].media) appData.properties[idx].media = [];
+  let count = 0;
+  let total = files.length;
+  Array.from(files).forEach(file => {
+    if (file.size > 5 * 1024 * 1024) {
+      showToast('Video "' + file.name + '" is large (' + Math.round(file.size/1024/1024) + 'MB) — may exceed storage limit');
+    }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      appData.properties[idx].media.push({ type: 'video', data: e.target.result, name: file.name });
+      count++;
+      if (count === total) { saveData(); refreshMediaGallery(idx); showToast(count + ' video(s) uploaded'); }
+    };
+    reader.readAsDataURL(file);
+  });
+  input.value = '';
+}
+function removeMedia(idx, mi) {
+  if (!appData.properties[idx].media) return;
+  appData.properties[idx].media.splice(mi, 1);
+  saveData();
+  refreshMediaGallery(idx);
+}
+function refreshMediaGallery(idx) {
+  const gallery = document.getElementById('mediaGallery_' + idx);
+  if (gallery) gallery.innerHTML = renderMediaGallery(appData.properties[idx].media || [], idx);
+  renderProperties();
+}
 function addNewProperty() {
   const newId = Math.max(...appData.properties.map(p => p.id)) + 1;
   appData.properties.push({
     id: newId, title_en: "New Property", title_ar: "عقار جديد", price: 0, type: "Apartment",
     location: "Salmiya", bedrooms: 1, bathrooms: 1, photos: 1, status: "Available",
     recommended: false, newlyAdded: true, image: "https://picsum.photos/seed/newprop/600/400",
-    desc_en: "Description here.", desc_ar: "الوصف هنا.", features: []
+    desc_en: "Description here.", desc_ar: "الوصف هنا.", features: [], media: []
   });
   saveData();
   renderPropertiesEditor();
@@ -1589,51 +1790,44 @@ function resetData() {
 // ==================== RENDER: CONTENT ====================
 function renderContent() {
   const c = appData.content;
-  // Hero
-  const heroEn = document.getElementById('heroTitle');
-  const heroAr = document.createElement('h2');
-  heroAr.setAttribute('data-ar', ''); heroAr.textContent = c.heroTitleAr;
-  heroAr.style.display = 'none';
-  heroEn.textContent = c.heroTitleEn;
-  heroEn.setAttribute('data-en', '');
-  // Replace
-  const heroTitleParent = heroEn.parentElement;
-  const existingAr = heroTitleParent.querySelector('[data-ar]');
-  if (existingAr) existingAr.textContent = c.heroTitleAr; else heroTitleParent.appendChild(heroAr);
-
-  const subEn = document.getElementById('heroSubtitle');
-  subEn.textContent = c.heroSubEn; subEn.setAttribute('data-en', '');
-  let subAr = heroTitleParent.querySelector('p[data-ar]');
-  if (!subAr) { subAr = document.createElement('p'); subAr.setAttribute('data-ar',''); heroTitleParent.appendChild(subAr); }
-  subAr.textContent = c.heroSubAr;
-
+  // Hero — update existing elements in place
+  setText('heroTitle', c.heroTitleEn, 'data-en');
+  setText('heroSubtitle', c.heroSubEn, 'data-en');
+  setOrCreateSibling('heroTitle', 'h2', c.heroTitleAr, 'data-ar');
+  setOrCreateSibling('heroSubtitle', 'p', c.heroSubAr, 'data-ar');
   // About
-  const aboutTitle = document.getElementById('aboutTitle');
-  aboutTitle.textContent = c.aboutTitleEn; aboutTitle.setAttribute('data-en', '');
-  let aboutTitleAr = aboutTitle.nextElementSibling;
-  if (!aboutTitleAr || !aboutTitleAr.hasAttribute('data-ar')) {
-    aboutTitleAr = document.createElement('h2'); aboutTitleAr.setAttribute('data-ar','');
-    aboutTitle.parentElement.insertBefore(aboutTitleAr, aboutTitle.nextSibling);
-  }
-  aboutTitleAr.textContent = c.aboutTitleAr;
-
+  setText('aboutTitle', c.aboutTitleEn, 'data-en');
+  setOrCreateSibling('aboutTitle', 'h2', c.aboutTitleAr, 'data-ar');
   const aboutTextDiv = document.getElementById('aboutText');
-  aboutTextDiv.innerHTML = `<p data-en>${c.aboutTextEn.replace(/\n/g,'</p><p data-en>')}</p><p data-ar>${c.aboutTextAr.replace(/\n/g,'</p><p data-ar>')}</p>`;
-
-  document.getElementById('aboutImg').src = c.aboutImg;
-  document.getElementById('stat1Num').textContent = c.stat1;
-  document.getElementById('stat2Num').textContent = c.stat2;
-  document.getElementById('stat3Num').textContent = c.stat3;
-
+  if (aboutTextDiv) {
+    aboutTextDiv.innerHTML = '<p data-en>' + c.aboutTextEn.replace(/\n/g, '</p><p data-en>') + '</p><p data-ar>' + c.aboutTextAr.replace(/\n/g, '</p><p data-ar>') + '</p>';
+  }
+  const aboutImg = document.getElementById('aboutImg');
+  if (aboutImg) aboutImg.src = c.aboutImg;
+  setText('stat1Num', c.stat1);
+  setText('stat2Num', c.stat2);
+  setText('stat3Num', c.stat3);
   // Footer
-  const footerAbout = document.getElementById('footerAbout');
-  footerAbout.textContent = c.footerEn; footerAbout.setAttribute('data-en', '');
-  let footerAboutAr = document.createElement('p'); footerAboutAr.setAttribute('data-ar',''); footerAboutAr.textContent = c.footerAr;
-  let next = footerAbout.nextElementSibling;
-  if (next && next.hasAttribute('data-ar')) { next.textContent = c.footerAr; }
-  else { footerAbout.parentElement.insertBefore(footerAboutAr, next); }
-
+  setText('footerAbout', c.footerEn, 'data-en');
+  setOrCreateSibling('footerAbout', 'p', c.footerAr, 'data-ar');
   applyLangDisplay();
+}
+
+function setText(id, text, attr) {
+  const el = document.getElementById(id);
+  if (el) { el.textContent = text; if (attr) el.setAttribute(attr, ''); }
+}
+
+function setOrCreateSibling(srcId, tag, text, attr) {
+  const src = document.getElementById(srcId);
+  if (!src) return;
+  let sib = src.nextElementSibling;
+  if (!sib || !sib.hasAttribute(attr)) {
+    sib = document.createElement(tag);
+    sib.setAttribute(attr, '');
+    src.parentElement.insertBefore(sib, src.nextSibling);
+  }
+  sib.textContent = text;
 }
 
 function renderSettings() {
@@ -1801,11 +1995,30 @@ function openPropertyModal(propId) {
   const prop = appData.properties.find(p => p.id === propId);
   if (!prop) return;
   const isRtl = document.body.classList.contains('rtl');
-  document.getElementById('modalImage').src = prop.image;
-  document.getElementById('modalImage').onerror = function() { this.src = 'https://picsum.photos/seed/fallback/800/400'; };
+  const media = prop.media || [];
+  
+  // Show image or first video at top
+  const modalImage = document.getElementById('modalImage');
+  const modalVideoContainer = document.getElementById('modalVideoContainer');
+  const modalVideo = document.getElementById('modalVideo');
+  
+  if (media.length > 0 && media[0].type === 'video') {
+    modalImage.style.display = 'none';
+    modalVideoContainer.style.display = 'block';
+    modalVideo.src = media[0].data;
+  } else {
+    modalImage.style.display = 'block';
+    modalVideoContainer.style.display = 'none';
+    modalVideo.src = '';
+    modalImage.src = prop.image;
+    modalImage.onerror = function() { this.src = 'https://picsum.photos/seed/fallback/800/400'; };
+  }
+  
   document.getElementById('modalTitle').textContent = isRtl ? prop.title_ar : prop.title_en;
   document.getElementById('modalPrice').innerHTML = formatPrice(prop.price) + ' <span style="font-size:18px;">KD</span>';
   document.getElementById('modalDesc').textContent = isRtl ? prop.desc_ar : prop.desc_en;
+  
+  // Features
   const iconMap = {
     'Swimming pool': 'fa-swimming-pool', 'Garden': 'fa-tree', 'Gym': 'fa-dumbbell',
     'Balcony': 'fa-window-maximize', 'Terrace': 'fa-umbrella-beach', 'Diwaniya': 'fa-couch',
@@ -1815,11 +2028,69 @@ function openPropertyModal(propId) {
   };
   const featuresHtml = prop.features.map(f => {
     const icon = iconMap[f] || 'fa-check';
-    return `<div class="modal-feature"><i class="fas ${icon}"></i> ${f}</div>`;
+    return '<div class="modal-feature"><i class="fas ' + icon + '"></i> ' + f + '</div>';
   }).join('');
   document.getElementById('modalFeatures').innerHTML = featuresHtml;
+  
+  // Media Gallery
+  const galleryDiv = document.getElementById('modalMediaGallery');
+  if (media.length > 0) {
+    let galleryHtml = '<h4 style="margin-bottom:12px; color:var(--text-primary); font-size:16px;"><i class="fas fa-photo-video" style="color:var(--gold); margin-right:8px;"></i>';
+    galleryHtml += isRtl ? 'معرض الصور والفيديو' : 'Photos & Videos Gallery';
+    galleryHtml += '</h4><div style="display:flex; flex-wrap:wrap; gap:10px;">';
+    media.forEach((m, mi) => {
+      if (m.type === 'video') {
+        galleryHtml += '<div style="width:150px; height:110px; border-radius:8px; overflow:hidden; border:1.5px solid var(--border-color); position:relative; cursor:pointer;" onclick="playModalVideo(' + mi + ')">';
+        galleryHtml += '<video src="' + m.data + '" style="width:100%; height:100%; object-fit:cover;" muted></video>';
+        galleryHtml += '<div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center;"><i class="fas fa-play" style="color:white; font-size:14px;"></i></div>';
+        galleryHtml += '</div>';
+      } else {
+        galleryHtml += '<div style="width:150px; height:110px; border-radius:8px; overflow:hidden; border:1.5px solid var(--border-color); cursor:pointer;" onclick="showModalPhoto(\'' + encodeURIComponent(m.data) + '\')">';
+        galleryHtml += '<img src="' + m.data + '" style="width:100%; height:100%; object-fit:cover;">';
+        galleryHtml += '</div>';
+      }
+    });
+    galleryHtml += '</div>';
+    galleryDiv.innerHTML = galleryHtml;
+  } else {
+    galleryDiv.innerHTML = '';
+  }
+  
   document.getElementById('propertyModal').classList.add('show');
   document.body.style.overflow = 'hidden';
+}
+
+function playModalVideo(idx) {
+  const modalVideo = document.getElementById('modalVideo');
+  const modalVideoContainer = document.getElementById('modalVideoContainer');
+  const modalImage = document.getElementById('modalImage');
+  modalImage.style.display = 'none';
+  modalVideoContainer.style.display = 'block';
+  // Find the video from any property's media at index idx
+  for (let p of appData.properties) {
+    if (p.media && p.media[idx] && p.media[idx].type === 'video') {
+      modalVideo.src = p.media[idx].data;
+      modalVideo.play();
+      return;
+    }
+  }
+  // Fallback: try first property with media at that index
+  for (let p of appData.properties) {
+    if (p.media && p.media[idx]) {
+      modalVideo.src = p.media[idx].data;
+      modalVideo.play();
+      return;
+    }
+  }
+}
+
+function showModalPhoto(dataUri) {
+  // Simple lightbox: swap the modal image
+  const modalImage = document.getElementById('modalImage');
+  const modalVideoContainer = document.getElementById('modalVideoContainer');
+  modalVideoContainer.style.display = 'none';
+  modalImage.style.display = 'block';
+  modalImage.src = decodeURIComponent(dataUri);
 }
 function closeModal(e) {
   if (e.target === e.currentTarget) { document.getElementById('propertyModal').classList.remove('show'); document.body.style.overflow = ''; }

@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>VERTO_PUBLISHED_DATA_PLACEHOLDER</script>
 <style>
 /* ==================== CSS RESET & BASE ==================== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -465,6 +466,34 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
   font-weight: 600; cursor: pointer; border-radius: 5px; transition: background .2s; display: flex; align-items: center; gap: 6px;
 }
 .dash-header .dash-actions button:hover { background: rgba(255,255,255,0.25); }
+.dash-header .dash-actions button.dash-save-btn {
+  background: #27ae60; color: white; font-weight: 700;
+  box-shadow: 0 2px 8px rgba(39,174,96,0.4);
+}
+.dash-header .dash-actions button.dash-save-btn:hover { background: #2ecc71; }
+.dash-header .dash-actions button.dash-publish-btn {
+  background: var(--gold); color: var(--navy-dark); font-weight: 800;
+  box-shadow: 0 2px 8px rgba(197,165,90,0.5);
+}
+.dash-header .dash-actions button.dash-publish-btn:hover { background: #d4b66e; }
+#publishResult {
+  display: none; position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
+  background: var(--bg-card); color: var(--text-primary); border: 2px solid var(--gold);
+  border-radius: 10px; padding: 25px; z-index: 7000; max-width: 640px; width: 90%;
+  box-shadow: var(--shadow-lg); font-size: 14px; line-height: 1.7;
+}
+#publishResult.show { display: block; }
+#publishResult h3 { margin-bottom: 10px; color: var(--text-primary); }
+#publishResult .pub-link {
+  display: block; background: var(--bg-section); padding: 10px 14px; border-radius: 6px;
+  margin: 10px 0; word-break: break-all; font-family: monospace; font-size: 13px;
+  color: var(--gold-dark); cursor: pointer; border: 1px dashed var(--border-color);
+}
+#publishResult ol { margin: 10px 0 0 20px; color: var(--text-secondary); }
+#publishResult .pub-close {
+  margin-top: 15px; background: var(--navy); color: white; border: none;
+  padding: 8px 20px; border-radius: 5px; cursor: pointer; font-weight: 700;
+}
 .dash-header .role-badge {
   background: var(--gold); color: var(--navy); padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 800; text-transform: uppercase;
 }
@@ -943,6 +972,27 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
 <!-- ==================== TOAST ==================== -->
 <div class="toast" id="toast"></div>
 
+<!-- ==================== PUBLISH RESULT POPUP ==================== -->
+<div id="publishResult">
+  <h3><i class="fas fa-cloud-upload-alt" style="color:var(--gold);"></i> <span data-en>Your Live Site File is Ready!</span><span data-ar style="display:none;">ملف موقعك المباشر جاهز!</span></h3>
+  <p data-en>The file <b>verto-live.html</b> has been downloaded with ALL your changes baked in. Everyone who opens this file sees your changes — no login needed.</p>
+  <p data-ar style="display:none;">تم تنزيل ملف <b>verto-live.html</b> مع جميع تغييراتك. كل من يفتح هذا الملف يرى تغييراتك — دون الحاجة لتسجيل الدخول.</p>
+  <a class="pub-link" id="pubSaveLink" onclick="saveLiveFileAgain()" data-en>⬇ Download verto-live.html again</a>
+  <p><b data-en>To make it live at your website link:</b><span data-ar style="display:none;"><b>لجعله مباشراً على رابط موقعك:</b></span></p>
+  <ol>
+    <li data-en>Send the downloaded verto-live.html file to me (Yousef's assistant) here in the chat</li>
+    <li data-en>I will push it to GitHub Pages within a minute</li>
+    <li data-en>Your client opens the same link and sees your changes ✓</li>
+  </ol>
+  <ol data-ar style="display:none;">
+    <li>أرسل ملف verto-live.html الذي تم تنزيله لي هنا في المحادثة</li>
+    <li>سأقوم برفعه إلى GitHub Pages خلال دقيقة</li>
+    <li>عميلك يفتح نفس الرابط ويرى تغييراتك ✓</li>
+  </ol>
+  <button class="pub-close" onclick="document.getElementById('publishResult').classList.remove('show')" data-en>Close</button>
+  <button class="pub-close" onclick="document.getElementById('publishResult').classList.remove('show')" data-ar style="display:none;">إغلاق</button>
+</div>
+
 <!-- ==================== PROPERTY MODAL ==================== -->
 <div class="modal-overlay" id="propertyModal" onclick="closeModal(event)">
   <div class="modal-content">
@@ -996,6 +1046,12 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
     <h1><i class="fas fa-cog"></i> <span data-en>Verto Admin Dashboard</span><span data-ar>لوحة تحكم فيرتو</span></h1>
     <div class="dash-actions">
       <span class="role-badge" id="roleBadge">ADMIN</span>
+      <button class="dash-save-btn" onclick="saveAllChanges()" title="Save your changes to this browser">
+        <i class="fas fa-save"></i> <span data-en>Save Changes</span><span data-ar style="display:none;">حفظ التغييرات</span>
+      </button>
+      <button class="dash-publish-btn" onclick="publishToLive()" title="Make changes visible to everyone on the live site">
+        <i class="fas fa-cloud-upload-alt"></i> <span data-en>Publish to Live Site</span><span data-ar style="display:none;">نشر على الموقع</span>
+      </button>
       <button onclick="navigateTo('')" data-en>View Site</button>
       <button onclick="navigateTo('')" data-ar style="display:none;">عرض الموقع</button>
       <button onclick="logoutAdmin()" data-en>Logout</button>
@@ -1335,15 +1391,75 @@ let favorites = JSON.parse(localStorage.getItem('verto_favorites') || '[]');
 let adminRole = null; // 'superadmin' or 'admin'
 
 function loadData() {
+  // 1. Published data (baked into HTML at publish time) is the base for EVERYONE
+  let base = null;
+  if (typeof VERTO_PUBLISHED_DATA !== 'undefined' && VERTO_PUBLISHED_DATA) {
+    try { base = JSON.parse(JSON.stringify(VERTO_PUBLISHED_DATA)); } catch(e) {}
+  }
+  if (!base) base = JSON.parse(JSON.stringify(DEFAULT_DATA));
+  // 2. Admin's local edits (localStorage) sit on top — only the admin's own browser
   try {
     const saved = localStorage.getItem('verto_data');
-    if (saved) return JSON.parse(saved);
+    if (saved) {
+      const local = JSON.parse(saved);
+      // Deep-merge local edits over the published base
+      return deepMerge(base, local);
+    }
   } catch(e) {}
-  return JSON.parse(JSON.stringify(DEFAULT_DATA));
+  return base;
+}
+
+function deepMerge(base, override) {
+  if (!override || typeof override !== 'object') return base;
+  const result = Array.isArray(base) ? base.slice() : Object.assign({}, base);
+  for (const key in override) {
+    if (override[key] && typeof override[key] === 'object' && !Array.isArray(override[key]) && base[key] && typeof base[key] === 'object' && !Array.isArray(base[key])) {
+      result[key] = deepMerge(base[key], override[key]);
+    } else {
+      result[key] = override[key];
+    }
+  }
+  return result;
 }
 
 function saveData() {
   localStorage.setItem('verto_data', JSON.stringify(appData));
+}
+
+// ==================== PUBLISH TO LIVE ====================
+let lastPublishedHtml = null;
+function publishToLive() {
+  // First save everything
+  saveAllChanges();
+  // Fetch this page's own HTML and bake current appData into it
+  fetch(window.location.href.split('#')[0]).then(r => r.text()).then(html => {
+    const dataStr = JSON.stringify(appData).replace(/<\/script/gi, '<\\/script');
+    const injection = '<' + 'script>window.VERTO_PUBLISHED_DATA = ' + dataStr + ';<' + '/script>';
+    // Insert right after <head> so it's defined before the main script runs
+    let out;
+    if (html.includes('VERTO_PUBLISHED_DATA_PLACEHOLDER')) {
+      out = html.replace('VERTO_PUBLISHED_DATA_PLACEHOLDER', injection);
+    } else {
+      out = html.replace(/<head([^>]*)>/i, '<head$1>\n' + injection);
+    }
+    lastPublishedHtml = out;
+    const blob = new Blob([out], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'verto-live.html'; a.click();
+    URL.revokeObjectURL(url);
+    document.getElementById('publishResult').classList.add('show');
+  }).catch(err => {
+    showToast('Publish failed: ' + err.message);
+  });
+}
+function saveLiveFileAgain() {
+  if (!lastPublishedHtml) { publishToLive(); return; }
+  const blob = new Blob([lastPublishedHtml], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'verto-live.html'; a.click();
+  URL.revokeObjectURL(url);
 }
 
 // ==================== ROUTING ====================

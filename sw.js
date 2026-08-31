@@ -1,5 +1,5 @@
 // Verto Real Estate Service Worker — offline support + asset caching
-const CACHE_NAME = 'verto-re-v1';
+const CACHE_NAME = 'verto-re-v2';
 const ASSETS = [
   './',
   './index.html',

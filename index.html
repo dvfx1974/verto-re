@@ -585,6 +585,21 @@ body.rtl .modal-body h2, body.rtl .modal-desc, body.rtl .modal-feature { font-fa
   box-shadow: 0 2px 8px rgba(197,165,90,0.5);
 }
 .dash-header .dash-actions button.dash-publish-btn:hover { background: #d4b66e; }
+.dash-header .dash-actions button.dash-view-btn {
+  background: #2980b9; color: white; font-weight: 700;
+}
+.dash-header .dash-actions button.dash-view-btn:hover { background: #3498db; }
+.dash-header .dash-actions button.dash-logout-btn {
+  background: rgba(192,57,43,0.85); color: white; font-weight: 700;
+}
+.dash-header .dash-actions button.dash-logout-btn:hover { background: var(--red-tag); }
+@media (max-width: 768px) {
+  .dash-header { flex-wrap: wrap; gap: 10px; padding: 12px 15px; }
+  .dash-header h1 { font-size: 15px; }
+  .dash-actions { width: 100%; flex-wrap: wrap; }
+  .dash-actions button { flex: 1 1 40%; justify-content: center; padding: 10px 8px; font-size: 13px; }
+  .dash-actions .role-badge { flex: 0 0 auto; }
+}
 #publishResult {
   display: none; position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
   background: var(--bg-card); color: var(--text-primary); border: 2px solid var(--gold);
@@ -1219,15 +1234,17 @@ img, video, svg { max-width: 100%; }
     <div class="dash-actions">
       <span class="role-badge" id="roleBadge">ADMIN</span>
       <button class="dash-save-btn" onclick="saveAllChanges()" title="Save your changes to this browser">
-        <i class="fas fa-save"></i> <span data-en>Save Changes</span><span data-ar style="display:none;">حفظ التغييرات</span>
+        <i class="fas fa-save"></i> <span data-en>Save</span><span data-ar style="display:none;">حفظ</span>
       </button>
       <button class="dash-publish-btn" onclick="publishToLive()" title="Make changes visible to everyone on the live site">
-        <i class="fas fa-cloud-upload-alt"></i> <span data-en>Publish to Live Site</span><span data-ar style="display:none;">نشر على الموقع</span>
+        <i class="fas fa-cloud-upload-alt"></i> <span data-en>Publish</span><span data-ar style="display:none;">نشر</span>
       </button>
-      <button onclick="navigateTo('')" data-en>View Site</button>
-      <button onclick="navigateTo('')" data-ar style="display:none;">عرض الموقع</button>
-      <button onclick="logoutAdmin()" data-en>Logout</button>
-      <button onclick="logoutAdmin()" data-ar style="display:none;">خروج</button>
+      <button class="dash-view-btn" onclick="goToSite()" title="Go to the website">
+        <i class="fas fa-globe"></i> <span data-en>View Site</span><span data-ar style="display:none;">الموقع</span>
+      </button>
+      <button class="dash-logout-btn" onclick="logoutAdmin()" title="Logout">
+        <i class="fas fa-sign-out-alt"></i> <span data-en>Exit</span><span data-ar style="display:none;">خروج</span>
+      </button>
     </div>
   </div>
   <div class="dash-tabs">
@@ -1872,6 +1889,17 @@ function logoutAdmin() {
   sessionStorage.removeItem('verto_admin');
   hideDashboard();
   navigateTo('');
+}
+// Go from dashboard to the live site — reliably closes dashboard + clears hash
+function goToSite() {
+  hideDashboard();
+  hideAdminLogin();
+  if (window.location.hash && window.location.hash !== '#home') {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Force re-render of language display in case state drifted
+  applyLangDisplay();
 }
 function showDashboard() {
   document.getElementById('adminDashboard').classList.add('show');
